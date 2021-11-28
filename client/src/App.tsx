@@ -23,7 +23,7 @@ const App = (): ReactElement => {
           <Navigation />
           <Container fluid className="mycontainer">
             <Routes>
-              <Route path="/blog" element={<Blog />} />
+              <Route path="/" element={<Blog />} />
               <Route path="/blog/*" element={<BlogEntry />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
