@@ -9,9 +9,9 @@ const Navigation = (): ReactElement => {
   return (
     <Navbar expand="sm" className="navbar">
       <Navbar.Brand>
-        <Link to="https://lcolearts.com/#/about" className="mylogo">
+        <a href="https://lcolearts.com/#/about" className="mylogo">
           Laura Cole
-        </Link>
+        </a>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
