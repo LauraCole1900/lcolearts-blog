@@ -1,0 +1,129 @@
+:root {
+  --headerFont: "Fredericka the Great", cursive;
+  --bodyFont: "Open Sans", sans-serif;
+  --ltBlue: #c7dbf3;
+  --dkBlue: #00008b;
+  --translucentBgDk: rgba(45, 50, 30, 0.35);
+  --translucentBgLt: rgba(199, 219, 243, 0.25);
+}
+
+body {
+  background-image: url("../../pix/meeker-n-longs.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+h1 {
+  font-size: 42px;
+}
+
+h2 {
+  font-size: 36px;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--headerFont);
+}
+
+p {
+  font-size: 16px;
+}
+
+li {
+  font-size: 16px;
+}
+
+p,
+li,
+.caption {
+  font-family: var(--bodyFont);
+}
+
+a {
+  color: var(--dkBlue);
+}
+
+.mypic,
+.choralepic {
+  max-width: 300px;
+  padding-right: 1.25em;
+}
+
+.choralepic {
+  border-radius: 10%;
+}
+
+.mypic {
+  border-radius: 50%;
+}
+
+.icon {
+  max-width: 50px;
+  margin-bottom: 2em;
+}
+
+.iconBig {
+  max-width: 75px;
+  max-height: 75px;
+  margin: 1em;
+}
+
+.darkBg {
+  background: var(--translucentBgDk);
+  border-radius: 5px;
+}
+
+.darkBgSq {
+  background: var(--translucentBgDk);
+  border-radius: 2px;
+}
+
+.ltBg {
+  background: var(--translucentBgLt);
+  border-radius: 5px;
+}
+
+.ltBgSq {
+  background: var(--translucentBgLt);
+  border-radius: 2px;
+}
+
+.flexStart,
+.flexCenter,
+.flexEnd {
+  display: flex;
+  align-items: center;
+}
+
+.flexStart {
+  justify-content: flex-start;
+}
+
+.flexCenter {
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.flexEnd {
+  justify-content: flex-end;
+  height: 2.5em;
+}
+
+.topMargin {
+  margin-top: 2.5em;
+}
+
+.caption {
+  font-size: 12px;
+}
+
+.outline {
+  text-shadow: -1px 1px 1px var(--ltBlue), 1px 1px 1px var(--ltBlue),
+    1px -1px 1px var(--ltBlue), -1px -1px 1px var(--ltBlue);
+}
