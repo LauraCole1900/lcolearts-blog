@@ -58,9 +58,7 @@ npm run test
 
 ## Credits
 
-Typed.js was developed by [Matt Boldt](https://github.com/mattboldt/typed.js/)
-
-Card animation code provided by [Daniela Schmayev](https://codepen.io/danishyma) on CodePen
+Favicon created by [Freepik](https://www.freepik.com) [Flaticon](https://www.flaticon.com/)
 
 ## Contributing
 
