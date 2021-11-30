@@ -4,7 +4,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from "react-bootstrap/Container";
 import Navigation from "./components/navbar";
-import { Blog, BlogEntry, NotFound } from "./components/pages";
+import { Blog, BlogEntry, LoginPage, NotFound } from "./components/pages";
 import Footer from "./components/footer";
 import './App.css';
 
@@ -25,6 +25,7 @@ const App = (): ReactElement => {
             <Routes>
               <Route path="/" element={<Blog />} />
               <Route path="/blog/*" element={<BlogEntry />} />
+              <Route path="/log_me_in" element={<LoginPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Container>
