@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import { useQuery } from "@apollo/client";
 import { Col, Container, Row } from "react-bootstrap";
 import { QUERY_ALL_ENTRIES } from "../../utils";
-import EntryCard from "../entry";
+import PostCard from "../post";
 
 const Blog = (): ReactElement => {
   // GraphQL variables
@@ -32,7 +32,7 @@ const Blog = (): ReactElement => {
           ? <Row>
             <Col sm={1}></Col>
             <Col sm={10}>
-              <EntryCard entries={sortedEntries} />
+              <PostCard entries={sortedEntries} />
             </Col>
           </Row>
           : <Row>
