@@ -5,8 +5,6 @@ var typeDefs: any = gql`
     _id: ID!
     username: String!
     email: String
-    bookCount: Int
-    savedBooks: [Book]
   }
 
   # type Book {

@@ -7,7 +7,7 @@ var { typeDefs, resolvers } = require("./schemas");
 const { authMiddleware } = require("./utils/auth");
 const db = require("./config/connection");
 
-const PORT: string | 3001 = process.env.PORT || 3001;
+const PORT: any | 3001 = process.env.PORT || 3001;
 
 async function startApolloServer(resolvers: any, typeDefs: any) {
   const app = express();
@@ -40,7 +40,7 @@ async function startApolloServer(resolvers: any, typeDefs: any) {
         `Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`
       );
     });
-  });
+  })
 };
 
 startApolloServer(resolvers, typeDefs);
