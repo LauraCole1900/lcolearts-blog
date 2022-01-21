@@ -34,11 +34,13 @@ async function startApolloServer(resolvers: any, typeDefs: any) {
   });
 
   db.once("open", (): void => {
-    app.listen(PORT, () => {
+    httpServer.listen(PORT, () => {
       console.log(`API server running on port ${PORT}!`);
       console.log(
         `Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`
       );
     });
   });
-}
+};
+
+startApolloServer(resolvers, typeDefs);
