@@ -1,11 +1,11 @@
 import React, { ReactElement } from "react";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
-import { ApolloClient, ApolloLink, ApolloProvider, createHttpLink, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
+import { ApolloClient, ApolloLink, ApolloProvider, createHttpLink, GraphQLRequest, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
 import { setContext } from "@apollo/client/link/context";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from "react-bootstrap/Container";
 import Navigation from "./components/navbar";
-import { Blog, BlogEntry, LoginPage, NotFound } from "./components/pages";
+import { Blog, BlogEntry, LoginPage, NotFound, PostForm } from "./components/pages";
 import Footer from "./components/footer";
 import './App.css';
 
@@ -20,7 +20,7 @@ const httpLink: ApolloLink = createHttpLink({
 });
 
 // Sets authentication into context
-const authLink: ApolloLink = setContext((_, { headers }) => {
+const authLink: ApolloLink = setContext((_: GraphQLRequest, { headers }: any) => {
   const token: string | null = localStorage.getItem("id_token");
   return {
     headers: {
@@ -62,6 +62,7 @@ const App = (): ReactElement => {
               <Route path="/" element={<Blog />} />
               <Route path="/blog/*" element={<BlogEntry />} />
               <Route path="/log_me_in" element={<LoginPage />} />
+              <Route path="/post_form" element={<PostForm />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Container>
