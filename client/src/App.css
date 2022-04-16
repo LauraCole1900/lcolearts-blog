@@ -1,38 +1,23 @@
-.App {
-  text-align: center;
+:root {
+  --headerFont: 'Fredericka the Great', cursive;
+  --bodyFont: 'Open Sans', sans-serif;
+  --white: #ffffff;
+  --ltGray1: #e2e2e2;
+  --ltGray2: #d5d5d5;
+  --medGray: #c5c5c5;
+  --dkGray: #a5a5a5;
+  --medGreen: #1fad34;
+  --dkGreen: #031105;
+  --ltBlue: #c7dbf3;
+  --medBlue: #408ae1;
+  --dkBlue: #00008b;
+  --translucentBgDk: rgba(45, 50, 30, 0.35);
+  --translucentBgDker: rgba(0, 0, 0, 0.5);
+  --translucentBgLt: rgba(199, 219, 243, 0.25);
+  --translucentBgLter: rgba(0, 0, 0, 0.2);
+  --translucentBgGreen: rgba(3, 17, 5, 0.55);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.mycontainer {
+  background-color: var(--ltGray);
 }

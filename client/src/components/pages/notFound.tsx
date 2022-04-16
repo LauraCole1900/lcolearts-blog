@@ -25,25 +25,25 @@ const NotFound = (): ReactElement => {
           <Col sm={1}></Col>
           <Col sm={10}>
             <Link to="/">
-              <Button data-toggle="popover" title="Home" className="button">Home</Button>
+              <Button data-toggle="popover" title="Home" className="button btn btn404">Home</Button>
             </Link>
             <Link to="/about">
-              <Button data-toggle="popover" title="About" className="button">About</Button>
+              <Button data-toggle="popover" title="About" className="button btn btn404">About</Button>
             </Link>
             <Link to="/webdev">
-              <Button data-toggle="popover" title="Webdev Portfolio" className="button">Webdev Portfolio</Button>
+              <Button data-toggle="popover" title="Webdev Portfolio" className="button btn btn404">Webdev Portfolio</Button>
             </Link>
             <Link to="/musician">
-              <Button data-toggle="popover" title="Musician" className="button">Musician</Button>
+              <Button data-toggle="popover" title="Musician" className="button btn btn404">Musician</Button>
             </Link>
             <Link to="/martial_artist">
-              <Button data-toggle="popover" title="Martial Artist" className="button">Martial Artist</Button>
+              <Button data-toggle="popover" title="Martial Artist" className="button btn btn404">Martial Artist</Button>
             </Link>
             <Link to="/">
-              <Button data-toggle="popover" title="Blog" className="button">Blog</Button>
+              <Button data-toggle="popover" title="Blog" className="button btn btn404">Blog</Button>
             </Link>
             <Link to="/contact">
-              <Button data-toggle="popover" title="Contact Me" className="button">Contact Me</Button>
+              <Button data-toggle="popover" title="Contact Me" className="button btn">Contact Me</Button>
             </Link>
           </Col>
         </Row>
