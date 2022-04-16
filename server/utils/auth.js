@@ -1,4 +1,5 @@
 "use strict";
+require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const secret = process.env.JWT_SECRET;
 const expiration = "2h";
@@ -22,8 +23,12 @@ module.exports = {
         }
         return req;
     },
-    signToken: function ({ userName, email, _id }) {
-        const payload = { userName, email, _id };
+    signToken: function ({ userName, email, _id, }) {
+        const payload = {
+            userName,
+            email,
+            _id,
+        };
         return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
     },
 };

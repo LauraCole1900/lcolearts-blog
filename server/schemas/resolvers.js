@@ -14,15 +14,12 @@ var resolvers = {
     },
     Mutation: {
         addUser: async (_, args) => {
-            console.log("addUser");
             const user = await User.create(args);
             const token = signToken(user);
             return { token, user };
         },
         login: async (_, args) => {
-            console.log("login", args);
             const user = await User.findOne({ userName: args.userName });
-            console.log({ user });
             if (!user) {
                 throw new AuthenticationError("Incorrect credentials");
             }
