@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import { Link } from "react-router-dom";
 import { Button, Card, Col, Row } from "react-bootstrap";
-import { Post } from "../../utils";
+import { Post } from "../../utils/gql";
 
 const PostCard = (props: any): ReactElement => {
 

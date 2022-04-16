@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import { useQuery } from "@apollo/client";
 import { Col, Container, Row } from "react-bootstrap";
-import { QUERY_ALL_ENTRIES } from "../../utils";
+import { QUERY_ALL_ENTRIES } from "../../utils/gql";
 import PostCard from "../post";
 
 const Blog = (): ReactElement => {
