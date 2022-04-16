@@ -1,6 +1,7 @@
 import React, { ReactElement } from "react";
 import { Link } from "react-router-dom";
 import { Nav, Navbar } from "react-bootstrap";
+import Auth from "../../utils/auth";
 import "./style.css";
 
 const Navigation = (): ReactElement => {
@@ -37,6 +38,8 @@ const Navigation = (): ReactElement => {
           <a href="https://lcolearts.com/#/contact" className="navlink">
             Contact Me
           </a>
+          {Auth.loggedIn() &&
+            <Nav.Link onClick={Auth.logout} className="navlink">Logout</Nav.Link>}
         </Nav>
       </Navbar.Collapse>
     </Navbar>

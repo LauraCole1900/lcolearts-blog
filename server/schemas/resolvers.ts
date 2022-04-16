@@ -1,42 +1,44 @@
-const { AuthenticationError } = require('apollo-server-express');
-var { User } = require('../models');
-const { signToken } = require('../utils/auth');
+const { AuthenticationError } = require("apollo-server-express");
+var { User } = require("../models");
+const { signToken } = require("../utils/auth");
 
 var resolvers: any = {
   Query: {
-    me: async (_: any, args: any, context: any): Promise<any> => {
+    me: async (_: any, __: any, context: any): Promise<any> => {
       if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id }).select('-__v -password');
+        const userData = await User.findOne({ _id: context.user._id }).select(
+          "-__v -password"
+        );
 
         return userData;
       }
 
-      throw new AuthenticationError('Not logged in');
+      throw new AuthenticationError("Not logged in");
     },
   },
 
   Mutation: {
     addUser: async (_: any, args: any) => {
       const user: typeof User = await User.create(args);
-      const token: any = signToken(user);
+      const token: string = signToken(user);
 
       return { token, user };
     },
-    
-    login: async (_: any, { email, password }: {email: string, password: string}) => {
-      const user: typeof User = await User.findOne({ email });
+
+    login: async (_: any, args: any) => {
+      const user: typeof User = await User.findOne({ userName: args.userName });
 
       if (!user) {
-        throw new AuthenticationError('Incorrect credentials');
+        throw new AuthenticationError("Incorrect credentials");
       }
 
-      const correctPw: boolean = await user.isCorrectPassword(password);
+      const correctPw: boolean = await user.isCorrectPassword(args.password);
 
       if (!correctPw) {
-        throw new AuthenticationError('Incorrect credentials');
+        throw new AuthenticationError("Incorrect credentials");
       }
 
-      const token = signToken(user);
+      const token: string = signToken(user);
       return { token, user };
     },
 

@@ -7,7 +7,8 @@ export interface Post {
 }
 
 export interface User {
-  _id: string,
+  _id?: string,
   userName: string,
-  email: string
+  email?: string,
+  password: string
 }

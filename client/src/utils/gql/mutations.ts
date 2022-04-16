@@ -35,12 +35,12 @@ export const EDIT_ENTRY = gql`
 `;
 
 export const LOG_ME_IN = gql`
-  mutation login($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
+  mutation login($userName: String!, $password: String!) {
+    login(userName: $userName, password: $password) {
       token
       user {
         _id
-        email1
+        userName
       }
     }
   }

@@ -4,6 +4,8 @@
   --dkGreen: #031105;
   --ltBlue: #c7dbf3;
   --dkBlue: #00008b;
+  --ltGray1: #e2e2e2;
+  --dkGray: #a5a5a5;
   --translucentBgDk: rgba(45, 50, 30, 0.35);
   --translucentBgLt: rgba(199, 219, 243, 0.25);
 }
@@ -76,6 +78,26 @@ a {
   margin-right: .25rem;
 }
 
+.card {
+  margin: 1rem;
+  border: 3px solid var(--dkGreen);
+  border-radius: 18px;
+  box-shadow: 10px 10px 10px 5px var(--dkGreen);
+}
+
+.cardTitle {
+  color: var(--ltGray1);
+  background-color: var(--dkGreen);
+  text-align: center;
+  border-radius: 15px 15px 0 0 !important;
+}
+
+.cardBody {
+  color: var(--dkGreen);
+  background-color: var(--ltBlue);
+  border-radius: 0 0 15px 15px;
+}
+
 .mypic,
 .choralepic {
   max-width: 300px;
@@ -140,6 +162,58 @@ a {
 .flexEnd {
   justify-content: flex-end;
   height: 2.5em;
+}
+
+.formInput:focus,
+.formSelect:focus {
+  outline: none;
+  border-color: var(--disabled);
+  box-shadow: 0 0 10px var(--disabled);
+}
+
+.loginBtn {
+  color: var(--dkGreen);
+  background-color: var(--ltBlue);
+  border: 1px solid var(--dkGreen);
+}
+.loginBtn:disabled {
+  color: var(--ltGray1);
+  background-color: var(--dkGray);
+  border: 1px solid var(--ltGray1);
+}
+.loginBtn:focus {
+  background-color: var(--dkGreen);
+  border: 1px solid var(--ltBlue);
+  cursor: pointer;
+  border-color: var(--ltBlue);
+  box-shadow: none;
+}
+.loginBtn:active {
+  background-color: var(--dkGreen);
+  border: 1px solid var(--ltBlue);
+  cursor: pointer;
+  border-color: var(--disabled);
+  box-shadow: none;
+}
+.loginBtn:hover {
+  background-color: var(--dkGreen);
+  border: 1px solid var(--ltBlue);
+  cursor: pointer;
+}
+
+.login {
+  height: 75vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginDiv {
+  margin-top: 5px;
+}
+
+.loginLabel {
+  color: var(--dkGreen);
 }
 
 .topMargin {
