@@ -48,7 +48,11 @@ const LoginPage = (): ReactElement => {
 
   return (
     <>
-      <h1>This is going to be the login page.</h1>
+      <Container>
+        <Row>
+          <h1>This is going to be the login page.</h1>
+        </Row>
+      </Container>
     </>
   )
 }

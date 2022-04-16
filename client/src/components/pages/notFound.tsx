@@ -39,7 +39,7 @@ const NotFound = (): ReactElement => {
             <Link to="/martial_artist">
               <Button data-toggle="popover" title="Martial Artist" className="button">Martial Artist</Button>
             </Link>
-            <Link to="/blog">
+            <Link to="/">
               <Button data-toggle="popover" title="Blog" className="button">Blog</Button>
             </Link>
             <Link to="/contact">
