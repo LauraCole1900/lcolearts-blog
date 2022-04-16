@@ -9,7 +9,7 @@ const PostForm = (): ReactElement => {
     <>
       <Container>
         <Row>
-          <Col sm={12} className="center">
+          <Col sm={{ span: 10, offset: 1 }} className="center">
             <h1>New post</h1>
           </Col>
         </Row>

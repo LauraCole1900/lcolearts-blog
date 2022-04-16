@@ -8,14 +8,12 @@ const BlogEntry = (): ReactElement => {
     <>
       <Container>
         <Row>
-          <Col sm={1}></Col>
-          <Col sm={10}>
+          <Col sm={{ span: 10, offset: 1 }}>
             <h1>Blog Entry Title Here</h1>
           </Col>
         </Row>
         <Row>
-          <Col sm={1}></Col>
-          <Col sm={10}>
+          <Col sm={{ span: 10, offset: 1 }}>
             <p>And this isn't my nose. This is a false one. I'm not a witch. Bring her forward! We want a shrubbery!! You don't vote for kings.
 
               What do you mean? I am your king. The Knights Who Say Ni demand a sacrifice! Well, we did do the nose. I have to push the pram a lot.

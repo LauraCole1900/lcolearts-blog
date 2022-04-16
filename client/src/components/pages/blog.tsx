@@ -16,28 +16,24 @@ const Blog = (): ReactElement => {
     <>
       <Container>
         <Row>
-          <Col sm={1}></Col>
-          <Col sm={10}>
+          <Col sm={{ span: 10, offset: 1 }}>
             <h1>Blog</h1>
           </Col>
         </Row>
         {loading &&
           <Row>
-            <Col sm={1}></Col>
-            <Col sm={10}>
+            <Col sm={{ span: 10, offset: 1 }}>
               <p>Loading....</p>
             </Col>
           </Row>}
         {data
           ? <Row>
-            <Col sm={1}></Col>
-            <Col sm={10}>
+            <Col sm={{ span: 10, offset: 1 }}>
               <PostCard entries={sortedEntries} />
             </Col>
           </Row>
           : <Row>
-            <Col sm={1}></Col>
-            <Col sm={10}>
+            <Col sm={{ span: 10, offset: 1 }}>
               <h1>Coming soon!</h1>
             </Col>
           </Row>}

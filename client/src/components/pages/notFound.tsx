@@ -10,20 +10,17 @@ const NotFound = (): ReactElement => {
     <>
       <Container>
         <Row>
-          <Col sm={1}></Col>
-          <Col sm={10}>
+          <Col sm={{ span: 10, offset: 1 }}>
             <h1>404 Not Found</h1>
           </Col>
         </Row>
         <Row>
-          <Col sm={1}></Col>
-          <Col sm={10}>
+          <Col sm={{ span: 10, offset: 1 }}>
             <p>You've discovered uncharted territory! Return to familiar areas here:</p>
           </Col>
         </Row>
         <Row>
-          <Col sm={1}></Col>
-          <Col sm={10}>
+          <Col sm={{ span: 10, offset: 1 }}>
             <Link to="/">
               <Button data-toggle="popover" title="Home" className="button btn btn404">Home</Button>
             </Link>

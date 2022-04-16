@@ -50,7 +50,9 @@ const LoginPage = (): ReactElement => {
     <>
       <Container>
         <Row>
-          <h1>This is going to be the login page.</h1>
+          <Col sm={{ span: 10, offset: 1 }}>
+            <h1>This is going to be the login page.</h1>
+          </Col>
         </Row>
       </Container>
     </>
