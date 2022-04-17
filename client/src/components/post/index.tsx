@@ -4,11 +4,11 @@ import { Button, Card, Col, Row } from "react-bootstrap";
 import { Post } from "../../utils/gql";
 
 const PostCard = (props: any): ReactElement => {
-
+  console.log({ props });
 
   return (
     <>
-      {props.posts?.map((post: Post) => (
+      {props.entries?.map((post: Post) => (
         <Card key={post!._id!.toString()}>
           <Card.Header>
             <Link to={`/blog/${post._id}`}>
@@ -17,11 +17,8 @@ const PostCard = (props: any): ReactElement => {
             <p>{post.postDate}</p>
           </Card.Header>
           <Card.Body>
-            <p>{post.postBody}</p>
-          </Card.Body>
-          <Card.Footer>
             <p>{post.postKeywords.join(", ")}</p>
-          </Card.Footer>
+          </Card.Body>
         </Card>
       ))}
     </>

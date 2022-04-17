@@ -21,7 +21,7 @@ const SuccessModal = (props: any): ReactElement => {
           <Modal.Footer className="modalFooter">
 
             {/* Link to Blog */}
-              <Link to={"/blog"}>
+              <Link to={"/"}>
                 <Button data-toggle="popover" title="Blog" type="button" className="button">Return to Blog</Button>
               </Link>
 

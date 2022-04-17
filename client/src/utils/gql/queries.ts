@@ -16,6 +16,7 @@ query getAllEntries {
     postTitle
     postBody
     postKeywords
+    postDate
   }
 }
 `;
@@ -27,6 +28,7 @@ query getEntry($id: ID!) {
     postTitle
     postBody
     postKeywords
+    postDate
   }
 }
 `;

@@ -110,7 +110,7 @@ const PostForm = () => {
 
   // Creates array from keywords
   const handleKeywordArray = () => {
-    if (postData.postKeywords.length) {
+    if (postData.postKeywords.length > 0) {
       const keywordArr = postData.postKeywords.split(",");
       setPostData({ ...postData, postKeywords: keywordArr });
     }
