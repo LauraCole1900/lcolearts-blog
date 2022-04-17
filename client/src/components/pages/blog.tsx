@@ -26,7 +26,7 @@ const Blog = (): ReactElement => {
               <p>Loading....</p>
             </Col>
           </Row>}
-        {data
+        {data?.length
           ? <Row>
             <Col sm={{ span: 10, offset: 1 }}>
               <PostCard entries={sortedEntries} />

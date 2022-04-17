@@ -1,35 +1,34 @@
 import { gql } from "@apollo/client";
 
 export const CREATE_ENTRY = gql`
-mutation createEntry($title: String!, $content: String!, $tags: [String]) {
-  createToDo(title: $title, content: $content, tags: $tags) {
+mutation createEntry($postTitle: String!, $postBody: String!, $postKeywords: [String!]) {
+  createEntry(postTitle: $postTitle, postBody: $postBody, postKeywords: $postKeywords) {
     _id
-    title
-    content
-    tags
-
+    postTitle
+    postBody
+    postKeywords
   }
 }
 `;
 
 export const DELETE_ENTRY = gql`
-  mutation deleteEntry($id: String!) {
+  mutation deleteEntry($id: ID!) {
     deleteEntry(_id: $id) {
       _id
-      title
-      content
-      tags
+      postTitle
+      postBody
+      postKeywords
     }
   }
 `;
 
 export const EDIT_ENTRY = gql`
-  mutation editEntry($id: String!, $name: String!, $description: String!, $due: String, $done: Boolean!) {
-    editEntry(_id: $id, name: $name, description: $description, due: $due, done: $done) {
+  mutation editEntry($id: ID!, $postTitle: String!, $postBody: String!, $postKeywords: [String!]) {
+    editEntry(_id: $id, postTitle: $postTitle, postBody: $postBody, postKeywords: $postKeywords) {
       _id
-      title
-      content
-      tags
+      postTitle
+      postBody
+      postKeywords
     }
   }
 `;

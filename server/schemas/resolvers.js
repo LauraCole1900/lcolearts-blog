@@ -1,6 +1,6 @@
 "use strict";
 const { AuthenticationError } = require("apollo-server-express");
-var { User } = require("../models");
+var { Post, User } = require("../models");
 const { signToken } = require("../utils/auth");
 var resolvers = {
     Query: {
@@ -10,6 +10,12 @@ var resolvers = {
                 return userData;
             }
             throw new AuthenticationError("Not logged in");
+        },
+        getAllEntries: async () => {
+            return await Post.find({});
+        },
+        getEntry: async (_, args) => {
+            return await Post.findOne({ _id: args._id });
         },
     },
     Mutation: {
@@ -29,6 +35,18 @@ var resolvers = {
             }
             const token = signToken(user);
             return { token, user };
+        },
+        createEntry: async (_, args) => {
+            const post = await Post.create(args);
+            return post;
+        },
+        deleteEntry: async (_, args) => {
+            const post = await Post.findByIdAndDelete({ _id: args._id });
+            return post;
+        },
+        editEntry: async (_, args) => {
+            const post = await Post.findByIdAndUpdate({ _id: args._id }, { $set: Object.assign({}, args) }, { new: true });
+            return post;
         },
         // saveBook: async (_: any, { bookData }, context) => {
         //   if (context.user) {

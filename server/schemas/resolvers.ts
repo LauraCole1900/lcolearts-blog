@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-var { User } = require("../models");
+var { Post, User } = require("../models");
 const { signToken } = require("../utils/auth");
 
 var resolvers: any = {
@@ -14,6 +14,14 @@ var resolvers: any = {
       }
 
       throw new AuthenticationError("Not logged in");
+    },
+
+    getAllEntries: async (): Promise<any> => {
+      return await Post.find({});
+    },
+
+    getEntry: async (_: any, args: any): Promise<any> => {
+      return await Post.findOne({ _id: args._id });
     },
   },
 
@@ -40,6 +48,25 @@ var resolvers: any = {
 
       const token: string = signToken(user);
       return { token, user };
+    },
+
+    createEntry: async (_: any, args: any): Promise<any> => {
+      const post = await Post.create(args);
+      return post;
+    },
+
+    deleteEntry: async (_: any, args: any): Promise<any> => {
+      const post = await Post.findByIdAndDelete({ _id: args._id });
+      return post;
+    },
+
+    editEntry: async (_: any, args: any): Promise<any> => {
+      const post = await Post.findByIdAndUpdate(
+        { _id: args._id },
+        { $set: { ...args } },
+        { new: true }
+      );
+      return post;
     },
 
     // saveBook: async (_: any, { bookData }, context) => {

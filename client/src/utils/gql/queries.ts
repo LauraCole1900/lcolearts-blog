@@ -1,32 +1,32 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_ME = gql`
-query getMe($email: String!) {
-  getMe(email: $email) {
+query me($userName: String!) {
+  me(userName: $userName) {
     _id
-    email
+    userName
   }
 }
 `;
 
 export const QUERY_ALL_ENTRIES = gql`
 query getAllEntries {
-  GetAllEntries {
+  getAllEntries {
     _id
-    title
-    content
-    tags
+    postTitle
+    postBody
+    postKeywords
   }
 }
 `;
 
 export const QUERY_ONE_ENTRY = gql `
-query GetOneEntry($id: String!) {
-  GetEntry(_id: $id) {
+query getEntry($id: ID!) {
+  getEntry(_id: $id) {
     _id
-    title
-    content
-    tags
+    postTitle
+    postBody
+    postKeywords
   }
 }
 `;

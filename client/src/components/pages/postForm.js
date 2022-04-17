@@ -42,16 +42,6 @@ const PostForm = () => {
 
 
   //=====================//
-  //    URL Variables    //
-  //=====================//
-
-  // Determines which page user is on, specifically for use with modals
-  const urlArray = window.location.href.split("/");
-  const urlId = urlArray.at(-2);
-  const urlType = urlArray.at(-3);
-
-
-  //=====================//
   //       Queries       //
   //=====================//
 
@@ -118,12 +108,20 @@ const PostForm = () => {
     });
   };
 
+  // Creates array from keywords
+  const handleKeywordArray = () => {
+    if (postData.postKeywords.length) {
+      const keywordArr = postData.postKeywords.split(",");
+      setPostData({ ...postData, postKeywords: keywordArr });
+    }
+  }
+
   // Handles click on "Submit" button
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     // Validates required inputs
     const validationErrors = postValidate(postData);
-    const noErrors = Object.keys(validationErrors).length === 0;
+    const noErrors = Object.keys(validationErrors).some(val => validationErrors[val] === "");
     setErrors(validationErrors);
     if (noErrors) {
       try {
@@ -246,7 +244,7 @@ const PostForm = () => {
                   <Form.Label>Post keywords:</Form.Label>
                   {errors.postKeywords &&
                     <div className="error"><p>{errors.postKeywords}</p></div>}
-                  <Form.Control type="input" name="postKeywords" placeholder="Keywords" value={postData.postKeywords} className="formInput" onChange={handleInputChange} />
+                  <Form.Control type="input" name="postKeywords" placeholder="Keywords" value={postData.postKeywords} className="formInput" onChange={handleInputChange} onBlur={handleKeywordArray} />
                 </Col>
               </Row>
             </Form.Group>

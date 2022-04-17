@@ -8,14 +8,13 @@ var typeDefs: any = gql`
     password: String!
   }
 
-  # type Book {
-  #   bookId: ID!
-  #   authors: [String]
-  #   description: String
-  #   image: String
-  #   link: String
-  #   title: String!
-  # }
+  type Post {
+    _id: ID!
+    postTitle: String!
+    postBody: String!
+    postKeywords: [String!]
+    postDate: String
+  }
 
   type Auth {
     token: ID!
@@ -33,13 +32,16 @@ var typeDefs: any = gql`
 
   type Query {
     me: User
+    getAllEntries: [Post]
+    getEntry(_id: ID!): Post
   }
 
   type Mutation {
     login(userName: String!, password: String!): Auth
     addUser(userName: String!, email: String!, password: String!): Auth
-    # saveBook(bookData: BookInput!): User
-    # removeBook(bookId: ID!): User
+    createEntry(postTitle: String!, postBody: String!, postKeywords: [String!]): Post
+    deleteEntry(_id: ID!): Post
+    editEntry(_id: ID!, postTitle: String!, postBody: String!, postKeywords: [String!]): Post
   }
 `;
 

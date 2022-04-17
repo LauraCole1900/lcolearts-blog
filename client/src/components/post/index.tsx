@@ -8,7 +8,7 @@ const PostCard = (props: any): ReactElement => {
 
   return (
     <>
-      {props.posts.map((post: Post) => (
+      {props?.posts?.map((post: Post) => (
         <Card key={post!._id!.toString()}>
           <Card.Header>
             <Link to={`/blog/${post._id}`}>
