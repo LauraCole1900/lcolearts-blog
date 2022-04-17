@@ -40,7 +40,7 @@ const Navigation = (): ReactElement => {
           </a>
           {Auth.loggedIn() &&
             <>
-              <Link to="/post_form" className="navlink">New Post</Link>
+              <Link to="/new_post" className="navlink">New Post</Link>
               <Nav.Link onClick={Auth.logout} className="navlink">Logout</Nav.Link>
             </>}
         </Nav>

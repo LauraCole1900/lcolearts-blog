@@ -62,7 +62,8 @@ const App = (): ReactElement => {
               <Route path="/" element={<Blog />} />
               <Route path="/blog/:blogId" element={<BlogEntry />} />
               <Route path="/log_me_in" element={<LoginPage />} />
-              <Route path="/post_form" element={<PostForm />} />
+              <Route path="/new_post" element={<PostForm />} />
+              <Route path="/edit_post/:postId" element={<PostForm />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Container>

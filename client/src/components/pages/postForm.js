@@ -53,7 +53,7 @@ const PostForm = () => {
     });
 
   const me = meData?.me || meData?.currentId || {};
-  const postToEdit = useMemo(() => { return noteData?.onePost || {} }, [noteData?.onePost]);
+  const postToEdit = useMemo(() => { return noteData?.getEntry || {} }, [noteData?.getEntry]);
 
 
   //=====================//
@@ -149,7 +149,7 @@ const PostForm = () => {
     e.preventDefault();
     // Validates required inputs
     const validationErrors = postValidate(postData);
-    const noErrors = Object.keys(validationErrors).length === 0;
+    const noErrors = Object.keys(validationErrors).some(val => validationErrors[val] === "");
     setErrors(validationErrors);
     if (noErrors) {
       try {
