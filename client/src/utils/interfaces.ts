@@ -1,9 +1,9 @@
 export interface Post {
-  _id: string,
-  title: string,
-  content: string,
-  tags: Array<string>,
-  created_At: Date
+  _id?: string,
+  postTitle: string,
+  postBody: string,
+  postKeywords: Array<string>,
+  postDate?: Date
 }
 
 export interface User {
