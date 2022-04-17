@@ -5,7 +5,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 import { postValidate } from "../../utils/validation";
-import { ADD_POST, EDIT_POST, QUERY_ME, QUERY_ALL_POSTS, QUERY_ONE_POST } from "../../utils/gql";
+import { CREATE_ENTRY, EDIT_ENTRY, QUERY_ME, QUERY_ALL_ENTRIES, QUERY_ONE_ENTRY } from "../../utils/gql";
 import Auth from "../../utils/auth";
 import { ErrorModal, SuccessModal } from "../modals";
 import EditorContainer from "../richTextEditor";
@@ -57,7 +57,7 @@ const PostForm = () => {
 
   const { loading: meLoading, data: meData, error: meError } = useQuery(QUERY_ME);
 
-  const { loading: noteLoading, data: noteData, error: noteError } = useQuery(QUERY_ONE_POST,
+  const { loading: noteLoading, data: noteData, error: noteError } = useQuery(QUERY_ONE_ENTRY,
     {
       variables: { id: postId }
     });
@@ -70,15 +70,15 @@ const PostForm = () => {
   //      Mutations      //
   //=====================//
 
-  const [addPost, { addPostError, addPostData }] = useMutation(ADD_POST, {
+  const [addPost, { addPostError, addPostData }] = useMutation(CREATE_ENTRY, {
     update(cache, { data: { addPost } }) {
       try {
         // Retrieve existing post data that is stored in the cache
-        const allData = cache.readQuery({ query: QUERY_ALL_POSTS });
+        const allData = cache.readQuery({ query: QUERY_ALL_ENTRIES });
         const currentPosts = allData.allPosts;
         // Update the cache by combining existing post data with the newly created data returned from the mutation
         cache.writeQuery({
-          query: QUERY_ALL_POSTS,
+          query: QUERY_ALL_ENTRIES,
           // If we want new data to show up before or after existing data, adjust the order of this array
           data: { allPosts: [...currentPosts, addPost] },
         });
@@ -88,7 +88,7 @@ const PostForm = () => {
     }
   });
 
-  const [editPost, { editPostError, editPostData }] = useMutation(EDIT_POST);
+  const [editPost, { editPostError, editPostData }] = useMutation(EDIT_ENTRY);
 
 
   //=====================//
