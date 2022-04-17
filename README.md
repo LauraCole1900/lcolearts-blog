@@ -24,25 +24,13 @@ This application uses a MERNG stack with JWT authentication to build my professi
 ## Screenshots
 
 Landing page:
-![Landing page](assets/rp-landing-page-screenshot.png)
+![Landing page](assets/rpb-lander-screenshot.png)
 
-"About" page:
-![About page](assets/rp-about-page-screenshot.png)
+Single entry details page:
+![Single entry page](assets/rpb-entry-screenshot.png)
 
-Portfolio page with all project cards showing their fronts:
-![Portfolio page card fronts](assets/rp-portfolio-page-screenshot-all-fronts.png)
-
-Portfolio page with some project cards showing their backs:
-![Portfolio page card backs](assets/rp-portfolio-page-screenshot-backs.png)
-
-"Musician" page:
-![Musician page](assets/rp-musician-page-screenshot.png)
-
-"Martial artist" page:
-![Martial artist page](assets/rp-martial-artist-page-screenshot.png)
-
-"Contact Me" page:
-![Contact Me page](assets/rp-contact-page-screenshot.png)
+Posts filtered by tag:
+![Posts filtered by tag](assets/rpb-tags-screenshot.png)
 
 ## Usage
 
