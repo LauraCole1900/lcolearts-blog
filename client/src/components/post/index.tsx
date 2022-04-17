@@ -19,7 +19,7 @@ const PostCard = (props: any): ReactElement => {
             <p>{dayjs(JSON.parse(post.postDate!)).format("MMM D, YYYY h:mma")}</p>
           </Card.Header>
           <Card.Body className="postBody">
-            <p>tags: {post.postKeywords.join(", ")}</p>
+            <p className="tags">tags: {post.postKeywords.join(", ")}</p>
           </Card.Body>
         </Card>
       ))}

@@ -1,7 +1,8 @@
 import React, { ReactElement } from "react";
 import { useParams } from "react-router-dom";
-import { Col, Container, Row } from "react-bootstrap";
 import { useQuery } from "@apollo/client";
+import { Col, Container, Row } from "react-bootstrap";
+import dayjs from "dayjs";
 import { QUERY_ONE_ENTRY } from "../../utils/gql";
 
 const BlogEntry = (): ReactElement => {
@@ -25,6 +26,7 @@ const BlogEntry = (): ReactElement => {
         <Row>
           <Col sm={{ span: 10, offset: 1 }}>
             <h1>{entry.postTitle}</h1>
+            <p>{dayjs(JSON.parse(entry.postDate!)).format("MMM D, YYYY h:mma")}</p>
           </Col>
         </Row>
 
@@ -36,7 +38,7 @@ const BlogEntry = (): ReactElement => {
 
         <Row>
           <Col sm={{span: 10, offset: 1}}>
-            <p className="tags">{entry.postKeywords.join(", ")}</p>
+            <p className="tags">tags: {entry.postKeywords.join(", ")}</p>
           </Col>
         </Row>
       </Container>

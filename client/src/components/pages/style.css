@@ -252,3 +252,7 @@ a {
   text-shadow: -1px 1px 1px var(--ltBlue), 1px 1px 1px var(--ltBlue),
     1px -1px 1px var(--ltBlue), -1px -1px 1px var(--ltBlue);
 }
+
+.tags {
+  font-size: .66rem;
+}
