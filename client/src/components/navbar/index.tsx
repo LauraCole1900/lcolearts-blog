@@ -39,7 +39,10 @@ const Navigation = (): ReactElement => {
             Contact Me
           </a>
           {Auth.loggedIn() &&
-            <Nav.Link onClick={Auth.logout} className="navlink">Logout</Nav.Link>}
+            <>
+              <Link to="/post_form" className="navlink">New Post</Link>
+              <Nav.Link onClick={Auth.logout} className="navlink">Logout</Nav.Link>
+            </>}
         </Nav>
       </Navbar.Collapse>
     </Navbar>

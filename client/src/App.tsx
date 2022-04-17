@@ -60,7 +60,7 @@ const App = (): ReactElement => {
           <Container fluid className="mycontainer">
             <Routes>
               <Route path="/" element={<Blog />} />
-              <Route path="/blog/*" element={<BlogEntry />} />
+              <Route path="/blog/:blogId" element={<BlogEntry />} />
               <Route path="/log_me_in" element={<LoginPage />} />
               <Route path="/post_form" element={<PostForm />} />
               <Route path="*" element={<NotFound />} />
