@@ -44,7 +44,7 @@ class EditorContainer extends Component {
         onEditorStateChange={this.onEditorStateChange}
         stripPastedStyles={true}
         ref={(ref) => this.editor = ref}
-        toolbarClassName="gcToolbar"
+        toolbarClassName="blogToolbar"
         toolbar={{
           options: ["inline", "blockType", "fontSize", "fontFamily", "list", "textAlign", "link", "colorPicker", "history"],
           inline: {

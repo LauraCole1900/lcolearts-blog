@@ -75,7 +75,7 @@ a {
 }
 
 .btn404 {
-  margin-right: .25rem;
+  margin-right: 0.25rem;
 }
 
 .card {
@@ -110,6 +110,15 @@ a {
 
 .mypic {
   border-radius: 50%;
+}
+
+.error {
+  color: var(--gcWhite);
+  background-color: var(--red);
+}
+
+.formHeader{
+  text-align: center;
 }
 
 .icon {
@@ -164,23 +173,38 @@ a {
   height: 2.5em;
 }
 
-.formInput:focus,
-.formSelect:focus {
+.formBtn {
+  width: 100%;
+  height: 3rem;
+}
+
+.formInput,
+.richTextEditor {
+  color: var(--dkGreen);
+  background-color: var(--ltGray2);
+  margin-bottom: .75rem;
+}
+
+.formInput:focus {
+  background-color: var(--ltGray1);
   outline: none;
   border-color: var(--dkGreen);
   box-shadow: 0 0 10px var(--dkGreen);
 }
 
+.formBtn,
 .loginBtn {
   color: var(--dkGreen);
   background-color: var(--ltBlue);
   border: 1px solid var(--dkGreen);
 }
+.formBtn:disabled,
 .loginBtn:disabled {
   color: var(--ltGray1);
   background-color: var(--dkGray);
   border: 1px solid var(--ltGray1);
 }
+.formBtn:focus,
 .loginBtn:focus {
   background-color: var(--dkGreen);
   border: 1px solid var(--ltBlue);

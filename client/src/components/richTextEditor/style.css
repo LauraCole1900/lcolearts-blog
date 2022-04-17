@@ -1,18 +1,21 @@
 :root {
-  --darkSil: #cacaca;
-  --gcWhite: #fdfdfd;
-  --gcGray: #a19f95;
-  --gcCharcoal: #282825;
-  --gcBlack: #020201;
-  --gcRed: #971316;
-  --disabled: #b14748;
-  --highlightRed: #f9aaaa;
-  --highlightYellow: #fff6b8;
-  --highlightOrange: #f9e3aa;
-  --highlightGreen: #7de67b;
-  --highlightBlue: #aad0f9;
-  --headerFont: "Sree Krushnadevaraya", serif;
-  --bodyFont: "Lato", sans-serif;
+  --headerFont: 'Fredericka the Great', cursive;
+  --bodyFont: 'Open Sans', sans-serif;
+  --white: #ffffff;
+  --ltGray1: #e2e2e2;
+  --ltGray2: #d5d5d5;
+  --medGray: #c5c5c5;
+  --dkGray: #a5a5a5;
+  --medGreen: #1fad34;
+  --dkGreen: #031105;
+  --ltBlue: #c7dbf3;
+  --medBlue: #408ae1;
+  --dkBlue: #00008b;
+  --translucentBgDk: rgba(45, 50, 30, 0.35);
+  --translucentBgDker: rgba(0, 0, 0, 0.5);
+  --translucentBgLt: rgba(199, 219, 243, 0.25);
+  --translucentBgLter: rgba(0, 0, 0, 0.2);
+  --translucentBgGreen: rgba(3, 17, 5, 0.55);
 }
 
 .editorIcon {
@@ -20,30 +23,30 @@
   padding: 0 5px 0 5px;
 }
 
-.gcToolbar {
-  background-color: var(--disabled)
+.blogToolbar {
+  background-color: var(--dkGreen);
 }
 
 .richTextContainer {
-  background-color: var(--gcWhite);
+  background-color: var(--ltGray1);
 }
 
 .rdw-editor-main {
-  color: var(--gcCharcoal);
-  background: var(--darkSil);
+  color: var(--dkGreen);
+  background: var(--ltGray2);
   min-height: 20rem;
   border-radius: 5px;
 }
 .rdw-editor-main:focus-within {
-  background: var(--lightSil);
+  background: var(--ltGray1);
   outline: none;
-  border-color: #b14748;
-  box-shadow: 0 0 10px #b14748;
+  border-color: var(--dkGreen);
+  box-shadow: 0 0 10px var(--dkGreen);
 }
 .public-DraftStyleDefault-block {
   margin: 0.5em 0.75em;
 }
 .rdw-dropdown-selectedtext,
 .rdw-option-wrapper {
-  background: var(--lightSil);
+  background: var(--ltGray1);
 }
