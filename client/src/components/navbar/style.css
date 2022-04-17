@@ -21,7 +21,7 @@
 
 .navlink {
   padding: 1em;
-  color: var(--ltBlue);
+  color: var(--ltBlue) !important;
   font-family: var(--headerFont);
 }
 

@@ -3,7 +3,7 @@ export interface Post {
   postTitle: string,
   postBody: string,
   postKeywords: Array<string>,
-  postDate?: Date
+  postDate?: string
 }
 
 export interface User {

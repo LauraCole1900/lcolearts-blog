@@ -1,23 +1,25 @@
 import React, { ReactElement } from "react";
 import { Link } from "react-router-dom";
 import { Button, Card, Col, Row } from "react-bootstrap";
+import dayjs from "dayjs";
 import { Post } from "../../utils/gql";
+import "./style.css";
 
 const PostCard = (props: any): ReactElement => {
-  console.log({ props });
+
 
   return (
     <>
       {props.entries?.map((post: Post) => (
         <Card key={post!._id!.toString()}>
-          <Card.Header>
-            <Link to={`/blog/${post._id}`}>
+          <Card.Header className="postHeader">
+            <Link to={`/blog/${post._id}`} className="blogLink">
               <h1>{post!.postTitle}</h1>
             </Link>
-            <p>{post.postDate}</p>
+            <p>{dayjs(JSON.parse(post.postDate!)).format("MMM D, YYYY h:mma")}</p>
           </Card.Header>
-          <Card.Body>
-            <p>{post.postKeywords.join(", ")}</p>
+          <Card.Body className="postBody">
+            <p>tags: {post.postKeywords.join(", ")}</p>
           </Card.Body>
         </Card>
       ))}

@@ -1,0 +1,21 @@
+.blogLink {
+  color: var(--ltBlue);
+}
+.blogLink:hover {
+  color: var(--medBlue);
+}
+.blogLink:visited {
+  color: var(--ltGray1);
+}
+
+.postBody {
+  color: var(--dkGreen);
+  background-color: var(--ltGray2);
+  border-radius: 0 0 15px 15px;
+}
+
+.postHeader {
+  color: var(--ltBlue);
+  background-color: var(--dkGreen);
+  border-radius: 15px 15px 0 0 !important;
+}
