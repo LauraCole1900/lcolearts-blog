@@ -1,0 +1,49 @@
+:root {
+  --darkSil: #cacaca;
+  --gcWhite: #fdfdfd;
+  --gcGray: #a19f95;
+  --gcCharcoal: #282825;
+  --gcBlack: #020201;
+  --gcRed: #971316;
+  --disabled: #b14748;
+  --highlightRed: #f9aaaa;
+  --highlightYellow: #fff6b8;
+  --highlightOrange: #f9e3aa;
+  --highlightGreen: #7de67b;
+  --highlightBlue: #aad0f9;
+  --headerFont: "Sree Krushnadevaraya", serif;
+  --bodyFont: "Lato", sans-serif;
+}
+
+.editorIcon {
+  height: 18px;
+  padding: 0 5px 0 5px;
+}
+
+.gcToolbar {
+  background-color: var(--disabled)
+}
+
+.richTextContainer {
+  background-color: var(--gcWhite);
+}
+
+.rdw-editor-main {
+  color: var(--gcCharcoal);
+  background: var(--darkSil);
+  min-height: 20rem;
+  border-radius: 5px;
+}
+.rdw-editor-main:focus-within {
+  background: var(--lightSil);
+  outline: none;
+  border-color: #b14748;
+  box-shadow: 0 0 10px #b14748;
+}
+.public-DraftStyleDefault-block {
+  margin: 0.5em 0.75em;
+}
+.rdw-dropdown-selectedtext,
+.rdw-option-wrapper {
+  background: var(--lightSil);
+}
