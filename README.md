@@ -19,7 +19,7 @@ This application uses a MERNG stack with JWT authentication to build my professi
 
 ## Links
 
-[Deployed application on Heroku](https://#.herokuapp.com) NOT DEPLOYED YET
+[Deployed application on Heroku](https://lcolearts-blog.herokuapp.com/)
 
 ## Screenshots
 
