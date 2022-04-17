@@ -167,8 +167,8 @@ a {
 .formInput:focus,
 .formSelect:focus {
   outline: none;
-  border-color: var(--disabled);
-  box-shadow: 0 0 10px var(--disabled);
+  border-color: var(--dkGreen);
+  box-shadow: 0 0 10px var(--dkGreen);
 }
 
 .loginBtn {
@@ -192,7 +192,7 @@ a {
   background-color: var(--dkGreen);
   border: 1px solid var(--ltBlue);
   cursor: pointer;
-  border-color: var(--disabled);
+  border-color: var(--ltBlue);
   box-shadow: none;
 }
 .loginBtn:hover {

@@ -9,18 +9,18 @@ const PostCard = (props: any): ReactElement => {
   return (
     <>
       {props.posts.map((post: Post) => (
-        <Card key={post._id.toString()}>
+        <Card key={post!._id!.toString()}>
           <Card.Header>
             <Link to={`/blog/${post._id}`}>
-              <h1>{post.title}</h1>
+              <h1>{post!.postTitle}</h1>
             </Link>
-            <p>{post.created_At}</p>
+            <p>{post.postDate}</p>
           </Card.Header>
           <Card.Body>
-            <p>{post.content}</p>
+            <p>{post.postBody}</p>
           </Card.Body>
           <Card.Footer>
-            <p>{post.tags.join(", ")}</p>
+            <p>{post.postKeywords.join(", ")}</p>
           </Card.Footer>
         </Card>
       ))}
