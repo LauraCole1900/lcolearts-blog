@@ -3,13 +3,14 @@ import { useQuery } from "@apollo/client";
 import { Col, Container, Row } from "react-bootstrap";
 import { QUERY_ALL_ENTRIES } from "../../utils/gql";
 import PostCard from "../post";
+import { Post } from "../../utils/interfaces";
 
 const Blog = (): ReactElement => {
   // GraphQL variables
   const { loading, data, refetch } = useQuery(QUERY_ALL_ENTRIES, {});
-  const entriesArr = data?.getAllEntries || [];
-  const arrToSort = [...entriesArr];
-  const sortedEntries = arrToSort.sort((a, b) => (a.created_At > b.created_At) ? 1 : -1)
+  const entriesArr: Post[] = data?.getAllEntries || [];
+  const arrToSort: Post[] = [...entriesArr];
+  const sortedEntries: Post[] = arrToSort.sort((a, b) => (a.postDate! < b.postDate!) ? 1 : -1)
 
 
   return (
