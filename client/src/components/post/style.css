@@ -8,6 +8,12 @@
   color: var(--ltGray1);
 }
 
+.cardBtn {
+  text-align: center;
+  vertical-align: auto;
+  height: 2.25rem;
+}
+
 .postBody {
   color: var(--dkGreen);
   background-color: var(--ltGray2);

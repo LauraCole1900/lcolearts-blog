@@ -23,9 +23,13 @@ const PostCard = (props: any): ReactElement => {
             {Auth.loggedIn() &&
               <div>
                 <Link to={`/edit_post/${post._id}`} className="navlink">
-                  <p>Edit</p>
+                  <Button className="btn cardBtn">
+                    <p>Edit</p>
+                  </Button>
                 </Link>
-                <p>Delete</p>
+                <Button className="btn cardBtn" onClick={() => props.handleDelete(post._id)}>
+                  <p>Delete</p>
+                </Button>
               </div>}
           </Card.Header>
           <Card.Body className="postBody">
