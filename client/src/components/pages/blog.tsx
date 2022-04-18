@@ -3,6 +3,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { Col, Container, Row } from "react-bootstrap";
 import { DELETE_ENTRY, QUERY_ALL_ENTRIES } from "../../utils/gql";
 import PostCard from "../post";
+import { ConfirmModal, ErrorModal, SuccessModal } from "../modals";
 import { Post } from "../../utils/interfaces";
 
 const Blog = (): ReactElement => {
@@ -45,6 +46,10 @@ const Blog = (): ReactElement => {
       // handleShowErr();
     }
   };
+
+  if (loading) {
+    return <h1>Loading....</h1>
+  }
 
 
   return (
