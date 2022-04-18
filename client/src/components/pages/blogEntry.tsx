@@ -24,21 +24,21 @@ const BlogEntry = (): ReactElement => {
     <>
       <Container>
         <Row>
-          <Col sm={{ span: 10, offset: 1 }}>
-            <h1>{entry.postTitle}</h1>
-            <p>{dayjs(JSON.parse(entry.postDate!)).format("MMM D, YYYY h:mma")}</p>
-          </Col>
-        </Row>
+          <Col sm={{ span: 10, offset: 1 }} className="transpBground">
 
-        <Row>
-          <Col sm={{ span: 10, offset: 1 }}>
-            <div dangerouslySetInnerHTML={{ __html: entry.postBody }} />
-          </Col>
-        </Row>
+            <Row>
+              <h1>{entry.postTitle}</h1>
+              <p>{dayjs(JSON.parse(entry.postDate!)).format("MMM D, YYYY h:mma")}</p>
+            </Row>
 
-        <Row>
-          <Col sm={{span: 10, offset: 1}}>
-            <p className="tags">tags: {entry.postKeywords.join(", ")}</p>
+            <Row>
+              <div dangerouslySetInnerHTML={{ __html: entry.postBody }} />
+            </Row>
+
+            <Row>
+              <p className="tags">tags: {entry.postKeywords.join(", ")}</p>
+            </Row>
+
           </Col>
         </Row>
       </Container>
