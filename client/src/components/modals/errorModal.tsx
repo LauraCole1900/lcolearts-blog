@@ -24,7 +24,7 @@ const ErrorModal = (props: any): ReactElement => {
             <Button data-toggle="popover" title="Close" type="button" className="button" onClick={props.hide}>Close</Button>
 
             {/* Link to Blog page */}
-              <Link to={"/blog"}>
+              <Link to={"/"}>
                 <Button data-toggle="popover" title="Blog" type="button" className="button">Return to Blog</Button>
               </Link>
 

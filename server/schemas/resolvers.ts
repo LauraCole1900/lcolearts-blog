@@ -61,6 +61,7 @@ var resolvers: any = {
     },
 
     editEntry: async (_: any, args: any): Promise<any> => {
+      console.log({ args });
       const post = await Post.findByIdAndUpdate(
         { _id: args._id },
         { $set: { ...args } },

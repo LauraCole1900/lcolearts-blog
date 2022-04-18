@@ -94,10 +94,12 @@ const PostForm = () => {
   // Handles input changes to form fields
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setPostData(prev => {
-      currentPostData.current = { ...prev, [name]: value };
-      return { ...prev, [name]: value };
-    });
+    setPostData({ ...postData, [name]: value });
+    if (name === "postKeywords") {
+      let dataArr = value.split(",");
+      let trimmedArr = dataArr.map(item => item.trim())
+      setPostData({ ...postData, [name]: trimmedArr });
+    }
   };
 
   // Handles input changes to editor
@@ -108,18 +110,9 @@ const PostForm = () => {
     });
   };
 
-  // Creates array from keywords
-  const handleKeywordArray = () => {
-    if (postData.postKeywords.length > 0) {
-      const keywordArr = postData.postKeywords.split(",");
-      setPostData({ ...postData, postKeywords: keywordArr });
-    }
-  }
-
   // Handles click on "Submit" button
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    handleKeywordArray();
     // Validates required inputs
     const validationErrors = postValidate(postData);
     const noErrors = Object.keys(validationErrors).some(val => validationErrors[val] === "");
@@ -147,20 +140,22 @@ const PostForm = () => {
 
   // Handles click on "Update" button
   const handleFormUpdate = async (e) => {
+    console.log({ postData }, { postId });
     e.preventDefault();
-    handleKeywordArray();
     // Validates required inputs
     const validationErrors = postValidate(postData);
     const noErrors = Object.keys(validationErrors).some(val => validationErrors[val] === "");
     setErrors(validationErrors);
     if (noErrors) {
       try {
+        console.log("ding");
         const { data } = await editEntry({
           variables: { id: postId, ...postData, postBody: draftToHtml(convertToRaw(postData.postBody.getCurrentContent())) }
         });
+        console.log({ data });
         handleShowSuccess();
       } catch (error) {
-        console.error(JSON.stringify(error));
+        console.error(JSON.parse(JSON.stringify(error)));
         setErrThrown(error.message);
         handleShowErr();
       }
