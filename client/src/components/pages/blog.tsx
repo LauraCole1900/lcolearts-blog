@@ -21,7 +21,7 @@ const Blog = (): ReactElement => {
         cache.writeQuery({
           query: QUERY_ALL_ENTRIES,
           // If we want new data to show up before or after existing data, adjust the order of this array
-          data: { allPosts: updatedPosts },
+          data: { getAllEntries: updatedPosts },
         });
       } catch (err) {
         console.error(err);

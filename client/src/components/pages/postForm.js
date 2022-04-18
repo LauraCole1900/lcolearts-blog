@@ -60,17 +60,17 @@ const PostForm = () => {
   //      Mutations      //
   //=====================//
 
-  const [addPost, { addPostError, addPostData }] = useMutation(CREATE_ENTRY, {
-    update(cache, { data: { addPost } }) {
+  const [createEntry, { createEntryError, createEntryData }] = useMutation(CREATE_ENTRY, {
+    update(cache, { data: { createEntry } }) {
       try {
         // Retrieve existing post data that is stored in the cache
         const allData = cache.readQuery({ query: QUERY_ALL_ENTRIES });
-        const currentPosts = allData.allPosts;
+        const currentPosts = allData.getAllEntries;
         // Update the cache by combining existing post data with the newly created data returned from the mutation
         cache.writeQuery({
           query: QUERY_ALL_ENTRIES,
           // If we want new data to show up before or after existing data, adjust the order of this array
-          data: { allPosts: [...currentPosts, addPost] },
+          data: { getAllEntries: [...currentPosts, createEntry] },
         });
       } catch (err) {
         console.error(err);
@@ -78,7 +78,7 @@ const PostForm = () => {
     }
   });
 
-  const [editPost, { editPostError, editPostData }] = useMutation(EDIT_ENTRY);
+  const [editEntry, { editEntryError, editEntryData }] = useMutation(EDIT_ENTRY);
 
 
   //=====================//
@@ -119,13 +119,14 @@ const PostForm = () => {
   // Handles click on "Submit" button
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    handleKeywordArray();
     // Validates required inputs
     const validationErrors = postValidate(postData);
     const noErrors = Object.keys(validationErrors).some(val => validationErrors[val] === "");
     setErrors(validationErrors);
     if (noErrors) {
       try {
-        const { data } = await addPost({
+        const { data } = await createEntry({
           variables: { ...postData, postBody: draftToHtml(convertToRaw(postData.postBody.getCurrentContent())) }
         });
         handleShowSuccess();
@@ -147,13 +148,14 @@ const PostForm = () => {
   // Handles click on "Update" button
   const handleFormUpdate = async (e) => {
     e.preventDefault();
+    handleKeywordArray();
     // Validates required inputs
     const validationErrors = postValidate(postData);
     const noErrors = Object.keys(validationErrors).some(val => validationErrors[val] === "");
     setErrors(validationErrors);
     if (noErrors) {
       try {
-        const { data } = await editPost({
+        const { data } = await editEntry({
           variables: { id: postId, ...postData, postBody: draftToHtml(convertToRaw(postData.postBody.getCurrentContent())) }
         });
         handleShowSuccess();
@@ -244,7 +246,7 @@ const PostForm = () => {
                   <Form.Label>Post keywords:</Form.Label>
                   {errors.postKeywords &&
                     <div className="error"><p>{errors.postKeywords}</p></div>}
-                  <Form.Control type="input" name="postKeywords" placeholder="Keywords" value={postData.postKeywords} className="formInput" onChange={handleInputChange} onBlur={handleKeywordArray} />
+                  <Form.Control type="input" name="postKeywords" placeholder="Keywords" value={postData.postKeywords} className="formInput" onChange={handleInputChange} />
                 </Col>
               </Row>
             </Form.Group>
