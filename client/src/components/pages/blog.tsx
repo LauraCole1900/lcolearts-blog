@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { MouseEvent, ReactElement, useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { Col, Container, Row } from "react-bootstrap";
 import { DELETE_ENTRY, QUERY_ALL_ENTRIES } from "../../utils/gql";
@@ -7,6 +7,17 @@ import { ConfirmModal, ErrorModal, SuccessModal } from "../modals";
 import { Post } from "../../utils/interfaces";
 
 const Blog = (): ReactElement => {
+
+
+  // States passed to modals
+  const [btnName, setBtnName] = useState<string>();
+  const [errThrown, setErrThrown] = useState<string>();
+  const [entryId, setEntryId] = useState<string>();
+
+  // Modal states
+  const [showConfirm, setShowConfirm] = useState<boolean>(false);
+  const [showErr, setShowErr] = useState<boolean>(false);
+  const [showSuccess, setShowSuccess] = useState<boolean>(false);
 
   // GraphQL variables
   const { loading, data, refetch } = useQuery(QUERY_ALL_ENTRIES, {});
@@ -32,6 +43,25 @@ const Blog = (): ReactElement => {
   const entriesArr: Post[] = data?.getAllEntries || [];
   const arrToSort: Post[] = [...entriesArr];
   const sortedEntries: Post[] = arrToSort.sort((a, b) => (a.postDate! < b.postDate!) ? 1 : -1);
+
+
+  //=====================//
+  //    Modal Methods    //
+  //=====================//
+
+  // Sets boolean to show or hide relevant modal
+  const handleHideConfirm = () => setShowConfirm(false);
+  const handleShowSuccess = () => setShowSuccess(true);
+  const handleHideSuccess = () => setShowSuccess(false);
+  const handleShowErr = () => setShowErr(true);
+  const handleHideErr = () => setShowErr(false);
+
+  // Shows Confirm modal
+  const handleShowConfirm = (e: MouseEvent) => {
+    const { dataset } = e.target as HTMLButtonElement;
+    setBtnName(dataset.btnname);
+    setShowConfirm(true);
+  };
 
   const handleDeleteEntry = async (id: string) => {
     // handleHideConfirm();
@@ -60,12 +90,6 @@ const Blog = (): ReactElement => {
             <h1>Blog</h1>
           </Col>
         </Row>
-        {loading &&
-          <Row>
-            <Col sm={{ span: 10, offset: 1 }}>
-              <p>Loading....</p>
-            </Col>
-          </Row>}
         {sortedEntries?.length
           ? <Row>
             <Col sm={{ span: 10, offset: 1 }}>
@@ -77,6 +101,29 @@ const Blog = (): ReactElement => {
               <h1>Coming soon!</h1>
             </Col>
           </Row>}
+
+        <ConfirmModal
+          btnname={btnName}
+          entryDelete={() => handleDeleteEntry(entryId!)}
+          show={showConfirm === true}
+          hide={() => handleHideConfirm()}
+        />
+
+        <SuccessModal
+          btnname={btnName}
+          params={[]}
+          show={showSuccess === true}
+          hide={() => handleHideSuccess()}
+        />
+
+        <ErrorModal
+
+          errmsg={errThrown}
+          btnname={btnName}
+          show={showErr === true}
+          hide={() => handleHideErr()}
+        />
+
       </Container>
     </>
   )
