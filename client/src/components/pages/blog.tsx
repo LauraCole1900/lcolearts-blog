@@ -93,7 +93,7 @@ const Blog = (): ReactElement => {
         {sortedEntries?.length
           ? <Row>
             <Col sm={{ span: 10, offset: 1 }}>
-              <PostCard entries={sortedEntries} handleDelete={handleDeleteEntry} />
+              <PostCard entries={sortedEntries} handleShowConfirm={handleShowConfirm} />
             </Col>
           </Row>
           : <Row>

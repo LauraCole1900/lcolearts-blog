@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { MouseEvent, ReactElement } from "react";
 import { Link } from "react-router-dom";
 import { Button, Card, Col, Row } from "react-bootstrap";
 import dayjs from "dayjs";
@@ -27,7 +27,7 @@ const PostCard = (props: any): ReactElement => {
                     <p>Edit</p>
                   </Button>
                 </Link>
-                <Button className="btn cardBtn" onClick={() => props.handleDelete(post._id)}>
+                <Button className="btn cardBtn" data-id={post._id} onClick={(e: MouseEvent): any => props.handleShowConfirm(e)}>
                   <p>Delete</p>
                 </Button>
               </div>}
