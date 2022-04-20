@@ -14,16 +14,14 @@ const SuccessModal = (props: any): ReactElement => {
           <Modal.Title className="modalTitle"><h2>Success!</h2></Modal.Title>
         </Modal.Header>
         <Modal.Body className="modalBody">
-            <h3>Your post was created.</h3>
+          <h3>Your post was created. Or deleted. Whichever.</h3>
 
 
           {/* Navigation buttons */}
           <Modal.Footer className="modalFooter">
 
             {/* Link to Blog */}
-              <Link to={"/"}>
-                <Button data-toggle="popover" title="Blog" type="button" className="button">Return to Blog</Button>
-              </Link>
+            <Button data-toggle="popover" title="Blog" type="button" className="button" onClick={props.hide}>Return to Blog</Button>
 
           </Modal.Footer>
         </Modal.Body>

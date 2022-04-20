@@ -1,4 +1,4 @@
-import React, { MouseEvent, ReactElement, useState } from "react";
+import React, { ReactElement, useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { Col, Container, Row } from "react-bootstrap";
 import { DELETE_ENTRY, QUERY_ALL_ENTRIES } from "../../utils/gql";
@@ -10,8 +10,7 @@ const Blog = (): ReactElement => {
 
 
   // States passed to modals
-  const [btnName, setBtnName] = useState<string>();
-  const [errThrown, setErrThrown] = useState<string>();
+  const [errThrown, setErrThrown] = useState<string | unknown>();
   const [entryId, setEntryId] = useState<string>();
 
   // Modal states
@@ -57,23 +56,22 @@ const Blog = (): ReactElement => {
   const handleHideErr = () => setShowErr(false);
 
   // Shows Confirm modal
-  const handleShowConfirm = (e: MouseEvent) => {
-    const { dataset } = e.target as HTMLButtonElement;
-    setBtnName(dataset.btnname);
+  const handleShowConfirm = () => {
     setShowConfirm(true);
   };
 
   const handleDeleteEntry = async (id: string) => {
-    // handleHideConfirm();
+    console.log({ id });
+    handleHideConfirm();
     try {
       const { data } = await deleteEntry({
         variables: { id: id },
       });
-      // handleShowSuccess();
+      handleShowSuccess();
     } catch (err) {
       console.error(err);
-      // setErrThrown(err.message);
-      // handleShowErr();
+      setErrThrown(err);
+      handleShowErr();
     }
   };
 
@@ -93,7 +91,7 @@ const Blog = (): ReactElement => {
         {sortedEntries?.length
           ? <Row>
             <Col sm={{ span: 10, offset: 1 }}>
-              <PostCard entries={sortedEntries} handleShowConfirm={handleShowConfirm} />
+              <PostCard entries={sortedEntries} setEntryId={setEntryId} handleShowConfirm={handleShowConfirm} />
             </Col>
           </Row>
           : <Row>
@@ -103,23 +101,19 @@ const Blog = (): ReactElement => {
           </Row>}
 
         <ConfirmModal
-          btnname={btnName}
           entryDelete={() => handleDeleteEntry(entryId!)}
           show={showConfirm === true}
           hide={() => handleHideConfirm()}
         />
 
         <SuccessModal
-          btnname={btnName}
           params={[]}
           show={showSuccess === true}
           hide={() => handleHideSuccess()}
         />
 
         <ErrorModal
-
           errmsg={errThrown}
-          btnname={btnName}
           show={showErr === true}
           hide={() => handleHideErr()}
         />

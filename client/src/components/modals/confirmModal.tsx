@@ -21,7 +21,7 @@ const ConfirmModal = (props: any): ReactElement => {
           <Modal.Footer className="modalFooter">
 
             {/* Confirm Delete Post button */}
-            <Button data-toggle="popover" title="Confirm Delete" className="button" type="button" onClick={props.postDelete}>Yes, Delete Post</Button>
+            <Button data-toggle="popover" title="Confirm Delete" className="button" type="button" onClick={props.entryDelete}>Yes, Delete Post</Button>
 
             {/* No, take no action button */}
             <Button data-toggle="popover" title="No" className="button" type="button" onClick={props.hide}>No, take me back</Button>

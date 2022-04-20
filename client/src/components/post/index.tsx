@@ -8,6 +8,11 @@ import "./style.css";
 
 const PostCard = (props: any): ReactElement => {
 
+  const handleDeleteClick = (id: string): void => {
+    props.setEntryId(id);
+    props.handleShowConfirm();
+  }
+
 
   return (
     <>
@@ -27,7 +32,7 @@ const PostCard = (props: any): ReactElement => {
                     <p>Edit</p>
                   </Button>
                 </Link>
-                <Button className="btn cardBtn" data-id={post._id} onClick={(e: MouseEvent): any => props.handleShowConfirm(e)}>
+                <Button className="btn cardBtn" data-id={post._id} onClick={(): void => handleDeleteClick(post._id!)}>
                   <p>Delete</p>
                 </Button>
               </div>}
