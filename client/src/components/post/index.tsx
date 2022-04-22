@@ -38,7 +38,10 @@ const PostCard = (props: any): ReactElement => {
               </div>}
           </Card.Header>
           <Card.Body className="postBody">
-            <p className="tags">tags: {post.postKeywords.join(", ")}</p>
+            <p className="tags">tags: {post.postKeywords.map((keyword: string): any => (
+              <span onClick={(): MouseEvent | void => props.handleKeyword(keyword)}>{keyword}</span>
+            ))}
+            </p>
           </Card.Body>
         </Card>
       ))}

@@ -75,6 +75,11 @@ const Blog = (): ReactElement => {
     }
   };
 
+  const handleKeyword = (word: string) => {
+    console.log({ word });
+    // takes user back to blog page--maybe don't do this here?
+  }
+
   if (loading) {
     return <h1>Loading....</h1>
   }
@@ -91,7 +96,7 @@ const Blog = (): ReactElement => {
         {sortedEntries?.length
           ? <Row>
             <Col sm={{ span: 10, offset: 1 }}>
-              <PostCard entries={sortedEntries} setEntryId={setEntryId} handleShowConfirm={handleShowConfirm} />
+              <PostCard entries={sortedEntries} setEntryId={setEntryId} handleShowConfirm={handleShowConfirm} handleKeyword={handleKeyword} />
             </Col>
           </Row>
           : <Row>

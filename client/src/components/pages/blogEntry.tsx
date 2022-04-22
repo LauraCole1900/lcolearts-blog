@@ -18,7 +18,8 @@ const BlogEntry = (): ReactElement => {
 
   if (postLoading) {
     return <h1>Loading....</h1>
-  }
+  };
+
 
   return (
     <>
@@ -32,11 +33,11 @@ const BlogEntry = (): ReactElement => {
             </Row>
 
             <Row>
-              <div dangerouslySetInnerHTML={{ __html: entry.postBody }} />
+              <p className="tags">tags: {entry.postKeywords.join(", ")}</p>
             </Row>
 
             <Row>
-              <p className="tags">tags: {entry.postKeywords.join(", ")}</p>
+              <div dangerouslySetInnerHTML={{ __html: entry.postBody }} />
             </Row>
 
           </Col>
