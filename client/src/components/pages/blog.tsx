@@ -1,4 +1,5 @@
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
+import { useNavigate, Params, useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 import { Col, Container, Row } from "react-bootstrap";
 import { DELETE_ENTRY, QUERY_ALL_ENTRIES } from "../../utils/gql";
@@ -8,6 +9,10 @@ import { Post } from "../../utils/interfaces";
 
 const Blog = (): ReactElement => {
 
+  const params: Readonly<Params<string>> = useParams();
+  let navigate = useNavigate();
+
+  const [pageReady, setPageReady] = useState<boolean>(false);
 
   // States passed to modals
   const [errThrown, setErrThrown] = useState<string | unknown>();
@@ -42,6 +47,8 @@ const Blog = (): ReactElement => {
   const entriesArr: Post[] = data?.getAllEntries || [];
   const arrToSort: Post[] = [...entriesArr];
   const sortedEntries: Post[] = arrToSort.sort((a, b) => (a.postDate! < b.postDate!) ? 1 : -1);
+  let filteredEntries: Post[] = sortedEntries;
+  console.log("global", { filteredEntries });
 
 
   //=====================//
@@ -76,9 +83,24 @@ const Blog = (): ReactElement => {
   };
 
   const handleKeyword = (word: string) => {
-    console.log({ word });
-    // takes user back to blog page--maybe don't do this here?
-  }
+    navigate(`/${word}`)
+  };
+
+  useEffect(() => {
+    if (entriesArr?.length) {
+      if (Object.keys(params).length) {
+        filteredEntries = sortedEntries.filter((post: Post): boolean => post.postKeywords.includes(params.tag!));
+        console.log("filtered", { filteredEntries });
+        setPageReady(true);
+      } else {
+        filteredEntries = sortedEntries;
+        console.log("unfiltered", { filteredEntries });
+        setPageReady(true);
+      }
+    }
+    console.log({ filteredEntries }, { pageReady });
+  }, [filteredEntries]);
+
 
   if (loading) {
     return <h1>Loading....</h1>
@@ -87,43 +109,45 @@ const Blog = (): ReactElement => {
 
   return (
     <>
-      <Container>
-        <Row>
-          <Col sm={{ span: 10, offset: 1 }}>
-            <h1>Blog</h1>
-          </Col>
-        </Row>
-        {sortedEntries?.length
-          ? <Row>
+      {pageReady === true &&
+        <Container>
+          <Row>
             <Col sm={{ span: 10, offset: 1 }}>
-              <PostCard entries={sortedEntries} setEntryId={setEntryId} handleShowConfirm={handleShowConfirm} handleKeyword={handleKeyword} />
+              <h1>Blog</h1>
             </Col>
           </Row>
-          : <Row>
-            <Col sm={{ span: 10, offset: 1 }}>
-              <h1>Coming soon!</h1>
-            </Col>
-          </Row>}
+          {filteredEntries?.length
+            ? <Row>
+              <Col sm={{ span: 10, offset: 1 }}>
+                <PostCard entries={filteredEntries} setEntryId={setEntryId} handleShowConfirm={handleShowConfirm} handleKeyword={handleKeyword} />
+              </Col>
+            </Row>
+            : <Row>
+              <Col sm={{ span: 10, offset: 1 }}>
+                <h1>Coming soon!</h1>
+              </Col>
+            </Row>}
 
-        <ConfirmModal
-          entryDelete={() => handleDeleteEntry(entryId!)}
-          show={showConfirm === true}
-          hide={() => handleHideConfirm()}
-        />
+          <ConfirmModal
+            entryDelete={() => handleDeleteEntry(entryId!)}
+            show={showConfirm === true}
+            hide={() => handleHideConfirm()}
+          />
 
-        <SuccessModal
-          params={[]}
-          show={showSuccess === true}
-          hide={() => handleHideSuccess()}
-        />
+          <SuccessModal
+            params={[]}
+            show={showSuccess === true}
+            hide={() => handleHideSuccess()}
+          />
 
-        <ErrorModal
-          errmsg={errThrown}
-          show={showErr === true}
-          hide={() => handleHideErr()}
-        />
+          <ErrorModal
+            errmsg={errThrown}
+            show={showErr === true}
+            hide={() => handleHideErr()}
+          />
 
-      </Container>
+        </Container>
+      }
     </>
   )
 }
