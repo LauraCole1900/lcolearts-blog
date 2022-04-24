@@ -37,6 +37,11 @@
   font-size: .66rem;
 }
 
-.truncatedPost > p:last-child {
-  margin-bottom: 0;
+.truncatedPost > p > a {
+  color: var(--dkGreen);
+  font-size: 16px;
+}
+.truncatedPost > p > a:hover {
+  color: var(--medGreen);
+  font-size: 16px;
 }
