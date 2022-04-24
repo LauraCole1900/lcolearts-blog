@@ -51,6 +51,16 @@ const Blog = (): ReactElement => {
   const arrToSort: Post[] = [...entriesArr];
   const sortedEntries: Post[] = arrToSort.sort((a, b) => (a.postDate! < b.postDate!) ? 1 : -1);
 
+  const fetchTags = (): string[] | void => {
+    let allTags: string[] = [];
+    sortedEntries.map((entry: Post): string[] => {
+      console.log("tags", entry.postKeywords);
+      allTags = allTags.concat(entry.postKeywords);
+      return allTags;
+    });
+    console.log({ allTags });
+  }
+
 
   //=====================//
   //    Modal Methods    //
@@ -89,6 +99,7 @@ const Blog = (): ReactElement => {
 
   useEffect(() => {
     if (entriesArr?.length) {
+      fetchTags();
       if (Object.keys(params).length) {
         const filteredEntries = sortedEntries.filter((post: Post): boolean => post.postKeywords.includes(params.tag!));
         setEntriesToRender(filteredEntries);
