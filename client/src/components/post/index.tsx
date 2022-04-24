@@ -11,7 +11,14 @@ const PostCard = (props: any): ReactElement => {
   const handleDeleteClick = (id: string): void => {
     props.setEntryId(id);
     props.handleShowConfirm();
-  }
+  };
+
+  const trimBody = (body: string): string => {
+    if (body.length > 125) {
+      body = body.substring(0, 125);
+    }
+    return body;
+  };
 
 
   return (
@@ -44,6 +51,9 @@ const PostCard = (props: any): ReactElement => {
                 : <span key={`${post._id}-${i}`} onClick={(): MouseEvent | void => props.handleKeyword(keyword)}><span className="tagWord">{keyword}</span></span>
             ))}
             </p>
+            {post.postBody.length > 125
+              ? <Row><div className="truncatedPost" dangerouslySetInnerHTML={{ __html: trimBody(post.postBody) }} /><Link to={`/blog/${post._id}`}>...</Link></Row>
+              : <Row><div className="truncatedPost" dangerouslySetInnerHTML={{ __html: trimBody(post.postBody) }} /></Row>}
           </Card.Body>
         </Card>
       ))}
