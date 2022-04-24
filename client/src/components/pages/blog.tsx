@@ -13,6 +13,7 @@ const Blog = (): ReactElement => {
   let navigate = useNavigate();
 
   const [pageReady, setPageReady] = useState<boolean>(false);
+  const [entriesToRender, setEntriesToRender] = useState<Array<Post>>([]);
 
   // States passed to modals
   const [errThrown, setErrThrown] = useState<string | unknown>();
@@ -47,8 +48,6 @@ const Blog = (): ReactElement => {
   const entriesArr: Post[] = data?.getAllEntries || [];
   const arrToSort: Post[] = [...entriesArr];
   const sortedEntries: Post[] = arrToSort.sort((a, b) => (a.postDate! < b.postDate!) ? 1 : -1);
-  let filteredEntries: Post[] = sortedEntries;
-  console.log("global", { filteredEntries });
 
 
   //=====================//
@@ -89,17 +88,17 @@ const Blog = (): ReactElement => {
   useEffect(() => {
     if (entriesArr?.length) {
       if (Object.keys(params).length) {
-        filteredEntries = sortedEntries.filter((post: Post): boolean => post.postKeywords.includes(params.tag!));
-        console.log("filtered", { filteredEntries });
+        console.log("bang!")
+        const filteredEntries = sortedEntries.filter((post: Post): boolean => post.postKeywords.includes(params.tag!));
+        setEntriesToRender(filteredEntries);
         setPageReady(true);
       } else {
-        filteredEntries = sortedEntries;
-        console.log("unfiltered", { filteredEntries });
+        console.log("ding!")
+        setEntriesToRender(sortedEntries);
         setPageReady(true);
       }
     }
-    console.log({ filteredEntries }, { pageReady });
-  }, [filteredEntries]);
+  }, [entriesArr, params]);
 
 
   if (loading) {
@@ -116,10 +115,10 @@ const Blog = (): ReactElement => {
               <h1>Blog</h1>
             </Col>
           </Row>
-          {filteredEntries?.length
+          {entriesToRender?.length
             ? <Row>
               <Col sm={{ span: 10, offset: 1 }}>
-                <PostCard entries={filteredEntries} setEntryId={setEntryId} handleShowConfirm={handleShowConfirm} handleKeyword={handleKeyword} />
+                <PostCard entries={entriesToRender} setEntryId={setEntryId} handleShowConfirm={handleShowConfirm} handleKeyword={handleKeyword} />
               </Col>
             </Row>
             : <Row>
