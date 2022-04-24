@@ -40,8 +40,8 @@ const PostCard = (props: any): ReactElement => {
           <Card.Body className="postBody">
             <p className="tags">tags: {post.postKeywords.map((keyword: string, i: number): any => (
               i !== post.postKeywords.length - 1
-                ? <span key={`${post._id}-${i}`} className="singleTag" onClick={(): MouseEvent | void => props.handleKeyword(keyword)}>{keyword}, </span>
-                : <span key={`${post._id}-${i}`} className="singleTag" onClick={(): MouseEvent | void => props.handleKeyword(keyword)}>{keyword}</span>
+                ? <span key={`${post._id}-${i}`} onClick={(): MouseEvent | void => props.handleKeyword(keyword)}><span className="tagWord">{keyword}</span>, </span>
+                : <span key={`${post._id}-${i}`} onClick={(): MouseEvent | void => props.handleKeyword(keyword)}><span className="tagWord">{keyword}</span></span>
             ))}
             </p>
           </Card.Body>

@@ -88,12 +88,10 @@ const Blog = (): ReactElement => {
   useEffect(() => {
     if (entriesArr?.length) {
       if (Object.keys(params).length) {
-        console.log("bang!")
         const filteredEntries = sortedEntries.filter((post: Post): boolean => post.postKeywords.includes(params.tag!));
         setEntriesToRender(filteredEntries);
         setPageReady(true);
       } else {
-        console.log("ding!")
         setEntriesToRender(sortedEntries);
         setPageReady(true);
       }
