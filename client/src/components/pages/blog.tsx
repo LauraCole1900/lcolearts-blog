@@ -82,7 +82,7 @@ const Blog = (): ReactElement => {
   };
 
   const handleKeyword = (word: string) => {
-    navigate(`/${word}`)
+    navigate(`/tags/${word}`)
   };
 
   useEffect(() => {
