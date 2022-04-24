@@ -2,6 +2,7 @@ import React, { ReactElement, useEffect, useState } from "react";
 import { useNavigate, Params, useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 import { Col, Container, Row } from "react-bootstrap";
+import { TagCloud } from "react-tagcloud";
 import { DELETE_ENTRY, QUERY_ALL_ENTRIES } from "../../utils/gql";
 import PostCard from "../post";
 import { ConfirmModal, ErrorModal, SuccessModal } from "../modals";
@@ -14,6 +15,7 @@ const Blog = (): ReactElement => {
 
   const [pageReady, setPageReady] = useState<boolean>(false);
   const [entriesToRender, setEntriesToRender] = useState<Array<Post>>([]);
+  const [tagsToRender, setTagsToRender] = useState<Array<Object>>([]);
 
   // States passed to modals
   const [errThrown, setErrThrown] = useState<string | unknown>();
@@ -113,17 +115,25 @@ const Blog = (): ReactElement => {
               <h1>Blog</h1>
             </Col>
           </Row>
-          {entriesToRender?.length
-            ? <Row>
-              <Col sm={{ span: 10, offset: 1 }}>
+
+          <Row>
+            {entriesToRender?.length
+              ? <Col sm={{ span: 8, offset: 1 }}>
                 <PostCard entries={entriesToRender} setEntryId={setEntryId} handleShowConfirm={handleShowConfirm} handleKeyword={handleKeyword} />
               </Col>
-            </Row>
-            : <Row>
-              <Col sm={{ span: 10, offset: 1 }}>
+              : <Col sm={{ span: 8, offset: 1 }}>
                 <h1>Coming soon!</h1>
-              </Col>
-            </Row>}
+              </Col>}
+
+            <Col sm={2}>
+              <TagCloud
+                minSize={12}
+                maxSize={48}
+                tags={tagsToRender}
+                onClick={handleKeyword}
+              />
+            </Col>
+          </Row>
 
           <ConfirmModal
             entryDelete={() => handleDeleteEntry(entryId!)}
