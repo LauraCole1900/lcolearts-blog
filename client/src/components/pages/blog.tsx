@@ -16,6 +16,10 @@ const Blog = (): ReactElement => {
   const [pageReady, setPageReady] = useState<boolean>(false);
   const [entriesToRender, setEntriesToRender] = useState<Array<Post>>([]);
   const [tagsToRender, setTagsToRender] = useState<Array<Object>>([]);
+  const color = {
+    luminosity: "dark",
+    hue: "#031105"
+  }
 
   // States passed to modals
   const [errThrown, setErrThrown] = useState<string | unknown>();
@@ -53,13 +57,52 @@ const Blog = (): ReactElement => {
 
   const fetchTags = (): string[] | void => {
     let allTags: string[] = [];
+    let mappedTags: Object[] = [{}];
     sortedEntries.map((entry: Post): string[] => {
       console.log("tags", entry.postKeywords);
       allTags = allTags.concat(entry.postKeywords);
       return allTags;
     });
     console.log({ allTags });
+    allTags.map((tag: any): Object[] => {
+      let count: number = 0;
+      console.log("values", Object.values(mappedTags));
+      if (Object.values(mappedTags).includes(tag)) {
+        console.log("includes", tag);
+        return tag;
+      } else {
+        for (let i = 0; i < allTags.length; i++) {
+          if (allTags[i] === tag) {
+            ++count
+          }
+        }
+        mappedTags = [...mappedTags, { value: tag, count: count }]
+        count = 0;
+      }
+      console.log({ mappedTags });
+      return mappedTags;
+    })
+    setTagsToRender(mappedTags);
   }
+
+  // allTags.map((tag: any): Object[] => {
+  //   let count: number = 0;
+  //   // iterate through mappedTags array
+  //   // check each key to see if it matches the current tag
+  //   // if yes, increment the value
+  //   // if no, add an object with the tag as a key and the value of 1
+  //   for (const obj of mappedTags) {
+  //     if (tag in obj) {
+  //       count++;
+  //       mappedTags = [...mappedTags, { mappedTags[tag]: count }];
+  //       count = 0;
+  //     } else {
+  //       mappedTags = [...mappedTags, { tag: 1 }];
+  //     }
+  //   }
+  //   console.log({ mappedTags });
+  //   return mappedTags;
+  // })
 
 
   //=====================//
@@ -94,6 +137,7 @@ const Blog = (): ReactElement => {
   };
 
   const handleKeyword = (word: string) => {
+    console.log({ word });
     navigate(`/tags/${word}`)
   };
 
@@ -141,7 +185,8 @@ const Blog = (): ReactElement => {
                 minSize={12}
                 maxSize={48}
                 tags={tagsToRender}
-                onClick={handleKeyword}
+                colorOptions={color}
+                onClick={(e: any) => handleKeyword(e.value[0])}
               />
             </Col>
           </Row>
