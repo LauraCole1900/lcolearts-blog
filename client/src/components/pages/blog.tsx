@@ -18,7 +18,8 @@ const Blog = (): ReactElement => {
   const [tagsToRender, setTagsToRender] = useState<Array<Object>>([]);
   const color = {
     luminosity: "dark",
-    hue: "#031105"
+    hue: "#031105",
+    format: "hex"
   }
 
   // States passed to modals
@@ -58,6 +59,7 @@ const Blog = (): ReactElement => {
   const fetchTags = (): string[] | void => {
     let allTags: string[] = [];
     let mappedTags: Object[] = [{}];
+    let dedupedTags: Object[] = [{}];
     sortedEntries.map((entry: Post): string[] => {
       console.log("tags", entry.postKeywords);
       allTags = allTags.concat(entry.postKeywords);
@@ -65,24 +67,32 @@ const Blog = (): ReactElement => {
     });
     console.log({ allTags });
     allTags.map((tag: any): Object[] => {
+      // iterate through mappedTags array
+      // check value of each 'value' prop to see if it matches the current tag
+      // if yes, increment the count prop
+      // if no, add an object with the tag as the value prop and 1 as the count prop
       let count: number = 0;
-      console.log("values", Object.values(mappedTags));
-      if (Object.values(mappedTags).includes(tag)) {
-        console.log("includes", tag);
-        return tag;
-      } else {
-        for (let i = 0; i < allTags.length; i++) {
-          if (allTags[i] === tag) {
-            ++count
+      mappedTags.forEach((currentTagObj: Object): Array<Object> => {
+        console.log(Object.values(currentTagObj));
+        if (Object.values(currentTagObj).length) {
+          return tag;
+        } else {
+          for (let i: number = 0; i < allTags.length; i++) {
+            if (allTags[i] === tag) {
+              ++count
+            }
           }
+          mappedTags = [...mappedTags, { value: tag, count: count }]
+          count = 0;
         }
-        mappedTags = [...mappedTags, { value: tag, count: count }]
-        count = 0;
-      }
+        return mappedTags;
+      });
       console.log({ mappedTags });
-      return mappedTags;
+      dedupedTags = Array.from(new Set(mappedTags));
+      console.log({ dedupedTags });
+      return dedupedTags;
     })
-    setTagsToRender(mappedTags);
+    setTagsToRender(dedupedTags);
   }
 
   // allTags.map((tag: any): Object[] => {
@@ -180,13 +190,14 @@ const Blog = (): ReactElement => {
                 <h1>Coming soon!</h1>
               </Col>}
 
-            <Col sm={2}>
+            <Col sm={2} className="centered">
+              <h3>Tags</h3>
               <TagCloud
                 minSize={12}
                 maxSize={48}
                 tags={tagsToRender}
                 colorOptions={color}
-                onClick={(e: any) => handleKeyword(e.value[0])}
+                onClick={(e: any) => handleKeyword(e.value)}
               />
             </Col>
           </Row>
