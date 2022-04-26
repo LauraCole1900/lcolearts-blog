@@ -16,8 +16,17 @@ interface TagObj {
 
 const Blog = (): ReactElement => {
 
+  //=================//
+  //      Hooks      //
+  //=================//
+
   const params: Readonly<Params<string>> = useParams();
   let navigate = useNavigate();
+
+
+  //=================//
+  //      State      //
+  //=================//
 
   const [pageReady, setPageReady] = useState<boolean>(false);
   const [entriesToRender, setEntriesToRender] = useState<Array<Post>>([]);
@@ -37,7 +46,11 @@ const Blog = (): ReactElement => {
   const [showErr, setShowErr] = useState<boolean>(false);
   const [showSuccess, setShowSuccess] = useState<boolean>(false);
 
-  // GraphQL variables
+
+  //=================//
+  //     GraphQL     //
+  //=================//
+
   const { loading, data, refetch } = useQuery(QUERY_ALL_ENTRIES, {});
 
   const [deleteEntry, { error: deleteEntryError, data: deleteEntryData }] = useMutation(DELETE_ENTRY, {
@@ -62,6 +75,11 @@ const Blog = (): ReactElement => {
   const arrToSort: Post[] = [...entriesArr];
   const sortedEntries: Post[] = arrToSort.sort((a, b) => (a.postDate! < b.postDate!) ? 1 : -1);
 
+
+  //=================//
+  //    Tag Cloud    //
+  //=================//
+
   const fetchTags = (): string[] | void => {
     let allTags: string[] = [];
     sortedEntries.map((entry: Post): string[] => {
@@ -70,25 +88,19 @@ const Blog = (): ReactElement => {
       return allTags;
     });
     console.log({ allTags });
-    objTagsForCloud(allTags);
+    createTagObjectsForCloud(allTags);
   };
 
-  const objTagsForCloud = (tags: string[]): TagObj[] | void => {
-    let mappedTags: TagObj[] = [{value: "", count: 0}];
-    let dedupedTags: TagObj[] = [{value: "", count: 0}];
+  const createTagObjectsForCloud = (tags: string[]): TagObj[] | void => {
+    let mappedTags: TagObj[] = [{ value: "", count: 0 }];
     tags.map((tag: any): Object[] => {
-      // iterate through mappedTags array
-      // check value of each 'value' prop to see if it matches the current tag
-      // if yes, increment the count prop
-      // if no, add an object with the tag as the value prop and 1 as the count prop
       let count: number = 0;
-      mappedTags.forEach((currentTagObj: TagObj): Array<TagObj> => {
-        console.log("current tag object", Object.values(currentTagObj));
-        if (Object.values(currentTagObj).length && Object.values(currentTagObj.value) === tag) {
+      mappedTags.forEach((currentTagObj: TagObj): TagObj[] => {
+        if (!Object.values(currentTagObj).includes(0) || Object.values(currentTagObj).includes(tag)) {
           return tag;
         } else {
-          for (let i: number = 0; i < tags.length; i++) {
-            if (tags[i] === tag) {
+          for (let j: number = 0; j < tags.length; j++) {
+            if (tags[j] === tag) {
               ++count
             }
           }
@@ -97,53 +109,29 @@ const Blog = (): ReactElement => {
         }
         return mappedTags;
       });
-      console.log({ mappedTags });
-      dedupedTags = Array.from(new Set(mappedTags));
+      return mappedTags;
+    });
+    filterTagObjectsForCloud(mappedTags);
+  };
+
+  const filterTagObjectsForCloud = (tagArr: TagObj[]): TagObj[] | void => {
+    let dedupedTags: TagObj[] = [];
+    tagArr = tagArr.filter(tag => tag.value !== "");
+    console.log("filter 1", { tagArr });
+      const map = new Map();
+      for (const tag of tagArr) {
+        if (!map.has(tag.value)) {
+          map.set(tag.value, true);
+          dedupedTags.push({
+            value: tag.value,
+            count: tag.count
+          })
+        }
+      }
       console.log({ dedupedTags });
-      return dedupedTags;
-    })
+    console.log("filter 2", { dedupedTags });
     setTagsToRender(dedupedTags);
-  }
-
-  // allTags.map((tag: any): Object[] => {
-  //   let count: number = 0;
-  //   // iterate through mappedTags array
-  //   // check each key to see if it matches the current tag
-  //   // if yes, increment the value
-  //   // if no, add an object with the tag as a key and the value of 1
-  //   for (const obj of mappedTags) {
-  //     if (tag in obj) {
-  //       count++;
-  //       mappedTags = [...mappedTags, { mappedTags[tag]: count }];
-  //       count = 0;
-  //     } else {
-  //       mappedTags = [...mappedTags, { tag: 1 }];
-  //     }
-  //   }
-  //   console.log({ mappedTags });
-  //   return mappedTags;
-  // })
-
-  // allTags.map((tag: any): Object[] => {
-  //   let count: number = 0;
-  //   console.log("values", Object.values(mappedTags));
-  //   if (Object.values(mappedTags).includes(tag)) {
-  //     console.log("includes", tag);
-  //     return tag;
-  //   } else {
-  //     for (let i = 0; i < allTags.length; i++) {
-  //       if (allTags[i] === tag) {
-  //         ++count
-  //       }
-  //     }
-  //     mappedTags = [...mappedTags, { value: tag, count: count }]
-  //     count = 0;
-  //   }
-  //   console.log({ mappedTags });
-  //   return mappedTags;
-  // })
-  // setTagsToRender(mappedTags);
-  // }
+  };
 
 
   //=====================//
@@ -156,11 +144,12 @@ const Blog = (): ReactElement => {
   const handleHideSuccess = () => setShowSuccess(false);
   const handleShowErr = () => setShowErr(true);
   const handleHideErr = () => setShowErr(false);
+  const handleShowConfirm = () => setShowConfirm(true);
 
-  // Shows Confirm modal
-  const handleShowConfirm = () => {
-    setShowConfirm(true);
-  };
+
+  //=================//
+  //     Methods     //
+  //=================//
 
   const handleDeleteEntry = async (id: string) => {
     console.log({ id });
@@ -182,6 +171,11 @@ const Blog = (): ReactElement => {
     navigate(`/tags/${word}`)
   };
 
+
+  //=================//
+  //  Run on render  //
+  //=================//
+
   useEffect(() => {
     if (entriesArr?.length) {
       fetchTags();
@@ -196,6 +190,10 @@ const Blog = (): ReactElement => {
     }
   }, [entriesArr, params]);
 
+
+  //================//
+  //  Conditionals  //
+  //================//
 
   if (loading) {
     return <h1>Loading....</h1>
@@ -221,7 +219,7 @@ const Blog = (): ReactElement => {
                 <h1>Coming soon!</h1>
               </Col>}
 
-            <Col sm={2} className="centered">
+            <Col sm={3} className="centered">
               <h3>Tags</h3>
               <TagCloud
                 minSize={12}
