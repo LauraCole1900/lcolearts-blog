@@ -114,6 +114,27 @@ const Blog = (): ReactElement => {
   //   return mappedTags;
   // })
 
+//   allTags.map((tag: any): Object[] => {
+//     let count: number = 0;
+//     console.log("values", Object.values(mappedTags));
+//     if (Object.values(mappedTags).includes(tag)) {
+//       console.log("includes", tag);
+//       return tag;
+//     } else {
+//       for (let i = 0; i < allTags.length; i++) {
+//         if (allTags[i] === tag) {
+//           ++count
+//         }
+//       }
+//       mappedTags = [...mappedTags, { value: tag, count: count }]
+//       count = 0;
+//     }
+//     console.log({ mappedTags });
+//     return mappedTags;
+//   })
+//   setTagsToRender(mappedTags);
+// }
+
 
   //=====================//
   //    Modal Methods    //
