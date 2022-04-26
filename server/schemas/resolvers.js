@@ -45,7 +45,7 @@ var resolvers = {
             return post;
         },
         editEntry: async (_, args) => {
-            const post = await Post.findByIdAndUpdate({ _id: args._id }, { $set: Object.assign({}, args) }, { new: true });
+            const post = await Post.findByIdAndUpdate({ _id: args._id }, { $set: { ...args } }, { new: true });
             return post;
         },
         // saveBook: async (_: any, { bookData }, context) => {
