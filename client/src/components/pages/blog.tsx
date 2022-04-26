@@ -76,64 +76,6 @@ const Blog = (): ReactElement => {
   const sortedEntries: Post[] = arrToSort.sort((a, b) => (a.postDate! < b.postDate!) ? 1 : -1);
 
 
-  //=================//
-  //    Tag Cloud    //
-  //=================//
-
-  const fetchTags = (): string[] | void => {
-    let allTags: string[] = [];
-    sortedEntries.map((entry: Post): string[] => {
-      console.log("tags", entry.postKeywords);
-      allTags = allTags.concat(entry.postKeywords);
-      return allTags;
-    });
-    console.log({ allTags });
-    createTagObjectsForCloud(allTags);
-  };
-
-  const createTagObjectsForCloud = (tags: string[]): TagObj[] | void => {
-    let mappedTags: TagObj[] = [{ value: "", count: 0 }];
-    tags.map((tag: any): Object[] => {
-      let count: number = 0;
-      mappedTags.forEach((currentTagObj: TagObj): TagObj[] => {
-        if (!Object.values(currentTagObj).includes(0) || Object.values(currentTagObj).includes(tag)) {
-          return tag;
-        } else {
-          for (let j: number = 0; j < tags.length; j++) {
-            if (tags[j] === tag) {
-              ++count
-            }
-          }
-          mappedTags = [...mappedTags, { value: tag, count: count }]
-          count = 0;
-        }
-        return mappedTags;
-      });
-      return mappedTags;
-    });
-    filterTagObjectsForCloud(mappedTags);
-  };
-
-  const filterTagObjectsForCloud = (tagArr: TagObj[]): TagObj[] | void => {
-    let dedupedTags: TagObj[] = [];
-    tagArr = tagArr.filter(tag => tag.value !== "");
-    console.log("filter 1", { tagArr });
-      const map = new Map();
-      for (const tag of tagArr) {
-        if (!map.has(tag.value)) {
-          map.set(tag.value, true);
-          dedupedTags.push({
-            value: tag.value,
-            count: tag.count
-          })
-        }
-      }
-      console.log({ dedupedTags });
-    console.log("filter 2", { dedupedTags });
-    setTagsToRender(dedupedTags);
-  };
-
-
   //=====================//
   //    Modal Methods    //
   //=====================//
@@ -169,6 +111,60 @@ const Blog = (): ReactElement => {
   const handleKeyword = (word: string) => {
     console.log({ word });
     navigate(`/tags/${word}`)
+  };
+
+
+  //=================//
+  //    Tag Cloud    //
+  //=================//
+
+  const fetchTags = (): string[] | void => {
+    let allTags: string[] = [];
+    sortedEntries.map((entry: Post): string[] => {
+      console.log("tags", entry.postKeywords);
+      allTags = allTags.concat(entry.postKeywords);
+      return allTags;
+    });
+    createTagObjectsForCloud(allTags);
+  };
+
+  const createTagObjectsForCloud = (tags: string[]): TagObj[] | void => {
+    let mappedTags: TagObj[] = [{ value: "", count: 0 }];
+    tags.map((tag: any): Object[] => {
+      let count: number = 0;
+      mappedTags.forEach((currentTagObj: TagObj): TagObj[] => {
+        if (!Object.values(currentTagObj).includes(0) || Object.values(currentTagObj).includes(tag)) {
+          return tag;
+        } else {
+          for (let j: number = 0; j < tags.length; j++) {
+            if (tags[j] === tag) {
+              ++count
+            }
+          }
+          mappedTags = [...mappedTags, { value: tag, count: count }]
+          count = 0;
+        }
+        return mappedTags;
+      });
+      return mappedTags;
+    });
+    filterTagObjectsForCloud(mappedTags);
+  };
+
+  const filterTagObjectsForCloud = (tagArr: TagObj[]): TagObj[] | void => {
+    let dedupedTags: TagObj[] = [];
+    tagArr = tagArr.filter(tag => tag.value !== "");
+    const map = new Map();
+    for (const tag of tagArr) {
+      if (!map.has(tag.value)) {
+        map.set(tag.value, true);
+        dedupedTags.push({
+          value: tag.value,
+          count: tag.count
+        })
+      }
+    }
+    setTagsToRender(dedupedTags);
   };
 
 
