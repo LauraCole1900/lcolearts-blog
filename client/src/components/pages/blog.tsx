@@ -8,6 +8,12 @@ import PostCard from "../post";
 import { ConfirmModal, ErrorModal, SuccessModal } from "../modals";
 import { Post } from "../../utils/interfaces";
 
+interface TagObj {
+  value: string
+  count: number
+}
+
+
 const Blog = (): ReactElement => {
 
   const params: Readonly<Params<string>> = useParams();
@@ -58,27 +64,31 @@ const Blog = (): ReactElement => {
 
   const fetchTags = (): string[] | void => {
     let allTags: string[] = [];
-    let mappedTags: Object[] = [{}];
-    let dedupedTags: Object[] = [{}];
     sortedEntries.map((entry: Post): string[] => {
       console.log("tags", entry.postKeywords);
       allTags = allTags.concat(entry.postKeywords);
       return allTags;
     });
     console.log({ allTags });
-    allTags.map((tag: any): Object[] => {
+    objTagsForCloud(allTags);
+  };
+
+  const objTagsForCloud = (tags: string[]): TagObj[] | void => {
+    let mappedTags: TagObj[] = [{value: "", count: 0}];
+    let dedupedTags: TagObj[] = [{value: "", count: 0}];
+    tags.map((tag: any): Object[] => {
       // iterate through mappedTags array
       // check value of each 'value' prop to see if it matches the current tag
       // if yes, increment the count prop
       // if no, add an object with the tag as the value prop and 1 as the count prop
       let count: number = 0;
-      mappedTags.forEach((currentTagObj: Object): Array<Object> => {
-        console.log(Object.values(currentTagObj));
-        if (Object.values(currentTagObj).length) {
+      mappedTags.forEach((currentTagObj: TagObj): Array<TagObj> => {
+        console.log("current tag object", Object.values(currentTagObj));
+        if (Object.values(currentTagObj).length && Object.values(currentTagObj.value) === tag) {
           return tag;
         } else {
-          for (let i: number = 0; i < allTags.length; i++) {
-            if (allTags[i] === tag) {
+          for (let i: number = 0; i < tags.length; i++) {
+            if (tags[i] === tag) {
               ++count
             }
           }
@@ -114,26 +124,26 @@ const Blog = (): ReactElement => {
   //   return mappedTags;
   // })
 
-//   allTags.map((tag: any): Object[] => {
-//     let count: number = 0;
-//     console.log("values", Object.values(mappedTags));
-//     if (Object.values(mappedTags).includes(tag)) {
-//       console.log("includes", tag);
-//       return tag;
-//     } else {
-//       for (let i = 0; i < allTags.length; i++) {
-//         if (allTags[i] === tag) {
-//           ++count
-//         }
-//       }
-//       mappedTags = [...mappedTags, { value: tag, count: count }]
-//       count = 0;
-//     }
-//     console.log({ mappedTags });
-//     return mappedTags;
-//   })
-//   setTagsToRender(mappedTags);
-// }
+  // allTags.map((tag: any): Object[] => {
+  //   let count: number = 0;
+  //   console.log("values", Object.values(mappedTags));
+  //   if (Object.values(mappedTags).includes(tag)) {
+  //     console.log("includes", tag);
+  //     return tag;
+  //   } else {
+  //     for (let i = 0; i < allTags.length; i++) {
+  //       if (allTags[i] === tag) {
+  //         ++count
+  //       }
+  //     }
+  //     mappedTags = [...mappedTags, { value: tag, count: count }]
+  //     count = 0;
+  //   }
+  //   console.log({ mappedTags });
+  //   return mappedTags;
+  // })
+  // setTagsToRender(mappedTags);
+  // }
 
 
   //=====================//
