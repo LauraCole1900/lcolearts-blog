@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import { Col, Image, Row } from "react-bootstrap";
 import linkedin from "../../pix/linkedin-icon-128px.png";
 import githublt from "../../pix/github-mark-light.png";

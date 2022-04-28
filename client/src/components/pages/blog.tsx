@@ -1,6 +1,6 @@
-import React, { ReactElement, useEffect, useState } from "react";
-import { useNavigate, Params, useParams } from "react-router-dom";
-import { useMutation, useQuery } from "@apollo/client";
+import { ReactElement, useEffect, useState } from "react";
+import { NavigateFunction, useNavigate, Params, useParams } from "react-router-dom";
+import { ApolloCache, useMutation, useQuery } from "@apollo/client";
 import { Col, Container, Row } from "react-bootstrap";
 import { TagCloud } from "react-tagcloud";
 import { DELETE_ENTRY, QUERY_ALL_ENTRIES } from "../../utils/gql";
@@ -21,7 +21,7 @@ const Blog = (): ReactElement => {
   //=================//
 
   const params: Readonly<Params<string>> = useParams();
-  let navigate = useNavigate();
+  let navigate: NavigateFunction = useNavigate();
 
 
   //=================//
@@ -31,7 +31,7 @@ const Blog = (): ReactElement => {
   const [pageReady, setPageReady] = useState<boolean>(false);
   const [entriesToRender, setEntriesToRender] = useState<Array<Post>>([]);
   const [tagsToRender, setTagsToRender] = useState<Array<Object>>([]);
-  const color = {
+  const color: { luminosity: string, hue: string, format: string } = {
     luminosity: "dark",
     hue: "#031105",
     format: "hex"
@@ -54,12 +54,12 @@ const Blog = (): ReactElement => {
   const { loading, data, refetch } = useQuery(QUERY_ALL_ENTRIES, {});
 
   const [deleteEntry, { error: deleteEntryError, data: deleteEntryData }] = useMutation(DELETE_ENTRY, {
-    update(cache, { data: { deleteEntry } }) {
+    update(cache: ApolloCache<any>, { data: { deleteEntry } }) {
       try {
         // Retrieve existing post data that is stored in the cache
         const existingPosts: any = cache.readQuery({ query: QUERY_ALL_ENTRIES });
         // Filter out data returned from the mutation
-        const updatedPosts: Post[] = existingPosts!.getAllEntries.filter((post: Post) => post._id !== deleteEntry._id);
+        const updatedPosts: Post[] = existingPosts!.getAllEntries.filter((post: Post): boolean => post._id !== deleteEntry._id);
         // Update the cache by setting post data to the above-filtered data
         cache.writeQuery({
           query: QUERY_ALL_ENTRIES,
@@ -93,7 +93,7 @@ const Blog = (): ReactElement => {
   //     Methods     //
   //=================//
 
-  const handleDeleteEntry = async (id: string) => {
+  const handleDeleteEntry = async (id: string): Promise<void> => {
     console.log({ id });
     handleHideConfirm();
     try {
@@ -108,7 +108,7 @@ const Blog = (): ReactElement => {
     }
   };
 
-  const handleKeyword = (word: string) => {
+  const handleKeyword = (word: string): void => {
     console.log({ word });
     navigate(`/tags/${word}`)
   };
@@ -171,11 +171,11 @@ const Blog = (): ReactElement => {
   //  Run on render  //
   //=================//
 
-  useEffect(() => {
+  useEffect((): void => {
     if (entriesArr?.length) {
       fetchTags();
       if (Object.keys(params).length) {
-        const filteredEntries = sortedEntries.filter((post: Post): boolean => post.postKeywords.includes(params.tag!));
+        const filteredEntries: Post[] = sortedEntries.filter((post: Post): boolean => post.postKeywords.includes(params.tag!));
         setEntriesToRender(filteredEntries);
         setPageReady(true);
       } else {

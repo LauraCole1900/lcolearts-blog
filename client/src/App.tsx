@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ApolloClient, ApolloLink, ApolloProvider, createHttpLink, GraphQLRequest, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
 import { setContext } from "@apollo/client/link/context";
