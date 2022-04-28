@@ -1,12 +1,19 @@
-import React, { MouseEvent, ReactElement } from "react";
+import { MouseEvent, ReactElement } from "react";
 import { Link } from "react-router-dom";
-import { Button, Card, Col, Row } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import dayjs from "dayjs";
-import { Post } from "../../utils/gql";
 import Auth from "../../utils/auth";
+import { Post } from "../../utils/interfaces";
 import "./style.css";
 
-const PostCard = (props: any): ReactElement => {
+interface PostCardProps {
+  setEntryId: Function
+  handleShowConfirm: Function
+  entries: Post[]
+  handleKeyword: Function
+}
+
+const PostCard = (props: PostCardProps): ReactElement => {
 
   const handleDeleteClick = (id: string): void => {
     props.setEntryId(id);
@@ -25,7 +32,7 @@ const PostCard = (props: any): ReactElement => {
 
   return (
     <>
-      {props.entries?.map((post: Post) => (
+      {props.entries?.map((post: Post): ReactElement => (
         <Card key={post!._id!.toString()}>
           <Card.Header className="postHeader">
             <div>
@@ -47,7 +54,7 @@ const PostCard = (props: any): ReactElement => {
               </div>}
           </Card.Header>
           <Card.Body className="postBody">
-            <p className="tags">tags: {post.postKeywords.map((keyword: string, i: number): any => (
+            <p className="tags">tags: {post.postKeywords.map((keyword: string, i: number): ReactElement => (
               i !== post.postKeywords.length - 1
                 ? <span key={`${post._id}-${i}`} onClick={(): MouseEvent | void => props.handleKeyword(keyword)}><span className="tagWord">{keyword}</span>, </span>
                 : <span key={`${post._id}-${i}`} onClick={(): MouseEvent | void => props.handleKeyword(keyword)}><span className="tagWord">{keyword}</span></span>
