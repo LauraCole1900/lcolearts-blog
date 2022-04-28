@@ -48,6 +48,8 @@ npm run test
 
 Favicon created by [Freepik](https://www.freepik.com) [Flaticon](https://www.flaticon.com/)
 
+Many thanks to [Leif Hetland](https://github.com/leifehetland) for his help when I got stuck
+
 ## Contributing
 
 N/A
