@@ -1,4 +1,4 @@
-import decode from 'jwt-decode';
+import decode, { JwtPayload } from "jwt-decode";
 import { User } from "./interfaces";
 
 class AuthService {
@@ -17,8 +17,8 @@ class AuthService {
   // Check if token is expired
   isTokenExpired(token: string): boolean {
     try {
-      const decoded: any = decode(token);
-      if (decoded.exp < Date.now() / 1000) {
+      const decoded: JwtPayload = decode<JwtPayload>(token);
+      if (decoded.exp! < Date.now() / 1000) {
         return true;
       } else return false;
     } catch (err) {
@@ -26,22 +26,22 @@ class AuthService {
     }
   }
 
-  getToken(): any {
+  getToken(): string {
     // Retrieves the user token from localStorage
-    return localStorage.getItem('id_token');
+    return localStorage.getItem("id_token")!;
   }
 
   login(idToken: string): void {
     // Saves user token to localStorage
-    localStorage.setItem('id_token', idToken);
-    window.location.assign('/');
+    localStorage.setItem("id_token", idToken);
+    window.location.assign("/");
   }
 
   logout(): void {
     // Clears user token and profile data from localStorage
-    localStorage.removeItem('id_token');
+    localStorage.removeItem("id_token");
     // Reloads the page and resets the state of the application
-    window.location.assign('/');
+    window.location.assign("/");
   }
 }
 
