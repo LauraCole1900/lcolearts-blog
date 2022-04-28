@@ -121,7 +121,6 @@ const Blog = (): ReactElement => {
   const fetchTags = (): string[] | void => {
     let allTags: string[] = [];
     sortedEntries.map((entry: Post): string[] => {
-      console.log("tags", entry.postKeywords);
       allTags = allTags.concat(entry.postKeywords);
       return allTags;
     });
@@ -234,13 +233,11 @@ const Blog = (): ReactElement => {
           />
 
           <SuccessModal
-            params={[]}
             show={showSuccess === true}
             hide={() => handleHideSuccess()}
           />
 
           <ErrorModal
-            errmsg={errThrown}
             show={showErr === true}
             hide={() => handleHideErr()}
           />

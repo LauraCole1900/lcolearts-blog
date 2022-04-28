@@ -1,9 +1,15 @@
-import React, { ReactElement } from "react";
+import React, { MouseEventHandler, ReactElement } from "react";
 import { Button, Modal } from "react-bootstrap";
 import "./style.css";
 
+interface ConfirmProps {
+  show: boolean
+  hide: MouseEventHandler
+  entryDelete: MouseEventHandler
+}
 
-const ConfirmModal = (props: any): ReactElement => {
+
+const ConfirmModal = (props: ConfirmProps): ReactElement => {
 
 
   return (
@@ -15,7 +21,7 @@ const ConfirmModal = (props: any): ReactElement => {
         <Modal.Body className="modalBody">
 
           {/* Delete Post button */}
-          <p>Are you sure you want to delete {props.postTitle}? This action can't be undone.</p>
+          <p>Are you sure you want to delete this post? This action can't be undone.</p>
 
           {/* Navigation buttons */}
           <Modal.Footer className="modalFooter">

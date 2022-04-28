@@ -1,10 +1,15 @@
-import React, { ReactElement } from "react";
+import React, { MouseEventHandler, ReactElement } from "react";
 import { Link } from "react-router-dom";
 import { Button, Modal } from "react-bootstrap";
 import "./style.css";
 
+interface ErrorProps {
+  show: boolean
+  hide: MouseEventHandler
+}
 
-const ErrorModal = (props: any): ReactElement => {
+
+const ErrorModal = (props: ErrorProps): ReactElement => {
 
 
   return (
