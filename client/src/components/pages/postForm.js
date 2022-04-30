@@ -6,7 +6,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 import { postValidate } from "../../utils/validation";
-import { CREATE_ENTRY, EDIT_ENTRY, QUERY_ME, QUERY_ALL_ENTRIES, QUERY_ONE_ENTRY } from "../../utils/gql";
+import { CREATE_ENTRY, EDIT_ENTRY, QUERY_ALL_ENTRIES, QUERY_ME, QUERY_ONE_ENTRY } from "../../utils/gql";
 import Auth from "../../utils/auth";
 import { ErrorModal, SuccessModal } from "../modals";
 import EditorContainer from "../richTextEditor";

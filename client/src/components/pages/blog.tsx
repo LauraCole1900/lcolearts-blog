@@ -1,5 +1,5 @@
 import { ReactElement, useEffect, useState } from "react";
-import { NavigateFunction, useNavigate, Params, useParams } from "react-router-dom";
+import { NavigateFunction, Params, useNavigate, useParams } from "react-router-dom";
 import { ApolloCache, useMutation, useQuery } from "@apollo/client";
 import { Col, Container, Row } from "react-bootstrap";
 import { TagCloud } from "react-tagcloud";
