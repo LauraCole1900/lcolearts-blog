@@ -118,6 +118,7 @@ const Blog = (): ReactElement => {
   //    Tag Cloud    //
   //=================//
 
+  // Consolidates tags into array
   const fetchTags = (): string[] | void => {
     let allTags: string[] = [];
     sortedEntries.map((entry: Post): string[] => {
@@ -127,6 +128,7 @@ const Blog = (): ReactElement => {
     createTagObjectsForCloud(allTags);
   };
 
+  // Creates TagCloud array of objects
   const createTagObjectsForCloud = (tags: string[]): TagObj[] | void => {
     let mappedTags: TagObj[] = [{ value: "", count: 0 }];
     tags.map((tag: any): Object[] => {
@@ -150,6 +152,7 @@ const Blog = (): ReactElement => {
     filterTagObjectsForCloud(mappedTags);
   };
 
+  // Filters out empty and duplicate objects
   const filterTagObjectsForCloud = (tagArr: TagObj[]): TagObj[] | void => {
     let dedupedTags: TagObj[] = [];
     tagArr = tagArr.filter(tag => tag.value !== "");
