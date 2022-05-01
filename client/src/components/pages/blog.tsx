@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ReactElement, useEffect, useState } from "react";
 import { NavigateFunction, Params, useNavigate, useParams } from "react-router-dom";
 import { ApolloCache, useMutation, useQuery } from "@apollo/client";
@@ -186,6 +187,7 @@ const Blog = (): ReactElement => {
         setPageReady(true);
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [entriesArr, params]);
 
 
