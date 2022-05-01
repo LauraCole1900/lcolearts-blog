@@ -6,6 +6,7 @@ import Auth from "../../utils/auth";
 import { Post } from "../../utils/interfaces";
 import "./style.css";
 
+
 interface PostCardProps {
   setEntryId: Function
   handleShowConfirm: Function

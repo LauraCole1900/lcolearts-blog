@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { ContentState, EditorState } from "draft-js";
-import { Editor } from "react-draft-wysiwyg";
 import htmlToDraft from "html-to-draftjs";
+import { Editor } from "react-draft-wysiwyg";
 import ColorPicker from "./colorPicker";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "./style.css";

@@ -5,9 +5,9 @@ import { ApolloCache, useMutation, useQuery } from "@apollo/client";
 import { Col, Container, Row } from "react-bootstrap";
 import { TagCloud } from "react-tagcloud";
 import { DELETE_ENTRY, QUERY_ALL_ENTRIES } from "../../utils/gql";
+import { Post } from "../../utils/interfaces";
 import PostCard from "../post";
 import { ConfirmModal, ErrorModal, SuccessModal } from "../modals";
-import { Post } from "../../utils/interfaces";
 
 interface TagObj {
   value: string

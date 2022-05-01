@@ -6,6 +6,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import dayjs from "dayjs";
 import { QUERY_ONE_ENTRY } from "../../utils/gql";
 
+
 const BlogEntry = (): ReactElement => {
 
   const params: Readonly<Params<string>> = useParams<string>();

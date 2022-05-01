@@ -127,17 +127,6 @@ a {
   text-align: center;
 }
 
-.icon {
-  max-width: 50px;
-  margin-bottom: 2em;
-}
-
-.iconBig {
-  max-width: 75px;
-  max-height: 75px;
-  margin: 1em;
-}
-
 .darkBg {
   background: var(--translucentBgDk);
   border-radius: 5px;

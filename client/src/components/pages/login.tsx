@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { ChangeEvent, FormEvent, ReactElement, useState } from "react";
-import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
-import { LOG_ME_IN } from "../../utils/gql";
+import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import Auth from "../../utils/auth";
+import { LOG_ME_IN } from "../../utils/gql";
 import { User } from "../../utils/interfaces";
 import "./style.css";
+
 
 const LoginPage = (): ReactElement => {
 

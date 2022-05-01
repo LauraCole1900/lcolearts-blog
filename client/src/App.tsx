@@ -4,9 +4,9 @@ import { ApolloClient, ApolloLink, ApolloProvider, createHttpLink, GraphQLReques
 import { setContext } from "@apollo/client/link/context";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from "react-bootstrap/Container";
+import Footer from "./components/footer";
 import Navigation from "./components/navbar";
 import { Blog, BlogEntry, LoginPage, NotFound, PostForm } from "./components/pages";
-import Footer from "./components/footer";
 import './App.css';
 
 

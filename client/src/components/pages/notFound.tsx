@@ -2,6 +2,7 @@ import { ReactElement } from "react";
 import { Link } from "react-router-dom";
 import { Button, Col, Container, Row } from "react-bootstrap";
 
+
 const NotFound = (): ReactElement => {
 
 

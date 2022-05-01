@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { CompactPicker } from 'react-color';
-import colorWheel from "../../pix/color-wheel.png";
+import { ColorWheel } from "../../pix";
 
 
 class ColorPicker extends Component {
@@ -44,7 +44,7 @@ class ColorPicker extends Component {
           onClick={onExpandEvent}
         >
           <img
-            src={colorWheel}
+            src={ColorWheel}
             alt="Color picker icon"
             className="editorIcon"
           />
