@@ -3,17 +3,33 @@
   --translucentBgGreen: rgba(3, 17, 5, 0.55);
 }
 
+.center {
+  display: flex;
+  align-items: center;
+  margin-top: .75rem;
+}
+
 .footer {
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
-  height: 2.75rem;
   background: var(--translucentBgGreen);
   color: var(--ltBlue);
+}
+.footer > .row > .center > p {
+  font-size: 14px;
 }
 
 .icon {
   max-width: 25px;
-  margin-top: .5rem;
+  margin-top: .75em;
+}
+
+.ltBgFooter {
+  background: var(--ltBlue);
+  border-radius: 2px;
+  max-width: 35px;
+  margin-top: .5em;
+  padding: 5px;
 }

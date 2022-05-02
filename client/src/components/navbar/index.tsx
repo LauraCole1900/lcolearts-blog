@@ -36,9 +36,9 @@ const Navigation = (): ReactElement => {
           <Link to="/" className="navlink">
             Blog
           </Link>
-          <a href="https://lcolearts.com/#/contact" className="navlink">
+          {/* <a href="https://lcolearts.com/#/contact" className="navlink">
             Contact Me
-          </a>
+          </a> */}
           {Auth.loggedIn() &&
             <>
               <Link to="/new_post" className="navlink">New Post</Link>
