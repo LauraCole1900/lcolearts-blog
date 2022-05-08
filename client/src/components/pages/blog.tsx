@@ -33,6 +33,9 @@ const Blog = (): ReactElement => {
   const [pageReady, setPageReady] = useState<boolean>(false);
   const [entriesToRender, setEntriesToRender] = useState<Array<Post>>([]);
   const [tagsToRender, setTagsToRender] = useState<Array<Object>>([]);
+  const [itemOffset, setItemOffset] = useState<number>(0);
+  const [currentItems, setCurrentItems] = useState<Array<Post> | null>(null);
+  const [pageCount, setPageCount] = useState<number>(0);
   const color: { luminosity: string, hue: string, format: string } = {
     luminosity: "dark",
     hue: "#031105",
@@ -113,6 +116,14 @@ const Blog = (): ReactElement => {
   const handleKeyword = (word: string): void => {
     console.log({ word });
     navigate(`/tags/${word}`)
+  };
+
+  const handlePageClick = (e: any): void => {
+    const newOffset: number = (e.selected * 15) % entriesToRender.length;
+    console.log(
+      `User requested page number ${e.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
   };
 
 
@@ -241,7 +252,7 @@ const Blog = (): ReactElement => {
                 pageRangeDisplayed={5}
                 pageCount={pageCount}
                 previousLabel="< previous"
-                renderOnZeroPageCount={null}
+                // renderOnZeroPageCount={null}
               />
             </Col>
           </Row>
@@ -291,12 +302,6 @@ export default Blog;
 // }
 
 // function PaginatedItems({ itemsPerPage }) {
-//   // We start with an empty list of items.
-//   const [currentItems, setCurrentItems] = useState(null);
-//   const [pageCount, setPageCount] = useState(0);
-//   // Here we use item offsets; we could also use page offsets
-//   // following the API or data you're working with.
-//   const [itemOffset, setItemOffset] = useState(0);
 
 //   useEffect(() => {
 //     // Fetch items from another resources.
@@ -305,15 +310,6 @@ export default Blog;
 //     setCurrentItems(items.slice(itemOffset, endOffset));
 //     setPageCount(Math.ceil(items.length / itemsPerPage));
 //   }, [itemOffset, itemsPerPage]);
-
-//   // Invoke when user click to request another page.
-//   const handlePageClick = (event) => {
-//     const newOffset = (event.selected * itemsPerPage) % items.length;
-//     console.log(
-//       `User requested page number ${event.selected}, which is offset ${newOffset}`
-//     );
-//     setItemOffset(newOffset);
-//   };
 
 //   return (
 //     <>
