@@ -188,7 +188,7 @@ const Blog = (): ReactElement => {
         setPageReady(true);
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [entriesArr, params]);
 
 
@@ -228,6 +228,20 @@ const Blog = (): ReactElement => {
                 tags={tagsToRender}
                 colorOptions={color}
                 onClick={(e: any) => handleKeyword(e.value)}
+              />
+            </Col>
+          </Row>
+
+          <Row>
+            <Col sm={{ span: 10, offset: 1 }}>
+              <ReactPaginate
+                breakLabel="..."
+                nextLabel="next >"
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={5}
+                pageCount={pageCount}
+                previousLabel="< previous"
+                renderOnZeroPageCount={null}
               />
             </Col>
           </Row>
