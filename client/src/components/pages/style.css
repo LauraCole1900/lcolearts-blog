@@ -248,6 +248,36 @@ a {
     1px -1px 1px var(--ltBlue), -1px -1px 1px var(--ltBlue);
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  background-color: var(--dkGreen);
+  border: 2px solid var(--ltBlue);
+  border-radius: 7px;
+  box-shadow: 10px 10px 10px 5px var(--dkGreen);
+}
+
+.pagination > ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: .25rem;
+}
+
+.pagination > ul > li {
+  color: var(--ltBlue);
+  display: inline;
+  margin: .5rem;
+  text-decoration: underline;
+}
+
+.pagination > ul > li > a {
+  color: var(--ltBlue);
+}
+
+.pagination > ul > .selected {
+  color: var(--medBlue);
+}
+
 .tags {
   font-size: 0.66rem;
 }

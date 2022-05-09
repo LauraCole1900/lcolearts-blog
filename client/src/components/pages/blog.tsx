@@ -99,7 +99,6 @@ const Blog = (): ReactElement => {
   //=================//
 
   const handleDeleteEntry = async (id: string): Promise<void> => {
-    console.log({ id });
     handleHideConfirm();
     try {
       const { data } = await deleteEntry({
@@ -114,15 +113,12 @@ const Blog = (): ReactElement => {
   };
 
   const handleKeyword = (word: string): void => {
-    console.log({ word });
     navigate(`/tags/${word}`)
   };
 
+  // Handles click on pagination navigation
   const handlePageClick = (e: any): void => {
-    const newOffset: number = (e.selected * 15) % entriesToRender.length;
-    console.log(
-      `User requested page number ${e.selected}, which is offset ${newOffset}`
-    );
+    const newOffset: number = (e.selected * 15);
     setItemOffset(newOffset);
   };
 
@@ -189,21 +185,20 @@ const Blog = (): ReactElement => {
 
   useEffect((): void => {
     if (entriesArr?.length) {
+      const endOffset: number = itemOffset + 15;
       fetchTags();
       if (Object.keys(params).length) {
         const filteredEntries: Post[] = sortedEntries.filter((post: Post): boolean => post.postKeywords.includes(params.tag!));
-        setEntriesToRender(filteredEntries);
+        setEntriesToRender(filteredEntries.slice(itemOffset, endOffset));
+        setPageCount(Math.ceil(filteredEntries.length / 15));
         setPageReady(true);
       } else {
-        setEntriesToRender(sortedEntries);
+        setEntriesToRender(sortedEntries.slice(itemOffset, endOffset));
+        setPageCount(Math.ceil(sortedEntries.length / 15));
         setPageReady(true);
       }
     }
 
-    const endOffset: number = itemOffset + 15;
-    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-    setCurrentItems(entriesToRender.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(entriesToRender.length / 15));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [entriesArr, itemOffset, params]);
 
@@ -230,7 +225,7 @@ const Blog = (): ReactElement => {
           <Row>
             {entriesToRender?.length
               ? <Col sm={{ span: 8, offset: 1 }}>
-                <PostCard entries={currentItems!} setEntryId={setEntryId} handleShowConfirm={handleShowConfirm} handleKeyword={handleKeyword} />
+                <PostCard entries={entriesToRender!} setEntryId={setEntryId} handleShowConfirm={handleShowConfirm} handleKeyword={handleKeyword} />
               </Col>
               : <Col sm={{ span: 8, offset: 1 }}>
                 <h1>Coming soon!</h1>
@@ -250,7 +245,7 @@ const Blog = (): ReactElement => {
 
           {pageCount > 1 &&
             <Row>
-              <Col sm={{ span: 10, offset: 1 }}>
+              <Col sm={{ span: 8, offset: 1 }} className="pagination">
                 <ReactPaginate
                   breakLabel="..."
                   nextLabel="next >"
@@ -258,7 +253,6 @@ const Blog = (): ReactElement => {
                   pageRangeDisplayed={5}
                   pageCount={pageCount}
                   previousLabel="< previous"
-                // renderOnZeroPageCount={null}
                 />
               </Col>
             </Row>}
@@ -286,55 +280,3 @@ const Blog = (): ReactElement => {
 }
 
 export default Blog;
-
-// import React, { useEffect, useState } from 'react';
-// import ReactDOM from 'react-dom';
-// import ReactPaginate from 'react-paginate';
-
-// // Example items, to simulate fetching from another resources.
-// const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
-
-// function Items({ currentItems }) {
-//   return (
-//     <>
-//       {currentItems &&
-//         currentItems.map((item) => (
-//           <div>
-//             <h3>Item #{item}</h3>
-//           </div>
-//         ))}
-//     </>
-//   );
-// }
-
-// function PaginatedItems({ itemsPerPage }) {
-
-//   useEffect(() => {
-//     // Fetch items from another resources.
-//     const endOffset = itemOffset + itemsPerPage;
-//     console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-//     setCurrentItems(items.slice(itemOffset, endOffset));
-//     setPageCount(Math.ceil(items.length / itemsPerPage));
-//   }, [itemOffset, itemsPerPage]);
-
-//   return (
-//     <>
-//       <Items currentItems={currentItems} />
-//       <ReactPaginate
-//         breakLabel="..."
-//         nextLabel="next >"
-//         onPageChange={handlePageClick}
-//         pageRangeDisplayed={5}
-//         pageCount={pageCount}
-//         previousLabel="< previous"
-//         renderOnZeroPageCount={null}
-//       />
-//     </>
-//   );
-// }
-
-// // Add a <div id="container"> to your HTML to see the componend rendered.
-// ReactDOM.render(
-//   <PaginatedItems itemsPerPage={4} />,
-//   document.getElementById('container')
-// );
