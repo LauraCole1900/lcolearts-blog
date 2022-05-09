@@ -199,8 +199,13 @@ const Blog = (): ReactElement => {
         setPageReady(true);
       }
     }
+
+    const endOffset: number = itemOffset + 15;
+    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+    setCurrentItems(entriesToRender.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(entriesToRender.length / 15));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [entriesArr, params]);
+  }, [entriesArr, itemOffset, params]);
 
 
   //================//
@@ -225,7 +230,7 @@ const Blog = (): ReactElement => {
           <Row>
             {entriesToRender?.length
               ? <Col sm={{ span: 8, offset: 1 }}>
-                <PostCard entries={entriesToRender} setEntryId={setEntryId} handleShowConfirm={handleShowConfirm} handleKeyword={handleKeyword} />
+                <PostCard entries={currentItems!} setEntryId={setEntryId} handleShowConfirm={handleShowConfirm} handleKeyword={handleKeyword} />
               </Col>
               : <Col sm={{ span: 8, offset: 1 }}>
                 <h1>Coming soon!</h1>
@@ -243,19 +248,20 @@ const Blog = (): ReactElement => {
             </Col>
           </Row>
 
-          <Row>
-            <Col sm={{ span: 10, offset: 1 }}>
-              <ReactPaginate
-                breakLabel="..."
-                nextLabel="next >"
-                onPageChange={handlePageClick}
-                pageRangeDisplayed={5}
-                pageCount={pageCount}
-                previousLabel="< previous"
+          {pageCount > 1 &&
+            <Row>
+              <Col sm={{ span: 10, offset: 1 }}>
+                <ReactPaginate
+                  breakLabel="..."
+                  nextLabel="next >"
+                  onPageChange={handlePageClick}
+                  pageRangeDisplayed={5}
+                  pageCount={pageCount}
+                  previousLabel="< previous"
                 // renderOnZeroPageCount={null}
-              />
-            </Col>
-          </Row>
+                />
+              </Col>
+            </Row>}
 
           <ConfirmModal
             entryDelete={() => handleDeleteEntry(entryId!)}
