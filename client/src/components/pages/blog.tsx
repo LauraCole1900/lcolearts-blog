@@ -34,7 +34,6 @@ const Blog = (): ReactElement => {
   const [entriesToRender, setEntriesToRender] = useState<Array<Post>>([]);
   const [tagsToRender, setTagsToRender] = useState<Array<Object>>([]);
   const [itemOffset, setItemOffset] = useState<number>(0);
-  const [currentItems, setCurrentItems] = useState<Array<Post> | null>(null);
   const [pageCount, setPageCount] = useState<number>(0);
   const color: { luminosity: string, hue: string, format: string } = {
     luminosity: "dark",
