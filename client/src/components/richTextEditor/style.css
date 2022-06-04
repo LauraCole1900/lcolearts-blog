@@ -18,6 +18,10 @@
   --translucentBgGreen: rgba(3, 17, 5, 0.55);
 }
 
+pre {
+  margin-bottom: 0;
+}
+
 .editorIcon {
   height: 18px;
   padding: 0 5px 0 5px;

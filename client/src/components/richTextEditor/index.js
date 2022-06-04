@@ -49,7 +49,7 @@ class EditorContainer extends Component {
           options: ["inline", "blockType", "fontSize", "fontFamily", "list", "textAlign", "link", "colorPicker", "history"],
           inline: {
             inDropdown: false,
-            options: ["bold", "italic", "underline", "strikethrough", "superscript", "subscript"]
+            options: ["bold", "italic", "underline", "strikethrough", "monospace", "superscript", "subscript"]
           },
           blockType: {
             inDropdown: true,
