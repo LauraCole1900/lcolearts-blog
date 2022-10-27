@@ -1,19 +1,28 @@
 const { gql } = require('apollo-server-express');
 
 var typeDefs: any = gql`
-  type User {
-    _id: ID!
-    userName: String!
-    email: String
-    password: String!
-  }
-
   type Post {
     _id: ID!
     postTitle: String!
     postBody: String!
     postKeywords: [String!]
     postDate: String
+  }
+
+  type Song {
+    _id: ID!
+    songTitle: String!
+    songVoicing: String!
+    songAccompaniment: String!
+    songMIDI: String
+    songPreview: String
+  }
+
+  type User {
+    _id: ID!
+    userName: String!
+    email: String
+    password: String!
   }
 
   type Auth {
@@ -34,6 +43,9 @@ var typeDefs: any = gql`
     me: User
     getAllEntries: [Post]
     getEntry(_id: ID!): Post
+    getAllSongs: [Song]
+    getSong(_id: ID!): Song
+    getSongsByVoicing(songVoicing: String!): [Song]
   }
 
   type Mutation {
@@ -42,6 +54,9 @@ var typeDefs: any = gql`
     createEntry(postTitle: String!, postBody: String!, postKeywords: [String!]): Post
     deleteEntry(_id: ID!): Post
     editEntry(_id: ID!, postTitle: String!, postBody: String!, postKeywords: [String!]): Post
+    createSong(songTitle: String!, songVoicing: String!, songAccompaniment: String!, songMIDI: String, songPreview: String): Song
+    deleteSong(_id: ID!): Song
+    editSong(_id: ID!, songTitle: String!, songVoicing: String!, songAccompaniment: String!, songMIDI: String, songPreview: String): Song
   }
 `;
 
