@@ -59,7 +59,7 @@ const App = (): ReactElement => {
           <Navigation />
           <Container fluid className="mycontainer">
             <Routes>
-              <Route path="/" element={<Blog />} />
+              <Route path="/blog" element={<Blog />} />
               <Route path="/tags/:tag" element={<Blog />} />
               <Route path="/blog/:blogId" element={<BlogEntry />} />
               <Route path="/log_me_in" element={<LoginPage />} />

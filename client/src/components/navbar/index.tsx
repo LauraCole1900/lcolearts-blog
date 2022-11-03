@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import { Link } from "react-router-dom";
-import { Nav, Navbar } from "react-bootstrap";
+import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 import Auth from "../../utils/auth";
 import "./style.css";
 
@@ -27,15 +27,19 @@ const Navigation = (): ReactElement => {
           <a href="https://lcolearts.com/#/webdev" className="navlink">
             Webdev
           </a>
-          <a href="https://lcolearts.com/#/musician" className="navlink">
-            Musician
-          </a>
+          <NavDropdown title="Musician">
+            <NavDropdown.Item href="https://lcolearts.com/#/musician" className="navlink">C.V.</NavDropdown.Item>
+            <NavDropdown.Item href="/music" className="navlink" rel="noreferred noopener">Compositions</NavDropdown.Item>
+          </NavDropdown>
           <a href="https://lcolearts.com/#/martial_artist" className="navlink">
             Martial Artist
           </a>
-          <Link to="/" className="navlink">
+          <Link to="/blog" className="navlink">
             Blog
           </Link>
+          <a href="https://lcolearts.com/#/fun_and_games" className="navlink">
+            Fun & Games
+          </a>
           {/* <a href="https://lcolearts.com/#/contact" className="navlink">
             Contact Me
           </a> */}

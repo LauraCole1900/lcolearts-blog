@@ -21,26 +21,26 @@ const NotFound = (): ReactElement => {
         </Row>
         <Row>
           <Col sm={{ span: 10, offset: 1 }}>
-            <Link to="/">
+            <a href="https://lcolearts.com/">
               <Button data-toggle="popover" title="Home" className="button btn btn404">Home</Button>
-            </Link>
-            <Link to="/about">
+            </a>
+            <a href="https://lcolearts.com/#/about">
               <Button data-toggle="popover" title="About" className="button btn btn404">About</Button>
-            </Link>
-            <Link to="/webdev">
+            </a>
+            <a href="https://lcolearts.com/#/webdev">
               <Button data-toggle="popover" title="Webdev Portfolio" className="button btn btn404">Webdev Portfolio</Button>
-            </Link>
-            <Link to="/musician">
+            </a>
+            <a href="https://lcolearts.com/#/musician">
               <Button data-toggle="popover" title="Musician" className="button btn btn404">Musician</Button>
+            </a>
+            <Link to="/music">
+              <Button data-toggle="popover" title="Compositions" className="button btn btn404">Compositions</Button>
             </Link>
-            <Link to="/martial_artist">
+            <a href="https://lcolearts.com/#/martial_artist">
               <Button data-toggle="popover" title="Martial Artist" className="button btn btn404">Martial Artist</Button>
-            </Link>
-            <Link to="/">
+            </a>
+            <Link to="/blog">
               <Button data-toggle="popover" title="Blog" className="button btn btn404">Blog</Button>
-            </Link>
-            <Link to="/contact">
-              <Button data-toggle="popover" title="Contact Me" className="button btn">Contact Me</Button>
             </Link>
           </Col>
         </Row>
