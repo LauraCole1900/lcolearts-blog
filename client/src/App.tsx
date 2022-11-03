@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from "react-bootstrap/Container";
 import Footer from "./components/footer";
 import Navigation from "./components/navbar";
-import { Blog, BlogEntry, LoginPage, NotFound, PostForm } from "./components/pages";
+import { Blog, BlogEntry, LandingPage, LoginPage, NotFound, PostForm } from "./components/pages";
 import './App.css';
 
 
@@ -59,6 +59,7 @@ const App = (): ReactElement => {
           <Navigation />
           <Container fluid className="mycontainer">
             <Routes>
+              <Route path="/" element={<LandingPage />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/tags/:tag" element={<Blog />} />
               <Route path="/blog/:blogId" element={<BlogEntry />} />

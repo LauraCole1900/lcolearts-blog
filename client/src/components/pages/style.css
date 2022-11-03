@@ -98,7 +98,8 @@ a {
   border-radius: 0 0 15px 15px;
 }
 
-.centered {
+.centered,
+.landerHead {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -218,6 +219,10 @@ a {
   background-color: var(--dkGreen);
   border: 1px solid var(--ltBlue);
   cursor: pointer;
+}
+
+.landerHead {
+  margin: 1em 0;
 }
 
 .login {
