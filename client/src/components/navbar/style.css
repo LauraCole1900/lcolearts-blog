@@ -18,7 +18,7 @@
 
 .mylogo {
   color: var(--ltBlue);
-  font-size: 1em;
+  font-size: 1rem;
   font-family: var(--headerFont);
   padding-left: .5em;
 }

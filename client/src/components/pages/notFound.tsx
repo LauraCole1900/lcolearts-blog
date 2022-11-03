@@ -31,7 +31,7 @@ const NotFound = (): ReactElement => {
               <Button data-toggle="popover" title="Webdev Portfolio" className="button btn btn404">Webdev Portfolio</Button>
             </a>
             <a href="https://lcolearts.com/#/musician">
-              <Button data-toggle="popover" title="Musician" className="button btn btn404">Musician</Button>
+              <Button data-toggle="popover" title="Musician" className="button btn btn404">Music CV</Button>
             </a>
             <Link to="/music">
               <Button data-toggle="popover" title="Compositions" className="button btn btn404">Compositions</Button>
