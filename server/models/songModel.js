@@ -10,8 +10,15 @@ const songSchema = new Schema({
         required: true
     },
     songAccompaniment: {
-        type: String,
+        type: [String],
         required: true
+    },
+    songSacred: {
+        type: Boolean,
+        required: true
+    },
+    songLiturgy: {
+        type: String
     },
     songMIDI: {
         type: String
