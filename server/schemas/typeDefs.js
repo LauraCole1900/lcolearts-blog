@@ -1,5 +1,5 @@
 "use strict";
-const { gql } = require('apollo-server-express');
+const gql = require('graphql-tag');
 var typeDefs = gql `
   type Post {
     _id: ID!
