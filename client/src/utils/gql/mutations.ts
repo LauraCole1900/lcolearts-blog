@@ -1,14 +1,22 @@
 import { gql } from "@apollo/client";
 
 export const CREATE_ENTRY = gql`
-mutation createEntry($postTitle: String!, $postBody: String!, $postKeywords: [String!]) {
-  createEntry(postTitle: $postTitle, postBody: $postBody, postKeywords: $postKeywords) {
-    _id
-    postTitle
-    postBody
-    postKeywords
+  mutation createEntry(
+    $postTitle: String!
+    $postBody: String!
+    $postKeywords: [String!]
+  ) {
+    createEntry(
+      postTitle: $postTitle
+      postBody: $postBody
+      postKeywords: $postKeywords
+    ) {
+      _id
+      postTitle
+      postBody
+      postKeywords
+    }
   }
-}
 `;
 
 export const DELETE_ENTRY = gql`
@@ -23,12 +31,101 @@ export const DELETE_ENTRY = gql`
 `;
 
 export const EDIT_ENTRY = gql`
-  mutation editEntry($id: ID!, $postTitle: String!, $postBody: String!, $postKeywords: [String!]) {
-    editEntry(_id: $id, postTitle: $postTitle, postBody: $postBody, postKeywords: $postKeywords) {
+  mutation editEntry(
+    $id: ID!
+    $postTitle: String!
+    $postBody: String!
+    $postKeywords: [String!]
+  ) {
+    editEntry(
+      _id: $id
+      postTitle: $postTitle
+      postBody: $postBody
+      postKeywords: $postKeywords
+    ) {
       _id
       postTitle
       postBody
       postKeywords
+    }
+  }
+`;
+
+export const CREATE_SONG = gql`
+  mutation createSong(
+    $songTitle: String!
+    $songVoicing: String!
+    $songAccompaniment: [String!]
+    $songSacred: Boolean!
+    $songLiturgy: String
+    $songTrack: String
+    $songPreview: String
+  ) {
+    createSong(
+      songTitle: $songTitle
+      songVoicing: $songVoicing
+      songAccompaniment: $songAccompaniment
+      songSacred: $songSacred
+      songLiturgy: $songLiturgy
+      songTrack: $songTrack
+      songPreview: $songPreview
+    ) {
+      _id
+      songTitle
+      songVoicing
+      songAccompaniment
+      songSacred
+      songLiturgy
+      songDemo
+      songPreview
+    }
+  }
+`;
+
+export const DELETE_SONG = gql`
+  deleteSong($id: ID!) {
+    deleteSong(_id: $id) {
+      _id
+      songTitle
+      songVoicing
+      songAccompaniment
+      songSacred
+      songLiturgy
+      songDemo
+      songPreview
+    }
+  }
+`;
+
+export const EDIT_SONG = gql`
+  editSong(
+    $id: ID!
+    $songTitle: String!
+    $songVoicing: String!
+    $songAccompaniment: [String!]
+    $songSacred: Boolean!
+    $songLiturgy: String
+    $songTrack: String
+    $songPreview: String
+  ) {
+    editSong(
+      _id: $id
+      songTitle: $songTitle
+      songVoicing: $songVoicing
+      songAccompaniment: $songAccompaniment
+      songSacred: $songSacred
+      songLiturgy: $songLiturgy
+      songTrack: $songTrack
+      songPreview: $songPreview
+    ) {
+      _id
+      songTitle
+      songVoicing
+      songAccompaniment
+      songSacred
+      songLiturgy
+      songTrack
+      songPreview
     }
   }
 `;
