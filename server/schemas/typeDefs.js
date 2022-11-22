@@ -16,7 +16,7 @@ var typeDefs = gql `
     songAccompaniment: [String!]
     songSacred: Boolean!
     songLiturgy: String
-    songMIDI: String
+    songTrack: String
     songPreview: String
   }
 
@@ -31,15 +31,6 @@ var typeDefs = gql `
     token: ID!
     user: User
   }
-
-  # input BookInput {
-  #   authors: [String]
-  #   description: String!
-  #   bookId: String!
-  #   image: String
-  #   link: String
-  #   title: String!
-  # }
 
   type Query {
     me: User
@@ -60,9 +51,9 @@ var typeDefs = gql `
     createEntry(postTitle: String!, postBody: String!, postKeywords: [String!]): Post
     deleteEntry(_id: ID!): Post
     editEntry(_id: ID!, postTitle: String!, postBody: String!, postKeywords: [String!]): Post
-    createSong(songTitle: String!, songVoicing: String!, songAccompaniment: [String!], songSacred: Boolean!, songLiturgy: String, songMIDI: String, songPreview: String): Song
+    createSong(songTitle: String!, songVoicing: String!, songAccompaniment: [String!], songSacred: Boolean!, songLiturgy: String, songTrack: String, songPreview: String): Song
     deleteSong(_id: ID!): Song
-    editSong(_id: ID!, songTitle: String!, songVoicing: String!, songAccompaniment: [String!], songSacred: Boolean!, songLiturgy: String, songMIDI: String, songPreview: String): Song
+    editSong(_id: ID!, songTitle: String!, songVoicing: String!, songAccompaniment: [String!], songSacred: Boolean!, songLiturgy: String, songTrack: String, songPreview: String): Song
   }
 `;
 module.exports = typeDefs;

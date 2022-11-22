@@ -20,7 +20,7 @@ const songSchema = new Schema({
   songLiturgy: {
     type: String
   },
-  songMIDI: {
+  songTrack: {
     type: String
   },
   songPreview: {

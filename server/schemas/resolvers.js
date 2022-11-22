@@ -17,6 +17,37 @@ var resolvers = {
         getEntry: async (_, args) => {
             return await Post.findOne({ _id: args._id });
         },
+        getAllSongs: async () => {
+            return await Song.find({});
+        },
+        getSong: async (_, args) => {
+            return await Song.findOne({ _id: args._id });
+        },
+        getSongsByAcc: async (_, args) => {
+            return await Song.find({ songAccompaniment: args.songAccompaniment })
+                .sort({ songTitle: 1 })
+                .exec();
+        },
+        getSongsByLiturgy: async (_, args) => {
+            return await Song.find({ songLiturgy: args.songLiturgy })
+                .sort({ songTitle: 1 })
+                .exec();
+        },
+        getSongsBySacred: async (_, args) => {
+            return await Song.find({ songSacred: args.songSacred })
+                .sort({ songTitle: 1 })
+                .exec();
+        },
+        getSongsByTitle: async (_, args) => {
+            return await Song.find({ songTitle: args.songTitle })
+                .sort({ songTitle: 1 })
+                .exec();
+        },
+        getSongsByVoicing: async (_, args) => {
+            return await Song.find({ songVoicing: args.songVoicing })
+                .sort({ songTitle: 1 })
+                .exec();
+        },
     },
     Mutation: {
         addUser: async (_, args) => {
@@ -48,28 +79,18 @@ var resolvers = {
             const post = await Post.findByIdAndUpdate({ _id: args._id }, { $set: { ...args } }, { new: true });
             return post;
         },
-        // saveBook: async (_: any, { bookData }, context) => {
-        //   if (context.user) {
-        //     const updatedUser = await User.findByIdAndUpdate(
-        //       { _id: context.user._id },
-        //       { $push: { savedBooks: bookData } },
-        //       { new: true }
-        //     );
-        //     return updatedUser;
-        //   }
-        //   throw new AuthenticationError('You need to be logged in!');
-        // },
-        // removeBook: async (parent, { bookId }, context) => {
-        //   if (context.user) {
-        //     const updatedUser = await User.findOneAndUpdate(
-        //       { _id: context.user._id },
-        //       { $pull: { savedBooks: { bookId } } },
-        //       { new: true }
-        //     );
-        //     return updatedUser;
-        //   }
-        //   throw new AuthenticationError('You need to be logged in!');
-        // },
+        createSong: async (_, args) => {
+            const song = await Song.create(args);
+            return song;
+        },
+        deleteSong: async (_, args) => {
+            const song = await Song.findByIdAndDelete({ _id: args._id });
+            return song;
+        },
+        editSong: async (_, args) => {
+            const song = await Song.findByIdAndUpdate({ _id: args._id }, { $set: { ...args } }, { new: true });
+            return song;
+        },
     },
 };
 module.exports = resolvers;

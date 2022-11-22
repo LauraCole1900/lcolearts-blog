@@ -23,6 +23,44 @@ var resolvers: any = {
     getEntry: async (_: any, args: any): Promise<any> => {
       return await Post.findOne({ _id: args._id });
     },
+
+    getAllSongs: async (): Promise<any> => {
+      return await Song.find({});
+    },
+
+    getSong: async (_: any, args: any): Promise<any> => {
+      return await Song.findOne({ _id: args._id });
+    },
+
+    getSongsByAcc: async (_: any, args: any): Promise<any> => {
+      return await Song.find({ songAccompaniment: args.songAccompaniment })
+        .sort({ songTitle: 1 })
+        .exec();
+    },
+
+    getSongsByLiturgy: async (_: any, args: any): Promise<any> => {
+      return await Song.find({ songLiturgy: args.songLiturgy })
+        .sort({ songTitle: 1 })
+        .exec();
+    },
+
+    getSongsBySacred: async (_: any, args: any): Promise<any> => {
+      return await Song.find({ songSacred: args.songSacred })
+        .sort({ songTitle: 1 })
+        .exec();
+    },
+
+    getSongsByTitle: async (_: any, args: any): Promise<any> => {
+      return await Song.find({ songTitle: args.songTitle })
+        .sort({ songTitle: 1 })
+        .exec();
+    },
+
+    getSongsByVoicing: async (_: any, args: any): Promise<any> => {
+      return await Song.find({ songVoicing: args.songVoicing })
+        .sort({ songTitle: 1 })
+        .exec();
+    },
   },
 
   Mutation: {
@@ -69,32 +107,24 @@ var resolvers: any = {
       return post;
     },
 
-    // saveBook: async (_: any, { bookData }, context) => {
-    //   if (context.user) {
-    //     const updatedUser = await User.findByIdAndUpdate(
-    //       { _id: context.user._id },
-    //       { $push: { savedBooks: bookData } },
-    //       { new: true }
-    //     );
+    createSong: async (_: any, args: any): Promise<any> => {
+      const song = await Song.create(args);
+      return song;
+    },
 
-    //     return updatedUser;
-    //   }
+    deleteSong: async (_: any, args: any): Promise<any> => {
+      const song = await Song.findByIdAndDelete({ _id: args._id });
+      return song;
+    },
 
-    //   throw new AuthenticationError('You need to be logged in!');
-    // },
-    // removeBook: async (parent, { bookId }, context) => {
-    //   if (context.user) {
-    //     const updatedUser = await User.findOneAndUpdate(
-    //       { _id: context.user._id },
-    //       { $pull: { savedBooks: { bookId } } },
-    //       { new: true }
-    //     );
-
-    //     return updatedUser;
-    //   }
-
-    //   throw new AuthenticationError('You need to be logged in!');
-    // },
+    editSong: async (_: any, args: any): Promise<any> => {
+      const song = await Song.findByIdAndUpdate(
+        { _id: args._id },
+        { $set: { ...args } },
+        { new: true }
+      );
+      return song;
+    },
   },
 };
 
