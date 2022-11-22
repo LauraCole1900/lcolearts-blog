@@ -2,11 +2,11 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useMutation, useQuery } from "@apollo/client";
-import { postValidate } from "../../utils/validation";
+import { songValidate } from "../../utils/validation";
 import { CREATE_SONG, EDIT_SONG, QUERY_ALL_SONGS, QUERY_ME, QUERY_ONE_SONG } from "../../utils/gql";
 import Auth from "../../utils/auth";
 import { ErrorModal, SuccessModal } from "../modals";
-import EditorContainer from "../richTextEditor";
+import { Song } from '../../utils/interfaces';
 import "./style.css";
 
 
@@ -24,11 +24,15 @@ const SongForm = () => {
   const [songId, setSongId] = useState(params.songId);
   const [errors, setErrors] = useState({});
   const [songData, setSongData] = useState({
-    postTitle: "",
-    postBody: "",
-    postKeywords: []
+    songTitle: "",
+    songVoicing: "",
+    songAccompaniment: [""],
+    songSacred: false,
+    songLiturgy: "",
+    songTrack: "",
+    songPreview: "",
   });
-  const currentPostData = useRef(postData);
+  const currentPostData = useRef(songData);
 
   // States passed to modals
   const [errThrown, setErrThrown] = useState();
@@ -45,25 +49,25 @@ const SongForm = () => {
 
   const { loading: meLoading, data: meData, error: meError } = useQuery(QUERY_ME);
 
-  const { loading: noteLoading, data: noteData, error: noteError } = useQuery(QUERY_ONE_SONG,
+  const { loading: thisSongLoading, data: thisSongData, error: thisSongError } = useQuery(QUERY_ONE_SONG,
     {
-      variables: { id: postId }
+      variables: { id: songId }
     });
 
   const me = meData?.me || meData?.currentId || {};
-  const postToEdit = useMemo(() => { return noteData?.getEntry || {} }, [noteData?.getEntry]);
+  const songToEdit = useMemo(() => { return thisSongData?.getSong || {} }, [thisSongData?.getSong]);
 
 
   //=====================//
   //      Mutations      //
   //=====================//
 
-  const [createSong, { createSongError, createSongData }] = useMutation(CREATE_SONG, {
+  const [createSong, { error: createSongError, data: createSongData }] = useMutation(CREATE_SONG, {
     update(cache, { data: { createSong } }) {
       try {
         // Retrieve existing post data that is stored in the cache
         const allData = cache.readQuery({ query: QUERY_ALL_SONGS });
-        const currentSongs = allData.getAllEntries;
+        const currentSongs = allData.getAllSongs;
         // Update the cache by combining existing post data with the newly created data returned from the mutation
         cache.writeQuery({
           query: QUERY_ALL_SONGS,
@@ -76,7 +80,7 @@ const SongForm = () => {
     }
   });
 
-  const [editSong, { editSongError, editSongData }] = useMutation(EDIT_SONG);
+  const [editSong, { error: editSongError, data: editSongData }] = useMutation(EDIT_SONG);
 
 
   //=====================//
@@ -92,33 +96,25 @@ const SongForm = () => {
   // Handles input changes to form fields
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setPostData({ ...postData, [name]: value });
+    setSongData({ ...songData, [name]: value });
     if (name === "postKeywords") {
       let dataArr = value.split(",");
       let trimmedArr = dataArr.map(item => item.trim())
-      setPostData({ ...postData, [name]: trimmedArr });
+      setSongData({ ...songData, [name]: trimmedArr });
     }
-  };
-
-  // Handles input changes to editor
-  const handleEditorChange = (name, value) => {
-    setPostData(prev => {
-      currentPostData.current = { ...prev, [name]: value };
-      return { ...prev, [name]: value };
-    });
   };
 
   // Handles click on "Submit" button
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     // Validates required inputs
-    const validationErrors = postValidate(postData);
-    const noErrors = Object.keys(validationErrors).some(val => validationErrors[val] === "");
+    const validationErrors = songValidate(songData);
+    const noErrors: boolean = Object.keys(validationErrors).some(val => validationErrors[val] === "");
     setErrors(validationErrors);
     if (noErrors) {
       try {
-        const { data } = await createEntry({
-          variables: { ...postData, postBody: draftToHtml(convertToRaw(postData.postBody.getCurrentContent())) }
+        const { data } = await createSong({
+          variables: { ...songData }
         });
         handleShowSuccess();
       } catch (error) {
@@ -126,10 +122,14 @@ const SongForm = () => {
         setErrThrown(error.message);
         handleShowErr();
       }
-      setPostData({
-        postTitle: "",
-        postBody: "",
-        postKeywords: []
+      setSongData({
+        songTitle: "",
+        songVoicing: "",
+        songAccompaniment: [],
+        songSacred: false,
+        songLiturgy: "",
+        songTrack: "",
+        songPreview: "",
       });
     } else {
       console.error({ validationErrors });
@@ -138,17 +138,17 @@ const SongForm = () => {
 
   // Handles click on "Update" button
   const handleFormUpdate = async (e) => {
-    console.log({ postData }, { postId });
+    console.log({ songData }, { songId });
     e.preventDefault();
     // Validates required inputs
-    const validationErrors = postValidate(postData);
+    const validationErrors = songValidate(songData);
     const noErrors = Object.keys(validationErrors).some(val => validationErrors[val] === "");
     setErrors(validationErrors);
     if (noErrors) {
       try {
         console.log("ding");
-        const { data } = await editEntry({
-          variables: { id: postId, ...postData, postBody: draftToHtml(convertToRaw(postData.postBody.getCurrentContent())) }
+        const { data } = await editSong({
+          variables: { id: songId, ...songData }
         });
         console.log({ data });
         handleShowSuccess();
@@ -157,10 +157,14 @@ const SongForm = () => {
         setErrThrown(error.message);
         handleShowErr();
       }
-      setPostData({
-        postTitle: "",
-        postBody: "",
-        postKeywords: []
+      setSongData({
+        songTitle: "",
+        songVoicing: "",
+        songAccompaniment: [],
+        songSacred: false,
+        songLiturgy: "",
+        songTrack: "",
+        songPreview: "",
       });
     } else {
       console.error({ validationErrors });
@@ -173,22 +177,22 @@ const SongForm = () => {
   //=====================//
 
   useEffect(() => {
-    if (Object.keys(params).length > 0 && Object.keys(postToEdit).length > 0) {
-      setPostData(postToEdit);
+    if (Object.keys(params).length > 0 && Object.keys(songToEdit).length > 0) {
+      setSongData(songToEdit);
       setPageReady(true);
     }
 
     if (!Object.keys(params).length) {
       setPageReady(true);
     }
-  }, [postToEdit, me.section, params]);
+  }, [songToEdit, me.section, params]);
 
 
   //=====================//
   //    Conditionals     //
   //=====================//
 
-  if (meLoading || noteLoading) {
+  if (meLoading || thisSongLoading) {
     return <h1>Loading....</h1>
   };
 
@@ -215,9 +219,9 @@ const SongForm = () => {
               <Row>
                 <Col sm={{ span: 8, offset: 2 }}>
                   <Form.Label>Post title: <span className="red">*</span></Form.Label>
-                  {errors.postTitle &&
-                    <div className="error"><p>{errors.postTitle}</p></div>}
-                  <Form.Control type="input" name="postTitle" placeholder="Title of your post" value={postData.postTitle} className="formInput" onChange={handleInputChange} />
+                  {errors.songTitle &&
+                    <div className="error"><p>{errors.songTitle}</p></div>}
+                  <Form.Control type="input" name="postTitle" placeholder="Title of your post" value={songData.songTitle} className="formInput" onChange={handleInputChange} />
                 </Col>
               </Row>
             </Form.Group>
@@ -226,8 +230,8 @@ const SongForm = () => {
               <Row>
                 <Col sm={{ span: 8, offset: 2 }}>
                   <Form.Label>Post body: <span className="red">*</span></Form.Label>
-                  {errors.postBody &&
-                    <div className="error"><p>{errors.postBody}</p></div>}
+                  {errors.songVoicing &&
+                    <div className="error"><p>{errors.songVoicing}</p></div>}
                   <EditorContainer value={postData.postBody} name="postBody" onChange={handleEditorChange} />
                 </Col>
               </Row>
