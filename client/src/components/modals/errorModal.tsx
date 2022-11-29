@@ -4,7 +4,9 @@ import { Button, Modal } from "react-bootstrap";
 import "./style.css";
 
 interface ErrorProps {
-  show: boolean
+  errmsg: string | undefined;
+  btnname: string | undefined;
+  show: boolean;
   hide: MouseEventHandler
 }
 

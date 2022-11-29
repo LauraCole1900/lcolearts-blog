@@ -4,8 +4,10 @@ import { Button, Modal } from "react-bootstrap";
 import "./style.css";
 
 interface SuccessProps {
-  show: boolean
-  hide: MouseEventHandler
+  btnname: string | undefined;
+  params: [] | undefined;
+  show: boolean;
+  hide: MouseEventHandler;
 }
 
 

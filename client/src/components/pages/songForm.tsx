@@ -22,7 +22,7 @@ const SongForm = () => {
   // State variables
   const [pageReady, setPageReady] = useState(false);
   const [songId, setSongId] = useState(params.songId);
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<SongErrors | undefined>();
   const [songData, setSongData] = useState({
     songTitle: "",
     songVoicing: "",
@@ -213,37 +213,76 @@ const SongForm = () => {
             </Col>
           </Row>
 
-          <Form className="postForm">
+          <Form className="songForm">
 
-            <Form.Group controlId="formPostTitle">
+            <Form.Group controlId="formSongTitle">
               <Row>
                 <Col sm={{ span: 8, offset: 2 }}>
-                  <Form.Label>Post title: <span className="red">*</span></Form.Label>
-                  {errors.songTitle &&
+                  <Form.Label>Song title: <span className="red">*</span></Form.Label>
+                  {errors?.songTitle &&
                     <div className="error"><p>{errors.songTitle}</p></div>}
-                  <Form.Control type="input" name="postTitle" placeholder="Title of your post" value={songData.songTitle} className="formInput" onChange={handleInputChange} />
+                  <Form.Control type="input" name="songTitle" placeholder="Title of your song" value={songData.songTitle} className="formInput" onChange={handleInputChange} />
                 </Col>
               </Row>
             </Form.Group>
 
-            <Form.Group controlId="formPostBody">
+            <Form.Group controlId="formSongVoicing">
               <Row>
                 <Col sm={{ span: 8, offset: 2 }}>
-                  <Form.Label>Post body: <span className="red">*</span></Form.Label>
-                  {errors.songVoicing &&
+                  <Form.Label>Song voicing: <span className="red">*</span></Form.Label>
+                  {errors?.songVoicing &&
                     <div className="error"><p>{errors.songVoicing}</p></div>}
-                  <EditorContainer value={postData.postBody} name="postBody" onChange={handleEditorChange} />
+                  <Form.Control type="input" name="songVoicing" placeholder="Voicing of your song" value={songData.songVoicing} className="formInput" onChange={handleInputChange} />
                 </Col>
               </Row>
             </Form.Group>
 
-            <Form.Group controlId="formPostKeywords">
+            <Form.Group controlId="formSongAcc">
               <Row>
                 <Col sm={{ span: 8, offset: 2 }}>
-                  <Form.Label>Post keywords:</Form.Label>
-                  {errors.postKeywords &&
-                    <div className="error"><p>{errors.postKeywords}</p></div>}
-                  <Form.Control type="input" name="postKeywords" placeholder="Keywords" value={postData.postKeywords} className="formInput" onChange={handleInputChange} />
+                  <Form.Label>Song accompaniment: <span className="red">*</span></Form.Label>
+                  {errors?.songAccompaniment &&
+                    <div className="error"><p>{errors.songAccompaniment}</p></div>}
+                  <Form.Control type="input" name="songAccompaniment" placeholder="Keywords" value={songData.songAccompaniment} className="formInput" onChange={handleInputChange} />
+                </Col>
+              </Row>
+            </Form.Group>
+
+            <Form.Group controlId="formSongSacred"> {/* ! Make this radio buttons */}
+              <Row>
+                <Col sm={{ span: 8, offset: 2 }}>
+                  <Form.Label>Sacred or secular? <span className="red">*</span></Form.Label>
+                  {errors?.songSacred &&
+                    <div className="error"><p>{errors.songSacred}</p></div>}
+                  <Form.Control type="input" name="songSacred" placeholder="Keywords" value={songData.songSacred} className="formInput" onChange={handleInputChange} />
+                </Col>
+              </Row>
+            </Form.Group>
+
+            {songData.songSacred &&
+              <Form.Group controlId="formSongLit">
+                <Row>
+                  <Col sm={{ span: 8, offset: 2 }}>
+                    <Form.Label>Liturgical season:</Form.Label>
+                    <Form.Control type="input" name="songLiturgy" placeholder="Keywords" value={songData.songLiturgy} className="formInput" onChange={handleInputChange} />
+                  </Col>
+                </Row>
+              </Form.Group>}
+
+            <Form.Group controlId="formSongTrack">
+              <Row>
+                <Col sm={{ span: 8, offset: 2 }}>
+                  <Form.Label>URL for demo track:</Form.Label>
+                  <Form.Control type="input" name="songTrack" placeholder="Keywords" value={songData.songTrack} className="formInput" onChange={handleInputChange} />
+                </Col>
+              </Row>
+            </Form.Group>
+
+            <Form.Group controlId="formSongPreview">
+              <Row>
+                <Col sm={{ span: 8, offset: 2 }}>
+                  <Form.Label>URL for preview:</Form.Label>
+                  <Form.Control type="input" name="songPreview" placeholder="Keywords" value={songData.songPreview} className="formInput" onChange={handleInputChange} />
                 </Col>
               </Row>
             </Form.Group>
@@ -251,8 +290,8 @@ const SongForm = () => {
             <Row>
               <Col sm={{ span: 3, offset: 2 }}>
                 {!Object.keys(params).length
-                  ? <Button data-toggle="popover" title="Submit" disabled={!(postData.postTitle && postData.postBody)} className="button formBtn" onClick={handleFormSubmit} type="submit">Submit</Button>
-                  : <Button data-toggle="popover" title="Update" disabled={!(postData.postTitle && postData.postBody)} className="button formBtn" onClick={handleFormUpdate} type="submit">Update</Button>
+                  ? <Button data-toggle="popover" title="Submit" disabled={!(songData.songTitle && songData.songVoicing && songData.songAccompaniment && songData.songSacred)} className="button formBtn" onClick={handleFormSubmit} type="submit">Submit</Button>
+                  : <Button data-toggle="popover" title="Update" disabled={!(songData.songTitle && songData.songVoicing && songData.songAccompaniment && songData.songSacred)} className="button formBtn" onClick={handleFormUpdate} type="submit">Update</Button>
                 }
               </Col>
             </Row>
