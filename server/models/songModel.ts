@@ -10,7 +10,7 @@ const songSchema = new Schema({
     required: true
   },
   songAccompaniment: {
-    type: [String],
+    type: String,
     required: true
   },
   songSacred: {

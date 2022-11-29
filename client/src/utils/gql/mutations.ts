@@ -55,7 +55,7 @@ export const CREATE_SONG = gql`
   mutation createSong(
     $songTitle: String!
     $songVoicing: String!
-    $songAccompaniment: [String!]
+    $songAccompaniment: String!
     $songSacred: Boolean!
     $songLiturgy: String
     $songTrack: String
@@ -102,7 +102,7 @@ export const EDIT_SONG = gql`
     $id: ID!
     $songTitle: String!
     $songVoicing: String!
-    $songAccompaniment: [String!]
+    $songAccompaniment: String!
     $songSacred: Boolean!
     $songLiturgy: String
     $songTrack: String

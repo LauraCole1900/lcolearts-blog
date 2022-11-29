@@ -208,8 +208,8 @@ const SongForm = () => {
           <Row>
             <Col sm={12} className="formHeader">
               {Object.keys(params).length > 0
-                ? <h1>Edit this post</h1>
-                : <h1>Create new post</h1>}
+                ? <h1>Edit this song</h1>
+                : <h1>Create new song</h1>}
             </Col>
           </Row>
 
