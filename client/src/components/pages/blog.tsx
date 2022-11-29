@@ -42,7 +42,8 @@ const Blog = (): ReactElement => {
   }
 
   // States passed to modals
-  const [errThrown, setErrThrown] = useState<string | unknown>();
+  const [btnName, setBtnName] = useState();
+  const [errThrown, setErrThrown] = useState<string | undefined>();
   const [entryId, setEntryId] = useState<string>();
 
   // Modal states
@@ -104,7 +105,7 @@ const Blog = (): ReactElement => {
         variables: { id: id },
       });
       handleShowSuccess();
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
       setErrThrown(err);
       handleShowErr();
@@ -263,11 +264,15 @@ const Blog = (): ReactElement => {
           />
 
           <SuccessModal
+            btnname={btnName}
+            params={[]}
             show={showSuccess === true}
             hide={() => handleHideSuccess()}
           />
 
           <ErrorModal
+            btnname={btnName}
+            errmsg={errThrown}
             show={showErr === true}
             hide={() => handleHideErr()}
           />

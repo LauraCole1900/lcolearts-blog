@@ -26,7 +26,7 @@ const SongForm = () => {
   const [songData, setSongData] = useState({
     songTitle: "",
     songVoicing: "",
-    songAccompaniment: [""],
+    songAccompaniment: "",
     songSacred: false,
     songLiturgy: "",
     songTrack: "",
@@ -97,10 +97,8 @@ const SongForm = () => {
   const handleInputChange = (e: ChangeEvent<HTMLElement>): void => {
     const { name, value } = e.target as HTMLInputElement;
     setSongData({ ...songData, [name]: value });
-    if (name === "songAccompaniment") {
-      let dataArr: Array<String> = value.split(",");
-      let trimmedArr: string[] = dataArr.map((item: String) => item.trim())
-      setSongData({ ...songData, [name]: trimmedArr });
+    if (name === "songSacred") {
+      setSongData({ ...songData, [name]: JSON.parse(value) });
     }
   };
 
@@ -116,16 +114,17 @@ const SongForm = () => {
         const { data } = await createSong({
           variables: { ...songData }
         });
+        console.log({ data });
         handleShowSuccess();
       } catch (error: any) {
-        console.error(JSON.stringify(error));
+        console.error(JSON.parse(JSON.stringify(error)));
         setErrThrown(error.message);
         handleShowErr();
       }
       setSongData({
         songTitle: "",
         songVoicing: "",
-        songAccompaniment: [],
+        songAccompaniment: "",
         songSacred: false,
         songLiturgy: "",
         songTrack: "",
@@ -160,7 +159,7 @@ const SongForm = () => {
       setSongData({
         songTitle: "",
         songVoicing: "",
-        songAccompaniment: [],
+        songAccompaniment: "",
         songSacred: false,
         songLiturgy: "",
         songTrack: "",
@@ -248,13 +247,14 @@ const SongForm = () => {
               </Row>
             </Form.Group>
 
-            <Form.Group controlId="formSongSacred"> {/* ! Make this radio buttons */}
+            <Form.Group controlId="formSongSacred">
               <Row>
                 <Col sm={{ span: 8, offset: 2 }}>
                   <Form.Label>Sacred or secular? <span className="red">*</span></Form.Label>
                   {errors?.songSacred &&
-                    <div className="error"><p>{errors.songSacred}</p></div>}
-                  <Form.Control type="input" name="songSacred" placeholder="Keywords" value={songData.songSacred} className="formInput" onChange={handleInputChange} />
+                    <div className="error"><p>{errors.songSacred}</p></div>}<br />
+                  <Form.Check type="radio" name="songSacred" label="Sacred" checked={songData.songSacred === true} value={"true"} inline className="formRadio" onChange={handleInputChange} />
+                  <Form.Check type="radio" name="songSacred" label="Secular" checked={songData.songSacred === false} value={"false"} inline className="formRadio" onChange={handleInputChange} />
                 </Col>
               </Row>
             </Form.Group>
@@ -290,8 +290,8 @@ const SongForm = () => {
             <Row>
               <Col sm={{ span: 3, offset: 2 }}>
                 {!Object.keys(params).length
-                  ? <Button data-toggle="popover" title="Submit" disabled={!(songData.songTitle && songData.songVoicing && songData.songAccompaniment && songData.songSacred)} className="button formBtn" onClick={handleFormSubmit} type="submit">Submit</Button>
-                  : <Button data-toggle="popover" title="Update" disabled={!(songData.songTitle && songData.songVoicing && songData.songAccompaniment && songData.songSacred)} className="button formBtn" onClick={handleFormUpdate} type="submit">Update</Button>
+                  ? <Button data-toggle="popover" title="Submit" disabled={!(songData.songTitle && songData.songVoicing && songData.songAccompaniment)} className="button formBtn" onClick={handleFormSubmit} type="submit">Submit</Button>
+                  : <Button data-toggle="popover" title="Update" disabled={!(songData.songTitle && songData.songVoicing && songData.songAccompaniment)} className="button formBtn" onClick={handleFormUpdate} type="submit">Update</Button>
                 }
               </Col>
             </Row>

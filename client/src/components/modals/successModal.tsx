@@ -31,10 +31,15 @@ const SuccessModal = (props: SuccessProps): ReactElement => {
           <Modal.Footer className="modalFooter">
 
             {/* Link to Blog */}
-            {(urlWhere !== "lcolearts-blog.herokuapp.com" && urlWhere !== "")
-              ? <Link to="/">
+            {(urlWhere !== "lcolearts.herokuapp.com" && urlWhere !== "")
+              ? <>
+              <Link to="/blog">
                 <Button data-toggle="popover" title="Blog" type="button" className="button">Return to Blog</Button>
               </Link>
+              <Link to="/music">
+                <Button data-toggle="popover" title="Compositions" type="button" className="button">Return to Compositions</Button>
+              </Link>
+              </>
               : <Button data-toggle="popover" title="Blog" type="button" className="button" onClick={props.hide}>Return to Blog</Button>}
 
           </Modal.Footer>

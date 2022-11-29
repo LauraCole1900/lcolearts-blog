@@ -76,14 +76,14 @@ export const CREATE_SONG = gql`
       songAccompaniment
       songSacred
       songLiturgy
-      songDemo
+      songTrack
       songPreview
     }
   }
 `;
 
 export const DELETE_SONG = gql`
-  deleteSong($id: ID!) {
+  mutation deleteSong($id: ID!) {
     deleteSong(_id: $id) {
       _id
       songTitle
@@ -91,14 +91,14 @@ export const DELETE_SONG = gql`
       songAccompaniment
       songSacred
       songLiturgy
-      songDemo
+      songTrack
       songPreview
     }
   }
 `;
 
 export const EDIT_SONG = gql`
-  editSong(
+  mutation editSong(
     $id: ID!
     $songTitle: String!
     $songVoicing: String!

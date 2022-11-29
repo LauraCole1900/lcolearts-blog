@@ -189,6 +189,10 @@ a {
   box-shadow: 0 0 10px var(--dkGreen);
 }
 
+.formRadio {
+  margin-bottom: 0.75rem;
+}
+
 .formBtn,
 .loginBtn {
   color: var(--dkGreen);
@@ -282,6 +286,10 @@ a {
 
 .pagination > ul > .selected {
   color: var(--medBlue);
+}
+
+.red {
+  color: #f00;
 }
 
 .tags {

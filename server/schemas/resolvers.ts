@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("@apollo/server/express4");
-var { Post, User } = require("../models");
+var { Post, Song, User } = require("../models");
 const { signToken } = require("../utils/auth");
 
 var resolvers: any = {

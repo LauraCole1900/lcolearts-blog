@@ -22,7 +22,7 @@ const ErrorModal = (props: ErrorProps): ReactElement => {
         </Modal.Header>
         <Modal.Body className="modalBody">
           <h3>Post failed</h3>
-          
+
 
           {/* Navigation buttons */}
           <Modal.Footer className="modalFooter">
@@ -31,9 +31,12 @@ const ErrorModal = (props: ErrorProps): ReactElement => {
             <Button data-toggle="popover" title="Close" type="button" className="button" onClick={props.hide}>Close</Button>
 
             {/* Link to Blog page */}
-              <Link to={"/"}>
-                <Button data-toggle="popover" title="Blog" type="button" className="button">Return to Blog</Button>
-              </Link>
+            <Link to={"/blog"}>
+              <Button data-toggle="popover" title="Blog" type="button" className="button">Return to Blog</Button>
+            </Link>
+            <Link to={"/music"}>
+              <Button data-toggle="popover" title="Compositions" type="button" className="button">Return to Compositions</Button>
+            </Link>
 
           </Modal.Footer>
         </Modal.Body>

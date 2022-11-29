@@ -1,6 +1,6 @@
 "use strict";
 const { AuthenticationError } = require("@apollo/server/express4");
-var { Post, User } = require("../models");
+var { Post, Song, User } = require("../models");
 const { signToken } = require("../utils/auth");
 var resolvers = {
     Query: {
@@ -80,6 +80,7 @@ var resolvers = {
             return post;
         },
         createSong: async (_, args) => {
+            console.log({ args });
             const song = await Song.create(args);
             return song;
         },
