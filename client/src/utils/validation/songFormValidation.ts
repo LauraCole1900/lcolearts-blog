@@ -1,16 +1,6 @@
-import { Song } from "../interfaces";
+import { Song, SongErrors } from "../interfaces";
 
-interface SongErrors {
-  songTitle: string;
-  songVoicing: string;
-  songAccompaniment: string;
-  songSacred: string;
-  songLiturgy: string;
-  songTrack: string;
-  songPreview: string;
-}
-
-const songValidate = (song: Song): SongErrors => {
+export const songValidate = (song: Song): SongErrors => {
   let errors: SongErrors = {
     songTitle: "",
     songVoicing: "",
@@ -21,28 +11,32 @@ const songValidate = (song: Song): SongErrors => {
     songPreview: ""
   };
 
-  // type errors
+  // title errors
   if (!song.songTitle) {
     errors.songTitle = "What is the title of this song?";
   }
 
-  // content errors
+  // voicing errors
   if (!song.songVoicing) {
     errors.songVoicing = "What is the voicing for this song?";
   }
 
+  // Accompaniment errors
   if (!song.songAccompaniment) {
     errors.songAccompaniment = "What are the available accompaniment(s) for this song";
   }
 
+  // Sacred/Secular errors
   if (!song.songSacred) {
     errors.songSacred = "Is this song sacred or secular?"
   }
 
+  // Demo track errors
   if (!song.songTrack) {
     errors.songTrack = "What is the URL for the demo track?"
   }
 
+  // Preview link errors
   if (!song.songPreview) {
     errors.songPreview = "What is the URL for the preview page(s)?"
   }

@@ -17,6 +17,18 @@ export interface Song {
   songPreview: string
 }
 
+export interface SongErrors {
+  [index: string]: string;
+  
+  songTitle: string;
+  songVoicing: string;
+  songAccompaniment: string;
+  songSacred: string;
+  songLiturgy: string;
+  songTrack: string;
+  songPreview: string;
+}
+
 export interface User {
   _id?: string,
   userName: string,

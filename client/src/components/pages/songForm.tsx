@@ -1,12 +1,12 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import { useMutation, useQuery } from "@apollo/client";
+import { ApolloCache, QueryResult, useMutation, useQuery } from "@apollo/client";
 import { songValidate } from "../../utils/validation";
 import { CREATE_SONG, EDIT_SONG, QUERY_ALL_SONGS, QUERY_ME, QUERY_ONE_SONG } from "../../utils/gql";
 import Auth from "../../utils/auth";
 import { ErrorModal, SuccessModal } from "../modals";
-import { Song } from '../../utils/interfaces';
+import { Song, SongErrors, User } from '../../utils/interfaces';
 import "./style.css";
 
 
@@ -32,7 +32,7 @@ const SongForm = () => {
     songTrack: "",
     songPreview: "",
   });
-  const currentPostData = useRef(songData);
+  const currentSongData = useRef(songData);
 
   // States passed to modals
   const [errThrown, setErrThrown] = useState();
@@ -47,15 +47,15 @@ const SongForm = () => {
   //       Queries       //
   //=====================//
 
-  const { loading: meLoading, data: meData, error: meError } = useQuery(QUERY_ME);
+  const { loading: meLoading, data: meData, error: meError }: QueryResult = useQuery(QUERY_ME);
 
-  const { loading: thisSongLoading, data: thisSongData, error: thisSongError } = useQuery(QUERY_ONE_SONG,
+  const { loading: thisSongLoading, data: thisSongData, error: thisSongError }: QueryResult = useQuery(QUERY_ONE_SONG,
     {
       variables: { id: songId }
     });
 
-  const me = meData?.me || meData?.currentId || {};
-  const songToEdit = useMemo(() => { return thisSongData?.getSong || {} }, [thisSongData?.getSong]);
+  const me: User = meData?.me || meData?.currentId || {};
+  const songToEdit: Song = useMemo(() => { return thisSongData?.getSong || {} }, [thisSongData?.getSong]);
 
 
   //=====================//
@@ -63,16 +63,16 @@ const SongForm = () => {
   //=====================//
 
   const [createSong, { error: createSongError, data: createSongData }] = useMutation(CREATE_SONG, {
-    update(cache, { data: { createSong } }) {
+    update(cache: ApolloCache<Array<Song>>, { data: { createSong } }) {
       try {
         // Retrieve existing post data that is stored in the cache
-        const allData = cache.readQuery({ query: QUERY_ALL_SONGS });
-        const currentSongs = allData.getAllSongs;
+        const allData: any = cache.readQuery({ query: QUERY_ALL_SONGS });
+        const currentSongs: Array<Song> = allData.getAllSongs;
         // Update the cache by combining existing post data with the newly created data returned from the mutation
         cache.writeQuery({
           query: QUERY_ALL_SONGS,
           // If we want new data to show up before or after existing data, adjust the order of this array
-          data: { getAllEntries: [...currentSongs, createSong] },
+          data: { getAllSongs: [...currentSongs, createSong] },
         });
       } catch (err) {
         console.error(err);
@@ -94,22 +94,22 @@ const SongForm = () => {
   const handleHideErr = () => setShowErr(false);
 
   // Handles input changes to form fields
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
+  const handleInputChange = (e: ChangeEvent<HTMLElement>): void => {
+    const { name, value } = e.target as HTMLInputElement;
     setSongData({ ...songData, [name]: value });
-    if (name === "postKeywords") {
-      let dataArr = value.split(",");
-      let trimmedArr = dataArr.map(item => item.trim())
+    if (name === "songAccompaniment") {
+      let dataArr: Array<String> = value.split(",");
+      let trimmedArr: string[] = dataArr.map((item: String) => item.trim())
       setSongData({ ...songData, [name]: trimmedArr });
     }
   };
 
   // Handles click on "Submit" button
-  const handleFormSubmit = async (e) => {
+  const handleFormSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
     // Validates required inputs
-    const validationErrors = songValidate(songData);
-    const noErrors: boolean = Object.keys(validationErrors).some(val => validationErrors[val] === "");
+    const validationErrors: SongErrors = songValidate(songData);
+    const noErrors: boolean = Object.keys(validationErrors).some((val: string) => validationErrors[val] === "");
     setErrors(validationErrors);
     if (noErrors) {
       try {
@@ -117,7 +117,7 @@ const SongForm = () => {
           variables: { ...songData }
         });
         handleShowSuccess();
-      } catch (error) {
+      } catch (error: any) {
         console.error(JSON.stringify(error));
         setErrThrown(error.message);
         handleShowErr();
@@ -137,7 +137,7 @@ const SongForm = () => {
   };
 
   // Handles click on "Update" button
-  const handleFormUpdate = async (e) => {
+  const handleFormUpdate = async (e: FormEvent): Promise<void> => {
     console.log({ songData }, { songId });
     e.preventDefault();
     // Validates required inputs
@@ -152,7 +152,7 @@ const SongForm = () => {
         });
         console.log({ data });
         handleShowSuccess();
-      } catch (error) {
+      } catch (error: any) {
         console.error(JSON.parse(JSON.stringify(error)));
         setErrThrown(error.message);
         handleShowErr();
@@ -185,7 +185,7 @@ const SongForm = () => {
     if (!Object.keys(params).length) {
       setPageReady(true);
     }
-  }, [songToEdit, me.section, params]);
+  }, [songToEdit, me, params]);
 
 
   //=====================//

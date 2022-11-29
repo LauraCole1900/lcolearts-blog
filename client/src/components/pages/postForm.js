@@ -184,7 +184,7 @@ const PostForm = () => {
     if (!Object.keys(params).length) {
       setPageReady(true);
     }
-  }, [postToEdit, me.section, params]);
+  }, [postToEdit, me, params]);
 
 
   //=====================//
