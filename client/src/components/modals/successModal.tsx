@@ -24,7 +24,7 @@ const SuccessModal = (props: SuccessProps): ReactElement => {
           <Modal.Title className="modalTitle"><h2>Success!</h2></Modal.Title>
         </Modal.Header>
         <Modal.Body className="modalBody">
-          <h3>Your post was created. Or deleted. Or possibly updated. Whichever.</h3>
+          <h3>Your thing was created. Or deleted. Or possibly updated. Whichever.</h3>
 
 
           {/* Navigation buttons */}
@@ -40,7 +40,7 @@ const SuccessModal = (props: SuccessProps): ReactElement => {
                 <Button data-toggle="popover" title="Compositions" type="button" className="button">Return to Compositions</Button>
               </Link>
               </>
-              : <Button data-toggle="popover" title="Blog" type="button" className="button" onClick={props.hide}>Return to Blog</Button>}
+              : <Button data-toggle="popover" title="Blog" type="button" className="button" onClick={props.hide}>Close</Button>}
 
           </Modal.Footer>
         </Modal.Body>

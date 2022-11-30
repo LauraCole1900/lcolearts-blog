@@ -20,14 +20,14 @@ const ConfirmModal = (props: ConfirmProps): ReactElement => {
         </Modal.Header>
         <Modal.Body className="modalBody">
 
-          {/* Delete Post button */}
-          <p>Are you sure you want to delete this post? This action can't be undone.</p>
+          {/* Delete button */}
+          <p>Are you sure you want to delete this? This action can't be undone.</p>
 
           {/* Navigation buttons */}
           <Modal.Footer className="modalFooter">
 
-            {/* Confirm Delete Post button */}
-            <Button data-toggle="popover" title="Confirm Delete" className="button" type="button" onClick={props.entryDelete}>Yes, Delete Post</Button>
+            {/* Confirm Delete button */}
+            <Button data-toggle="popover" title="Confirm Delete" className="button" type="button" onClick={props.entryDelete}>Yes, Delete</Button>
 
             {/* No, take no action button */}
             <Button data-toggle="popover" title="No" className="button" type="button" onClick={props.hide}>No, take me back</Button>
