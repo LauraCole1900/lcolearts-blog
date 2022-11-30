@@ -33,6 +33,9 @@ var resolvers = {
                 .sort({ songTitle: 1 })
                 .exec();
         },
+        getSongsByMajorWork: async (_, args) => {
+            return await Song.find({ songMajorWork: args.songMajorWork === true });
+        },
         getSongsBySacred: async (_, args) => {
             return await Song.find({ songSacred: args.songSacred })
                 .sort({ songTitle: 1 })
@@ -80,7 +83,6 @@ var resolvers = {
             return post;
         },
         createSong: async (_, args) => {
-            console.log({ args });
             const song = await Song.create(args);
             return song;
         },

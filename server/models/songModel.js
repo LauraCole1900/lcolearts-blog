@@ -13,6 +13,10 @@ const songSchema = new Schema({
         type: String,
         required: true
     },
+    songMajorWork: {
+        type: Boolean,
+        default: false
+    },
     songSacred: {
         type: Boolean,
         required: true

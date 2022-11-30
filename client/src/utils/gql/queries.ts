@@ -40,6 +40,7 @@ export const QUERY_ALL_SONGS = gql`
       songTitle
       songVoicing
       songAccompaniment
+      songMajorWork
       songSacred
       songLiturgy
       songTrack
@@ -55,6 +56,7 @@ export const QUERY_ONE_SONG = gql`
       songTitle
       songVoicing
       songAccompaniment
+      songMajorWork
       songSacred
       songLiturgy
       songTrack
@@ -70,6 +72,7 @@ export const QUERY_SONGS_BY_ACC = gql`
       songTitle
       songVoicing
       songAccompaniment
+      songMajorWork
       songSacred
       songLiturgy
       songTrack
@@ -85,6 +88,23 @@ export const QUERY_SONGS_BY_LIT = gql`
       songTitle
       songVoicing
       songAccompaniment
+      songMajorWork
+      songSacred
+      songLiturgy
+      songTrack
+      songPreview
+    }
+  }
+`;
+
+export const QUERY_SONGS_BY_MW = gql`
+  query getSongsByMW {
+    getSongsByMW {
+      _id
+      songTitle
+      songVoicing
+      songAccompaniment
+      songMajorWork
       songSacred
       songLiturgy
       songTrack
@@ -100,6 +120,7 @@ export const QUERY_SONGS_BY_SACRED = gql`
       songTitle
       songVoicing
       songAccompaniment
+      songMajorWork
       songSacred
       songLiturgy
       songTrack
@@ -115,6 +136,7 @@ export const QUERY_SONGS_BY_TITLE = gql`
       songTitle
       songVoicing
       songAccompaniment
+      songMajorWork
       songSacred
       songLiturgy
       songTrack
@@ -130,6 +152,7 @@ export const QUERY_SONGS_BY_VOICING = gql`
       songTitle
       songVoicing
       songAccompaniment
+      songMajorWork
       songSacred
       songLiturgy
       songTrack

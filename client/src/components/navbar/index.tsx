@@ -46,6 +46,7 @@ const Navigation = (): ReactElement => {
           {Auth.loggedIn() &&
             <>
               <Link to="/new_post" className="navlink">New Post</Link>
+              <Link to="/new_song" className="navlink">New Song</Link>
               <Nav.Link onClick={Auth.logout} className="navlink">Logout</Nav.Link>
             </>}
         </Nav>

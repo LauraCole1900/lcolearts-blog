@@ -44,6 +44,10 @@ var resolvers: any = {
         .exec();
     },
 
+    getSongsByMajorWork: async (_: any, args: any): Promise<any> => {
+      return await Song.find({ songMajorWork: args.songMajorWork === true});
+    },
+
     getSongsBySacred: async (_: any, args: any): Promise<any> => {
       return await Song.find({ songSacred: args.songSacred })
         .sort({ songTitle: 1 })

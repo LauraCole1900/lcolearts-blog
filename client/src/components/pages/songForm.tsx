@@ -27,6 +27,7 @@ const SongForm = () => {
     songTitle: "",
     songVoicing: "",
     songAccompaniment: "",
+    songMajorWork: false,
     songSacred: false,
     songLiturgy: "",
     songTrack: "",
@@ -97,7 +98,7 @@ const SongForm = () => {
   const handleInputChange = (e: ChangeEvent<HTMLElement>): void => {
     const { name, value } = e.target as HTMLInputElement;
     setSongData({ ...songData, [name]: value });
-    if (name === "songSacred") {
+    if (name === "songSacred" || name === "songMajorWork") {
       setSongData({ ...songData, [name]: JSON.parse(value) });
     }
   };
@@ -125,6 +126,7 @@ const SongForm = () => {
         songTitle: "",
         songVoicing: "",
         songAccompaniment: "",
+        songMajorWork: false,
         songSacred: false,
         songLiturgy: "",
         songTrack: "",
@@ -160,6 +162,7 @@ const SongForm = () => {
         songTitle: "",
         songVoicing: "",
         songAccompaniment: "",
+        songMajorWork: false,
         songSacred: false,
         songLiturgy: "",
         songTrack: "",
@@ -242,7 +245,7 @@ const SongForm = () => {
                   <Form.Label>Song accompaniment: <span className="red">*</span></Form.Label>
                   {errors?.songAccompaniment &&
                     <div className="error"><p>{errors.songAccompaniment}</p></div>}
-                  <Form.Control type="input" name="songAccompaniment" placeholder="Keywords" value={songData.songAccompaniment} className="formInput" onChange={handleInputChange} />
+                  <Form.Control type="input" name="songAccompaniment" placeholder="Accompaniment" value={songData.songAccompaniment} className="formInput" onChange={handleInputChange} />
                 </Col>
               </Row>
             </Form.Group>
@@ -259,12 +262,21 @@ const SongForm = () => {
               </Row>
             </Form.Group>
 
+            <Form.Group controlId="formSongMW">
+              <Row>
+                <Col sm={{ span: 8, offset: 2 }}>
+                  <Form.Label>Check for major work</Form.Label>
+                  <Form.Check type="checkbox" name="songMajorWork" label="Major Work?" checked={songData.songMajorWork === true} value={"true"} className="formRadio" onChange={handleInputChange} />
+                </Col>
+              </Row>
+            </Form.Group>
+
             {songData.songSacred &&
               <Form.Group controlId="formSongLit">
                 <Row>
                   <Col sm={{ span: 8, offset: 2 }}>
                     <Form.Label>Liturgical season:</Form.Label>
-                    <Form.Control type="input" name="songLiturgy" placeholder="Keywords" value={songData.songLiturgy} className="formInput" onChange={handleInputChange} />
+                    <Form.Control type="input" name="songLiturgy" placeholder="Liturgical season" value={songData.songLiturgy} className="formInput" onChange={handleInputChange} />
                   </Col>
                 </Row>
               </Form.Group>}
@@ -273,7 +285,7 @@ const SongForm = () => {
               <Row>
                 <Col sm={{ span: 8, offset: 2 }}>
                   <Form.Label>URL for demo track:</Form.Label>
-                  <Form.Control type="input" name="songTrack" placeholder="Keywords" value={songData.songTrack} className="formInput" onChange={handleInputChange} />
+                  <Form.Control type="input" name="songTrack" placeholder="Demo track" value={songData.songTrack} className="formInput" onChange={handleInputChange} />
                 </Col>
               </Row>
             </Form.Group>
@@ -282,7 +294,7 @@ const SongForm = () => {
               <Row>
                 <Col sm={{ span: 8, offset: 2 }}>
                   <Form.Label>URL for preview:</Form.Label>
-                  <Form.Control type="input" name="songPreview" placeholder="Keywords" value={songData.songPreview} className="formInput" onChange={handleInputChange} />
+                  <Form.Control type="input" name="songPreview" placeholder="Preview" value={songData.songPreview} className="formInput" onChange={handleInputChange} />
                 </Col>
               </Row>
             </Form.Group>

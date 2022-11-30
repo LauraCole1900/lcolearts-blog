@@ -5,6 +5,7 @@ export const songValidate = (song: Song): SongErrors => {
     songTitle: "",
     songVoicing: "",
     songAccompaniment: "",
+    songMajorWork: "",
     songSacred: "",
     songLiturgy: "",
     songTrack: "",

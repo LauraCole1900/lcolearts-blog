@@ -69,6 +69,7 @@ const App = (): ReactElement => {
               <Route path="/new_song" element={<SongForm />} />
               <Route path="/edit_song/:songId" element={<SongForm />} />
               <Route path="/music" element={<Music />} />
+              {/* <Route path="/music/:songId" element={<SongPage />} /> */}
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Container>

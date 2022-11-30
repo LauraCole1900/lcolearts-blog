@@ -56,6 +56,7 @@ export const CREATE_SONG = gql`
     $songTitle: String!
     $songVoicing: String!
     $songAccompaniment: String!
+    $songMajorWork: Boolean
     $songSacred: Boolean!
     $songLiturgy: String
     $songTrack: String
@@ -65,6 +66,7 @@ export const CREATE_SONG = gql`
       songTitle: $songTitle
       songVoicing: $songVoicing
       songAccompaniment: $songAccompaniment
+      songMajorWork: $songMajorWork
       songSacred: $songSacred
       songLiturgy: $songLiturgy
       songTrack: $songTrack
@@ -74,6 +76,7 @@ export const CREATE_SONG = gql`
       songTitle
       songVoicing
       songAccompaniment
+      songMajorWork
       songSacred
       songLiturgy
       songTrack
@@ -89,6 +92,7 @@ export const DELETE_SONG = gql`
       songTitle
       songVoicing
       songAccompaniment
+      songMajorWork
       songSacred
       songLiturgy
       songTrack
@@ -103,6 +107,7 @@ export const EDIT_SONG = gql`
     $songTitle: String!
     $songVoicing: String!
     $songAccompaniment: String!
+    $songMajorWork: Boolean
     $songSacred: Boolean!
     $songLiturgy: String
     $songTrack: String
@@ -113,6 +118,7 @@ export const EDIT_SONG = gql`
       songTitle: $songTitle
       songVoicing: $songVoicing
       songAccompaniment: $songAccompaniment
+      songMajorWork: $songMajorWork
       songSacred: $songSacred
       songLiturgy: $songLiturgy
       songTrack: $songTrack
@@ -122,6 +128,7 @@ export const EDIT_SONG = gql`
       songTitle
       songVoicing
       songAccompaniment
+      songMajorWork
       songSacred
       songLiturgy
       songTrack

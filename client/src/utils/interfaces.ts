@@ -11,6 +11,7 @@ export interface Song {
   songTitle: string,
   songVoicing: string,
   songAccompaniment: string,
+  songMajorWork: boolean,
   songSacred: boolean,
   songLiturgy: string,
   songTrack: string,
@@ -23,6 +24,7 @@ export interface SongErrors {
   songTitle: string;
   songVoicing: string;
   songAccompaniment: string;
+  songMajorWork: string;
   songSacred: string;
   songLiturgy: string;
   songTrack: string;

@@ -1,6 +1,7 @@
 export { default as AWS } from "./aws-icon.png";
 export { default as Bootstrap1 } from "./bootstrap-icon.png";
 export { default as Bootstrap2 } from "./bootstrap-icon-2.png";
+export { default as Checkmark } from "./checkmark-circle-1.png";
 export { default as Chorale } from "./chorale_2.jpg";
 export { default as ColorWheel } from "./color-wheel.png";
 export { default as CssCircle } from "./css3-circle-icon.png";

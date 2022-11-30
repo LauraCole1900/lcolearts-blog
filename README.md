@@ -23,7 +23,7 @@ This application uses a MERNG stack with JWT authentication to build my professi
 
 ## Screenshots
 
-Landing page:
+Blog page:
 ![Blog page](assets/rpb-blog-screenshot.png)
 
 Single entry details page:
@@ -31,6 +31,9 @@ Single entry details page:
 
 Posts filtered by tag:
 ![Posts filtered by tag](assets/rpb-tags-screenshot.png)
+
+Compositions listing page:
+![List of compositions](assets/rpb-composition-list-screenshot.png)
 
 ## Usage
 

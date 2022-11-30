@@ -226,6 +226,11 @@ a {
   cursor: pointer;
 }
 
+.iconSmall {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
 .landerHead {
   margin: 1em 0;
 }
