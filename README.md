@@ -1,4 +1,4 @@
-# My Blog
+# My fullstack website
 
 ## Table of Contents
 
@@ -15,26 +15,26 @@
 
 ## Description
 
-This application uses a MERNG stack with JWT authentication to build my professional blog.
+This application uses a MERNG stack with JWT authentication to build my professional blog and catalog of my musical compositions.
 
 ## Links
 
-[Deployed application on Heroku](https://lcolearts-blog.herokuapp.com/)
+[Deployed application on Heroku](https://lcolearts.herokuapp.com/)
 
 ## Screenshots
 
 Landing page:
-![Landing page](assets/rpb-lander-screenshot.png)
+![Blog page](assets/rpb-blog-screenshot.png)
 
 Single entry details page:
-![Single entry page](assets/rpb-entry-screenshot.png)
+![Single blog entry page](assets/rpb-entry-screenshot.png)
 
 Posts filtered by tag:
 ![Posts filtered by tag](assets/rpb-tags-screenshot.png)
 
 ## Usage
 
-This project is intended to be used as my professional blog.
+This project is intended to be used as my professional blog and catalog of my musical compositions.
 
 ## Technologies Used
 

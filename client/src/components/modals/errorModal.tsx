@@ -18,10 +18,11 @@ const ErrorModal = (props: ErrorProps): ReactElement => {
     <>
       <Modal show={props.show} onHide={props.hide} backdrop="static" keyboard={false} centered={true} className="modal">
         <Modal.Header className="modalHead">
-          <Modal.Title className="modalTitle"><h2>Post failed</h2></Modal.Title>
+          <Modal.Title className="modalTitle"><h2>Failed</h2></Modal.Title>
         </Modal.Header>
         <Modal.Body className="modalBody">
-          <h3>Post failed</h3>
+          <h3>Failed</h3>
+          <p>{props.errmsg}</p>
 
 
           {/* Navigation buttons */}
