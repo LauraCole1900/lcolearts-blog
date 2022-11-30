@@ -7,7 +7,7 @@ import ReactPaginate from "react-paginate";
 import { TagCloud } from "react-tagcloud";
 import { DELETE_ENTRY, QUERY_ALL_ENTRIES } from "../../utils/gql";
 import { Post } from "../../utils/interfaces";
-import PostCard from "../post";
+import { PostCard } from "../cards";
 import { ConfirmModal, ErrorModal, SuccessModal } from "../modals";
 
 interface TagObj {
