@@ -45,6 +45,7 @@ export const QUERY_ALL_SONGS = gql`
       songLiturgy
       songTrack
       songPreview
+      songYear
     }
   }
 `;
@@ -61,6 +62,7 @@ export const QUERY_ONE_SONG = gql`
       songLiturgy
       songTrack
       songPreview
+      songYear
     }
   }
 `;
@@ -77,6 +79,7 @@ export const QUERY_SONGS_BY_ACC = gql`
       songLiturgy
       songTrack
       songPreview
+      songYear
     }
   }
 `;
@@ -93,6 +96,7 @@ export const QUERY_SONGS_BY_LIT = gql`
       songLiturgy
       songTrack
       songPreview
+      songYear
     }
   }
 `;
@@ -109,6 +113,7 @@ export const QUERY_SONGS_BY_MW = gql`
       songLiturgy
       songTrack
       songPreview
+      songYear
     }
   }
 `;
@@ -125,6 +130,7 @@ export const QUERY_SONGS_BY_SACRED = gql`
       songLiturgy
       songTrack
       songPreview
+      songYear
     }
   }
 `;
@@ -141,6 +147,7 @@ export const QUERY_SONGS_BY_TITLE = gql`
       songLiturgy
       songTrack
       songPreview
+      songYear
     }
   }
 `;
@@ -157,6 +164,7 @@ export const QUERY_SONGS_BY_VOICING = gql`
       songLiturgy
       songTrack
       songPreview
+      songYear
     }
   }
 `;

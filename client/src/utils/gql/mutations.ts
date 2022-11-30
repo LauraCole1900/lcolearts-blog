@@ -61,6 +61,7 @@ export const CREATE_SONG = gql`
     $songLiturgy: String
     $songTrack: String
     $songPreview: String
+    $songYear: String
   ) {
     createSong(
       songTitle: $songTitle
@@ -71,6 +72,7 @@ export const CREATE_SONG = gql`
       songLiturgy: $songLiturgy
       songTrack: $songTrack
       songPreview: $songPreview
+      songYear: $songYear
     ) {
       _id
       songTitle
@@ -81,6 +83,7 @@ export const CREATE_SONG = gql`
       songLiturgy
       songTrack
       songPreview
+      songYear
     }
   }
 `;
@@ -97,6 +100,7 @@ export const DELETE_SONG = gql`
       songLiturgy
       songTrack
       songPreview
+      songYear
     }
   }
 `;
@@ -112,6 +116,7 @@ export const EDIT_SONG = gql`
     $songLiturgy: String
     $songTrack: String
     $songPreview: String
+    $songYear: String
   ) {
     editSong(
       _id: $id
@@ -123,6 +128,7 @@ export const EDIT_SONG = gql`
       songLiturgy: $songLiturgy
       songTrack: $songTrack
       songPreview: $songPreview
+      songYear: $songYear
     ) {
       _id
       songTitle
@@ -133,6 +139,7 @@ export const EDIT_SONG = gql`
       songLiturgy
       songTrack
       songPreview
+      songYear
     }
   }
 `;

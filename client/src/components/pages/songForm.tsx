@@ -32,6 +32,7 @@ const SongForm = () => {
     songLiturgy: "",
     songTrack: "",
     songPreview: "",
+    songYear: ""
   });
   const currentSongData = useRef(songData);
 
@@ -131,6 +132,7 @@ const SongForm = () => {
         songLiturgy: "",
         songTrack: "",
         songPreview: "",
+        songYear: ""
       });
     } else {
       console.error({ validationErrors });
@@ -167,6 +169,7 @@ const SongForm = () => {
         songLiturgy: "",
         songTrack: "",
         songPreview: "",
+        songYear: ""
       });
     } else {
       console.error({ validationErrors });
@@ -246,6 +249,15 @@ const SongForm = () => {
                   {errors?.songAccompaniment &&
                     <div className="error"><p>{errors.songAccompaniment}</p></div>}
                   <Form.Control type="input" name="songAccompaniment" placeholder="Accompaniment" value={songData.songAccompaniment} className="formInput" onChange={handleInputChange} />
+                </Col>
+              </Row>
+            </Form.Group>
+
+            <Form.Group controlId="formSongYear">
+              <Row>
+                <Col sm={{ span: 8, offset: 2 }}>
+                  <Form.Label>Year composed:</Form.Label>
+                  <Form.Control type="input" name="songYear" placeholder="Year" value={songData.songYear} className="formInput" onChange={handleInputChange} />
                 </Col>
               </Row>
             </Form.Group>

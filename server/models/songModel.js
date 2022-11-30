@@ -29,6 +29,9 @@ const songSchema = new Schema({
     },
     songPreview: {
         type: String
+    },
+    songYear: {
+        type: String
     }
 });
 var Song = model("Song", songSchema);

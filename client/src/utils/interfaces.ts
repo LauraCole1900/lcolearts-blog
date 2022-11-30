@@ -15,20 +15,22 @@ export interface Song {
   songSacred: boolean,
   songLiturgy: string,
   songTrack: string,
-  songPreview: string
+  songPreview: string,
+  songYear: string
 }
 
 export interface SongErrors {
-  [index: string]: string;
+  [index: string]: string,
   
-  songTitle: string;
-  songVoicing: string;
-  songAccompaniment: string;
-  songMajorWork: string;
-  songSacred: string;
-  songLiturgy: string;
-  songTrack: string;
-  songPreview: string;
+  songTitle: string,
+  songVoicing: string,
+  songAccompaniment: string,
+  songMajorWork: string,
+  songSacred: string,
+  songLiturgy: string,
+  songTrack: string,
+  songPreview: string,
+  songYear: string
 }
 
 export interface User {

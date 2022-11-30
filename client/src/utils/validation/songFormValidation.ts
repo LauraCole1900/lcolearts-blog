@@ -9,7 +9,8 @@ export const songValidate = (song: Song): SongErrors => {
     songSacred: "",
     songLiturgy: "",
     songTrack: "",
-    songPreview: ""
+    songPreview: "",
+    songYear: ""
   };
 
   // title errors
