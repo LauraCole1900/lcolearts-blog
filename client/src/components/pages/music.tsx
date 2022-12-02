@@ -150,6 +150,7 @@ const Music = (): ReactElement => {
                     <td>Accompaniment</td>
                     <td>Sacred?</td>
                     <td>Liturgical Season</td>
+                    <td>© Year</td>
                   </tr>
                 </thead>
                 <tbody>
@@ -166,6 +167,9 @@ const Music = (): ReactElement => {
                         : <td>Secular</td>}
                       {song.songSacred === true
                         ? <td>{song.songLiturgy}</td>
+                        : <td></td>}
+                      {song.songYear
+                        ? <td>{song.songYear}</td>
                         : <td></td>}
                     </tr>
                   )}

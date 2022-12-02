@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from "react-bootstrap/Container";
 import Footer from "./components/footer";
 import Navigation from "./components/navbar";
-import { Blog, BlogEntry, LandingPage, LoginPage, Music, NotFound, PostForm, SongForm } from "./components/pages";
+import { Blog, BlogEntry, LandingPage, LoginPage, Music, NotFound, PostForm, SongForm, SongPage } from "./components/pages";
 import './App.css';
 
 
@@ -69,7 +69,7 @@ const App = (): ReactElement => {
               <Route path="/new_song" element={<SongForm />} />
               <Route path="/edit_song/:songId" element={<SongForm />} />
               <Route path="/music" element={<Music />} />
-              {/* <Route path="/music/:songId" element={<SongPage />} /> */}
+              <Route path="/music/:songId" element={<SongPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Container>
