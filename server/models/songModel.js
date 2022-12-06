@@ -10,7 +10,7 @@ const songSchema = new Schema({
         required: true
     },
     songAccompaniment: {
-        type: String,
+        type: [String],
         required: true
     },
     songMajorWork: {
@@ -25,10 +25,10 @@ const songSchema = new Schema({
         type: String
     },
     songTrack: {
-        type: String
+        type: [String]
     },
     songPreview: {
-        type: String
+        type: [String]
     },
     songYear: {
         type: String

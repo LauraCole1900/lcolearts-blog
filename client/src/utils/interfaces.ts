@@ -10,12 +10,12 @@ export interface Song {
   _id?: string,
   songTitle: string,
   songVoicing: string,
-  songAccompaniment: string,
+  songAccompaniment: Array<string>,
   songMajorWork: boolean,
   songSacred: boolean,
   songLiturgy: string,
-  songTrack: string,
-  songPreview: string,
+  songTrack: Array<string>,
+  songPreview: Array<string>,
   songYear: string
 }
 

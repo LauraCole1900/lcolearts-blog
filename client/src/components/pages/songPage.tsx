@@ -39,7 +39,10 @@ const SongPage = (): ReactElement => {
                 </Row>
 
                 <Row>
-                  <p>Instrumentation: {song.songAccompaniment}</p>
+                  {/* TODO: Make the preview a modal & add demo track to it */}
+                  {song.songPreview
+                  ? <p>Instrumentation (click to hear demo track and see preview): {song.songAccompaniment.map((ins: string): string => `<br />${ins}`)}</p>
+                  : <p>Instrumentation: {song.songAccompaniment.map((ins: string): string => ins)}</p>}
                 </Row>
 
                 {song.songYear &&
@@ -57,13 +60,6 @@ const SongPage = (): ReactElement => {
                   <Row>
                     <p>Liturgical season: {song.songLiturgy}</p>
                   </Row>}
-              </Col>
-
-              <Col sm={6}>
-                {/* TODO: Embed this */}
-                {song.songPreview &&
-                  <p>{song.songPreview}</p>
-                }
               </Col>
             </Row>
 
