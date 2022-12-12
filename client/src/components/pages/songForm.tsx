@@ -107,8 +107,9 @@ const SongForm = () => {
     }
 
     if (["songMvmtNames", "songMvmtTracks", "songMvmtPreviews"].includes(name)) {
-      let mvmtArr: string[] = value.split(",");
-      setSongData({ ...songData, [name]: mvmtArr });
+      const mvmtArr: string[] = value.split(",")
+      const trimmedArr: string[] = mvmtArr.map((mvmt: string): string => mvmt.trim());
+      setSongData({ ...songData, [name]: trimmedArr });
     }
   };
 

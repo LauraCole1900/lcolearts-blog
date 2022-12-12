@@ -32,27 +32,33 @@ const SongPage = (): ReactElement => {
             <Row>
               <Col sm={6}>
                 <Row>
-                  <p>Voicing: {song.songVoicing}</p>
+                  <p><span className="bold">Voicing:</span> {song.songVoicing}</p>
                 </Row>
 
                 <Row>
-                  <p>Instrumentation: {song.songAccompaniment}</p>
+                  <p><span className="bold">Instrumentation:</span> {song.songAccompaniment}</p>
                 </Row>
+
+                {song.songMajorWork &&
+                  <>
+                    <p><span className="bold">Movements:</span></p>
+                    {song.songMvmtNames.map((title: string) => <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{title}</p>)}
+                  </>}
 
                 {song.songYear &&
                   <Row>
-                    <p>Year composed: {song.songYear}</p>
+                    <p><span className="bold">Year composed:</span> {song.songYear}</p>
                   </Row>}
 
                 <Row>
                   {song.songSacred === true
-                    ? <p>Sacred</p>
-                    : <p>Secular</p>}
+                    ? <p className="bold">Sacred</p>
+                    : <p className="bold">Secular</p>}
                 </Row>
 
                 {song.songSacred &&
                   <Row>
-                    <p>Liturgical season: {song.songLiturgy}</p>
+                    <p><span className="bold">Liturgical season:</span> {song.songLiturgy}</p>
                   </Row>}
               </Col>
 

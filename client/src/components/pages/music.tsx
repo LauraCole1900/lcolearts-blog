@@ -2,6 +2,7 @@ import { ReactElement, useEffect, useState } from "react";
 import { NavigateFunction, Params, useNavigate, useParams } from "react-router-dom";
 import { ApolloCache, useMutation, useQuery } from "@apollo/client";
 import { Col, Container, Image, Row, Table } from "react-bootstrap";
+import ReactPaginate from "react-paginate";
 import { DELETE_SONG, QUERY_ALL_SONGS } from "../../utils/gql";
 import { Song } from "../../utils/interfaces";
 import { ConfirmModal, ErrorModal, SuccessModal } from "../modals";
@@ -81,7 +82,10 @@ const Music = (): ReactElement => {
   const handleHideSuccess = () => setShowSuccess(false);
   const handleShowErr = () => setShowErr(true);
   const handleHideErr = () => setShowErr(false);
-  const handleShowConfirm = () => setShowConfirm(true);
+  const handleShowConfirm = (id: any) => {
+    setSongId(id);
+    setShowConfirm(true);
+  }
 
 
   //=================//
@@ -143,7 +147,7 @@ const Music = (): ReactElement => {
               <h1>Compositions</h1>
               <Table striped bordered hover>
                 <thead>
-                  <tr>
+                  <tr className="bottomed">
                     <td className="centered">MW</td>
                     <td>Title</td>
                     <td>Voicing</td>
@@ -157,7 +161,7 @@ const Music = (): ReactElement => {
                   {sortedSongs.map(song =>
                     <tr key={song._id}>
                       {song.songMajorWork === true
-                        ? <td className="centered"><Image fluid src={Checkmark} alt="Major Work" className="iconSmall" /></td>
+                        ? <td><Image fluid src={Checkmark} alt="Major Work" className="iconSmall" /></td>
                         : <td></td>}
                       <td><a href={`/music/${song._id}`}>{song.songTitle}</a></td>
                       <td>{song.songVoicing}</td>
@@ -174,7 +178,7 @@ const Music = (): ReactElement => {
                       {Auth.loggedIn() &&
                         <>
                           <td><a href={`/edit_song/${song._id}`} title="Edit"><Image data-popover="Edit" alt="Edit" src={EditIcon} className="iconSmall actionIcon" /></a></td>
-                          <td><Image data-popover="Delete" alt="Delete" src={CloseIcon} className="iconSmall actionIcon" onClick={() => handleDeleteSong(song._id!)} /></td>
+                          <td><Image data-popover="Delete" alt="Delete" src={CloseIcon} className="iconSmall actionIcon" onClick={() => handleShowConfirm(song._id)} /></td>
                         </>}
                     </tr>
                   )}
@@ -183,6 +187,41 @@ const Music = (): ReactElement => {
             </>}
         </Col>
       </Row>
+
+      {pageCount > 1 &&
+        <Row>
+          <Col sm={{ span: 8, offset: 1 }} className="pagination">
+            <ReactPaginate
+              breakLabel="..."
+              nextLabel="next >"
+              onPageChange={handlePageClick}
+              pageRangeDisplayed={5}
+              pageCount={pageCount}
+              previousLabel="< previous"
+            />
+          </Col>
+        </Row>}
+
+      <ConfirmModal
+        entryDelete={() => handleDeleteSong(songId!)}
+        show={showConfirm === true}
+        hide={() => handleHideConfirm()}
+      />
+
+      <SuccessModal
+        btnname={btnName}
+        params={[]}
+        show={showSuccess === true}
+        hide={() => handleHideSuccess()}
+      />
+
+      <ErrorModal
+        btnname={btnName}
+        errmsg={errThrown}
+        show={showErr === true}
+        hide={() => handleHideErr()}
+      />
+
     </Container>
   )
 }
