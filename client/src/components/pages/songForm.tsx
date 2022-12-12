@@ -28,6 +28,9 @@ const SongForm = () => {
     songVoicing: "",
     songAccompaniment: "",
     songMajorWork: false,
+    songMvmtNames: [""],
+    songMvmtTracks: [""],
+    songMvmtPreviews: [""],
     songSacred: false,
     songLiturgy: "",
     songTrack: "",
@@ -128,6 +131,9 @@ const SongForm = () => {
         songVoicing: "",
         songAccompaniment: "",
         songMajorWork: false,
+        songMvmtNames: [""],
+        songMvmtTracks: [""],
+        songMvmtPreviews: [""],
         songSacred: false,
         songLiturgy: "",
         songTrack: "",
@@ -165,6 +171,9 @@ const SongForm = () => {
         songVoicing: "",
         songAccompaniment: "",
         songMajorWork: false,
+        songMvmtNames: [""],
+        songMvmtTracks: [""],
+        songMvmtPreviews: [""],
         songSacred: false,
         songLiturgy: "",
         songTrack: "",
@@ -282,6 +291,17 @@ const SongForm = () => {
                 </Col>
               </Row>
             </Form.Group>
+
+            {songData.songMajorWork &&
+              <Form.Group controlId="formSongMWMvmts">
+                <Row>
+                  <Col sm={{ span: 8, offset: 2 }}>
+                    <Form.Label>Names of movements:</Form.Label>
+                    <Form.Control type="input" name="songMvmtNames" placeholder="Please comma-separate movement names" value={songData.songMvmtNames} className="formInput" onChange={handleInputChange} />
+                  </Col>
+                </Row>
+              </Form.Group>
+            }
 
             {songData.songSacred &&
               <Form.Group controlId="formSongLit">

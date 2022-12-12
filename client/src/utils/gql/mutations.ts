@@ -57,6 +57,9 @@ export const CREATE_SONG = gql`
     $songVoicing: String!
     $songAccompaniment: String!
     $songMajorWork: Boolean
+    $songMvmtNames: [String!]
+    $songMvmtTracks: [String!]
+    $songMvmtPreviews: [String!]
     $songSacred: Boolean!
     $songLiturgy: String
     $songTrack: String
@@ -68,6 +71,9 @@ export const CREATE_SONG = gql`
       songVoicing: $songVoicing
       songAccompaniment: $songAccompaniment
       songMajorWork: $songMajorWork
+      songMvmtNames: $songMvmtNames
+      songMvmtTracks: $songMvmtTracks
+      songMvmtPreviews: $songMvmtPreviews
       songSacred: $songSacred
       songLiturgy: $songLiturgy
       songTrack: $songTrack
@@ -79,6 +85,9 @@ export const CREATE_SONG = gql`
       songVoicing
       songAccompaniment
       songMajorWork
+      songMvmtNames
+      songMvmtTracks
+      songMvmtPreviews
       songSacred
       songLiturgy
       songTrack
@@ -96,6 +105,9 @@ export const DELETE_SONG = gql`
       songVoicing
       songAccompaniment
       songMajorWork
+      songMvmtNames
+      songMvmtTracks
+      songMvmtPreviews
       songSacred
       songLiturgy
       songTrack
@@ -112,6 +124,9 @@ export const EDIT_SONG = gql`
     $songVoicing: String!
     $songAccompaniment: String!
     $songMajorWork: Boolean
+    $songMvmtNames: [String!]
+    $songMvmtTracks: [String!]
+    $songMvmtPreviews: [String!]
     $songSacred: Boolean!
     $songLiturgy: String
     $songTrack: String
@@ -124,6 +139,9 @@ export const EDIT_SONG = gql`
       songVoicing: $songVoicing
       songAccompaniment: $songAccompaniment
       songMajorWork: $songMajorWork
+      songMvmtNames: $songMvmtNames
+      songMvmtTracks: $songMvmtTracks
+      songMvmtPreviews: $songMvmtPreviews
       songSacred: $songSacred
       songLiturgy: $songLiturgy
       songTrack: $songTrack
@@ -135,6 +153,9 @@ export const EDIT_SONG = gql`
       songVoicing
       songAccompaniment
       songMajorWork
+      songMvmtNames
+      songMvmtTracks
+      songMvmtPreviews
       songSacred
       songLiturgy
       songTrack

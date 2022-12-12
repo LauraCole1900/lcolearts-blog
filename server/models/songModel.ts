@@ -17,6 +17,15 @@ const songSchema = new Schema({
     type: Boolean,
     default: false
   },
+  songMvmtNames: {
+    type: [String]
+  },
+  songMvmtTracks: {
+    type: [String]
+  },
+  songMvmtPreviews: {
+    type: [String]
+  },
   songSacred: {
     type: Boolean,
     required: true

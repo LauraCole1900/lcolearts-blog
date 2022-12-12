@@ -41,6 +41,9 @@ export const QUERY_ALL_SONGS = gql`
       songVoicing
       songAccompaniment
       songMajorWork
+      songMvmtNames
+      songMvmtTracks
+      songMvmtPreviews
       songSacred
       songLiturgy
       songTrack
@@ -58,6 +61,9 @@ export const QUERY_ONE_SONG = gql`
       songVoicing
       songAccompaniment
       songMajorWork
+      songMvmtNames
+      songMvmtTracks
+      songMvmtPreviews
       songSacred
       songLiturgy
       songTrack
@@ -75,6 +81,9 @@ export const QUERY_SONGS_BY_ACC = gql`
       songVoicing
       songAccompaniment
       songMajorWork
+      songMvmtNames
+      songMvmtTracks
+      songMvmtPreviews
       songSacred
       songLiturgy
       songTrack
@@ -92,6 +101,9 @@ export const QUERY_SONGS_BY_LIT = gql`
       songVoicing
       songAccompaniment
       songMajorWork
+      songMvmtNames
+      songMvmtTracks
+      songMvmtPreviews
       songSacred
       songLiturgy
       songTrack
@@ -109,6 +121,9 @@ export const QUERY_SONGS_BY_MW = gql`
       songVoicing
       songAccompaniment
       songMajorWork
+      songMvmtNames
+      songMvmtTracks
+      songMvmtPreviews
       songSacred
       songLiturgy
       songTrack
@@ -126,6 +141,9 @@ export const QUERY_SONGS_BY_SACRED = gql`
       songVoicing
       songAccompaniment
       songMajorWork
+      songMvmtNames
+      songMvmtTracks
+      songMvmtPreviews
       songSacred
       songLiturgy
       songTrack
@@ -143,6 +161,9 @@ export const QUERY_SONGS_BY_TITLE = gql`
       songVoicing
       songAccompaniment
       songMajorWork
+      songMvmtNames
+      songMvmtTracks
+      songMvmtPreviews
       songSacred
       songLiturgy
       songTrack
@@ -160,6 +181,9 @@ export const QUERY_SONGS_BY_VOICING = gql`
       songVoicing
       songAccompaniment
       songMajorWork
+      songMvmtNames
+      songMvmtTracks
+      songMvmtPreviews
       songSacred
       songLiturgy
       songTrack
