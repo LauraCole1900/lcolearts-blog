@@ -4,9 +4,9 @@ import { ApolloCache, useMutation, useQuery } from "@apollo/client";
 import { Col, Container, Image, Row, Table } from "react-bootstrap";
 import { DELETE_SONG, QUERY_ALL_SONGS } from "../../utils/gql";
 import { Song } from "../../utils/interfaces";
-import { SongCard } from "../cards";
 import { ConfirmModal, ErrorModal, SuccessModal } from "../modals";
-import { Checkmark } from "../../pix";
+import { Checkmark, CloseIcon, EditIcon } from "../../pix";
+import Auth from "../../utils/auth";
 
 const Music = (): ReactElement => {
 
@@ -171,6 +171,11 @@ const Music = (): ReactElement => {
                       {song.songYear
                         ? <td>{song.songYear}</td>
                         : <td></td>}
+                      {Auth.loggedIn() &&
+                        <>
+                          <td><a href={`/edit_song/${song._id}`} title="Edit"><Image data-popover="Edit" alt="Edit" src={EditIcon} className="iconSmall actionIcon" /></a></td>
+                          <td><Image data-popover="Delete" alt="Delete" src={CloseIcon} className="iconSmall actionIcon" onClick={() => handleDeleteSong(song._id!)} /></td>
+                        </>}
                     </tr>
                   )}
                 </tbody>

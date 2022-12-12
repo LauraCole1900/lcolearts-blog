@@ -15,7 +15,7 @@ const SongPage = (): ReactElement => {
     {
       variables: { id: params.songId }
     });
-  const song: Song = songData?.getOneSong || {};
+  const song: Song = songData?.getSong || {};
 
   if (songLoading) {
     return <h1>Loading....</h1>
@@ -27,22 +27,16 @@ const SongPage = (): ReactElement => {
       <Container>
         <Row>
           <Col sm={{ span: 10, offset: 1 }} className="transpBground">
+            <h1>{song.songTitle}</h1>
 
             <Row>
               <Col sm={6}>
-                <Row>
-                  <h1>{song.songTitle}</h1>
-                </Row>
-
                 <Row>
                   <p>Voicing: {song.songVoicing}</p>
                 </Row>
 
                 <Row>
-                  {/* TODO: Make the preview a modal & add demo track to it */}
-                  {song.songPreview
-                  ? <p>Instrumentation (click to hear demo track and see preview): {song.songAccompaniment.map((ins: string): string => `<br />${ins}`)}</p>
-                  : <p>Instrumentation: {song.songAccompaniment.map((ins: string): string => ins)}</p>}
+                  <p>Instrumentation: {song.songAccompaniment}</p>
                 </Row>
 
                 {song.songYear &&
@@ -61,6 +55,14 @@ const SongPage = (): ReactElement => {
                     <p>Liturgical season: {song.songLiturgy}</p>
                   </Row>}
               </Col>
+
+              {/* TODO: Embed this */}
+              {song.songPreview &&
+                <Col sm={6}>
+                  <Row>
+                    <p>{song.songPreview}</p>
+                  </Row>
+                </Col>}
             </Row>
 
             {/* TODO: Embed this */}
