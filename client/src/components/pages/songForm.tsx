@@ -102,8 +102,13 @@ const SongForm = () => {
   const handleInputChange = (e: ChangeEvent<HTMLElement>): void => {
     const { name, value } = e.target as HTMLInputElement;
     setSongData({ ...songData, [name]: value });
-    if (name === "songSacred" || name === "songMajorWork") {
+    if (["songSacred", "songMajorWork"].includes(name)) {
       setSongData({ ...songData, [name]: JSON.parse(value) });
+    }
+
+    if (["songMvmtNames", "songMvmtTracks", "songMvmtPreviews"].includes(name)) {
+      let mvmtArr: string[] = value.split(",");
+      setSongData({ ...songData, [name]: mvmtArr });
     }
   };
 
@@ -313,23 +318,44 @@ const SongForm = () => {
                 </Row>
               </Form.Group>}
 
-            <Form.Group controlId="formSongTrack">
-              <Row>
-                <Col sm={{ span: 8, offset: 2 }}>
-                  <Form.Label>URL for demo track:</Form.Label>
-                  <Form.Control type="input" name="songTrack" placeholder="Demo track" value={songData.songTrack} className="formInput" onChange={handleInputChange} />
-                </Col>
-              </Row>
-            </Form.Group>
+            {songData.songMajorWork
+              ? <>
+                <Form.Group controlId="formMWTracks">
+                  <Row>
+                    <Col sm={{ span: 8, offset: 2 }}>
+                      <Form.Label>URLs for demo tracks:</Form.Label>
+                      <Form.Control type="input" name="songMvmtTracks" placeholder="Please comma-separate URLs" value={songData.songMvmtTracks} className="formInput" onChange={handleInputChange} />
+                    </Col>
+                  </Row>
+                </Form.Group>
 
-            <Form.Group controlId="formSongPreview">
-              <Row>
-                <Col sm={{ span: 8, offset: 2 }}>
-                  <Form.Label>URL for preview:</Form.Label>
-                  <Form.Control type="input" name="songPreview" placeholder="Preview" value={songData.songPreview} className="formInput" onChange={handleInputChange} />
-                </Col>
-              </Row>
-            </Form.Group>
+                <Form.Group controlId="formMWPreviews">
+                  <Row>
+                    <Col sm={{ span: 8, offset: 2 }}>
+                      <Form.Label>URLs for previews:</Form.Label>
+                      <Form.Control type="input" name="songMvmtPreviews" placeholder="Please comma-separate URLs" value={songData.songMvmtPreviews} className="formInput" onChange={handleInputChange} />
+                    </Col>
+                  </Row>
+                </Form.Group></>
+              : <>
+                <Form.Group controlId="formSongTrack">
+                  <Row>
+                    <Col sm={{ span: 8, offset: 2 }}>
+                      <Form.Label>URL for demo track:</Form.Label>
+                      <Form.Control type="input" name="songTrack" placeholder="Demo track" value={songData.songTrack} className="formInput" onChange={handleInputChange} />
+                    </Col>
+                  </Row>
+                </Form.Group>
+
+                <Form.Group controlId="formSongPreview">
+                  <Row>
+                    <Col sm={{ span: 8, offset: 2 }}>
+                      <Form.Label>URL for preview:</Form.Label>
+                      <Form.Control type="input" name="songPreview" placeholder="Preview" value={songData.songPreview} className="formInput" onChange={handleInputChange} />
+                    </Col>
+                  </Row>
+                </Form.Group>
+              </>}
 
             <Row>
               <Col sm={{ span: 3, offset: 2 }}>
