@@ -2,7 +2,7 @@ import { ReactElement, useEffect, useRef, useState } from "react";
 import { Row } from "react-bootstrap"
 import PropTypes from "prop-types";
 
-const AudioEmbed = ({ title, src, songId }: { title: string; src: string; songId: string }): ReactElement => {
+const AudioEmbed = ({ title, src, songId }: { title: string; src: string; songId: string | undefined }): ReactElement => {
 
   return (
     <>

@@ -4,6 +4,7 @@ import { QueryResult, useQuery } from "@apollo/client";
 import { Col, Container, Row } from "react-bootstrap";
 import { QUERY_ONE_SONG } from "../../utils/gql";
 import { Song } from "../../utils/interfaces";
+import { AudioEmbed, VideoEmbed } from "../embed";
 
 
 const SongPage = (): ReactElement => {
@@ -71,11 +72,17 @@ const SongPage = (): ReactElement => {
                 </Col>}
             </Row>
 
-            {/* TODO: Embed this */}
             {song.songTrack &&
               <Row>
-                <p>Demo track: {song.songTrack}</p>
+                <p>Demo track:</p>
+                <AudioEmbed title={song.songTitle} src={song.songTrack} songId={song._id} />
               </Row>}
+
+            {song.songVideo &&
+              <Row>
+                <VideoEmbed src={song.songVideo} />
+              </Row>
+            }
 
           </Col>
         </Row>
