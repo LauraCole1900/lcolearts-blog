@@ -24,23 +24,26 @@ const SuccessModal = (props: SuccessProps): ReactElement => {
           <Modal.Title className="modalTitle"><h2>Success!</h2></Modal.Title>
         </Modal.Header>
         <Modal.Body className="modalBody">
-          <h3>Your thing was created. Or deleted. Or possibly updated. Whichever.</h3>
+          <h3>Your thing was created. Or deleted. Or possibly updated. Whatevs.</h3>
 
 
           {/* Navigation buttons */}
           <Modal.Footer className="modalFooter">
 
             {/* Link to Blog */}
-            {(urlWhere !== "lcolearts.herokuapp.com" && urlWhere !== "")
-              ? <>
-              <Link to="/blog">
-                <Button data-toggle="popover" title="Blog" type="button" className="button">Return to Blog</Button>
+            {urlWhere !== "blog"
+              ? <Link to="/blog">
+                <Button data-toggle="popover" title="Blog" type="button" className="button">Blog</Button>
               </Link>
-              <Link to="/music">
-                <Button data-toggle="popover" title="Compositions" type="button" className="button">Return to Compositions</Button>
+              : <Button data-toggle="popover" title="Blog" type="button" className="button" onClick={props.hide}>Blog</Button>}
+
+            {/* Link to Compositions */}
+            {urlWhere !== "music"
+              ? <Link to="/music">
+                <Button data-toggle="popover" title="Compositions" type="button" className="button">Compositions</Button>
               </Link>
-              </>
-              : <Button data-toggle="popover" title="Blog" type="button" className="button" onClick={props.hide}>Close</Button>}
+              : <Button data-toggle="popover" title="Compositions" type="button" className="button" onClick={props.hide}>Compositions</Button>}
+
 
           </Modal.Footer>
         </Modal.Body>
