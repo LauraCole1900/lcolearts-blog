@@ -56,7 +56,7 @@ const Music = (): ReactElement => {
         // Retrieve existing song data that is stored in the cache
         const existingSongs: any = cache.readQuery({ query: QUERY_ALL_SONGS });
         // Filter out data returned from the mutation
-        const updatedSongs: Song[] = existingSongs!.getAllSongs.filter((song: Song): boolean => song._id !== deleteSong.id);
+        const updatedSongs: Song[] = existingSongs!.getAllSongs.filter((song: Song): boolean => song._id !== deleteSong._id);
         // Update the cache by setting song data to the above-filtered data
         cache.writeQuery({
           query: QUERY_ALL_SONGS,
