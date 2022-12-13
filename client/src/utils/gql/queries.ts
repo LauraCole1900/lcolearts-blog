@@ -47,6 +47,7 @@ export const QUERY_ALL_SONGS = gql`
       songSacred
       songLiturgy
       songTrack
+      songVideo
       songPreview
       songYear
     }
@@ -67,6 +68,7 @@ export const QUERY_ONE_SONG = gql`
       songSacred
       songLiturgy
       songTrack
+      songVideo
       songPreview
       songYear
     }
@@ -87,6 +89,7 @@ export const QUERY_SONGS_BY_ACC = gql`
       songSacred
       songLiturgy
       songTrack
+      songVideo
       songPreview
       songYear
     }
@@ -107,6 +110,7 @@ export const QUERY_SONGS_BY_LIT = gql`
       songSacred
       songLiturgy
       songTrack
+      songVideo
       songPreview
       songYear
     }
@@ -127,6 +131,7 @@ export const QUERY_SONGS_BY_MW = gql`
       songSacred
       songLiturgy
       songTrack
+      songVideo
       songPreview
       songYear
     }
@@ -147,6 +152,7 @@ export const QUERY_SONGS_BY_SACRED = gql`
       songSacred
       songLiturgy
       songTrack
+      songVideo
       songPreview
       songYear
     }
@@ -167,6 +173,7 @@ export const QUERY_SONGS_BY_TITLE = gql`
       songSacred
       songLiturgy
       songTrack
+      songVideo
       songPreview
       songYear
     }
@@ -187,6 +194,7 @@ export const QUERY_SONGS_BY_VOICING = gql`
       songSacred
       songLiturgy
       songTrack
+      songVideo
       songPreview
       songYear
     }

@@ -18,6 +18,7 @@ export interface Song {
   songSacred: boolean,
   songLiturgy: string,
   songTrack: string,
+  songVideo: string,
   songPreview: string,
   songYear: string
 }

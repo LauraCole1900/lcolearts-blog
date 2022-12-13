@@ -36,6 +36,9 @@ const songSchema = new Schema({
   songTrack: {
     type: String
   },
+  songVideo: {
+    type: String
+  },
   songPreview: {
     type: String
   },

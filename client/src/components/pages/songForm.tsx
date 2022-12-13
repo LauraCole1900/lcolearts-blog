@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useMemo, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, ReactElement, useEffect, useMemo, useRef, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { ApolloCache, QueryResult, useMutation, useQuery } from "@apollo/client";
@@ -10,7 +10,7 @@ import { Song, SongErrors, User } from '../../utils/interfaces';
 import "./style.css";
 
 
-const SongForm = () => {
+const SongForm = (): ReactElement => {
 
   //=====================//
   //   Global Variables  //
@@ -34,6 +34,7 @@ const SongForm = () => {
     songSacred: false,
     songLiturgy: "",
     songTrack: "",
+    songVideo: "",
     songPreview: "",
     songYear: ""
   });
@@ -143,6 +144,7 @@ const SongForm = () => {
         songSacred: false,
         songLiturgy: "",
         songTrack: "",
+        songVideo: "",
         songPreview: "",
         songYear: ""
       });
@@ -183,6 +185,7 @@ const SongForm = () => {
         songSacred: false,
         songLiturgy: "",
         songTrack: "",
+        songVideo: "",
         songPreview: "",
         songYear: ""
       });
@@ -344,6 +347,15 @@ const SongForm = () => {
                     <Col sm={{ span: 8, offset: 2 }}>
                       <Form.Label>URL for demo track:</Form.Label>
                       <Form.Control type="input" name="songTrack" placeholder="Demo track" value={songData.songTrack} className="formInput" onChange={handleInputChange} />
+                    </Col>
+                  </Row>
+                </Form.Group>
+
+                <Form.Group controlId="formSongVideo">
+                  <Row>
+                    <Col sm={{ span: 8, offset: 2 }}>
+                      <Form.Label>URL for video:</Form.Label>
+                      <Form.Control type="input" name="songVideo" placeholder="https://youtube.com/embed/youTubeID" value={songData.songVideo} className="formInput" onChange={handleInputChange} />
                     </Col>
                   </Row>
                 </Form.Group>
