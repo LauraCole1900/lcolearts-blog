@@ -66,15 +66,20 @@ const SongPage = (): ReactElement => {
               {song.songPreview &&
                 <Col sm={6}>
                   <Row>
-                    <p>{song.songPreview}</p>
+                    <object data={song.songPreview} type="application/pdf" width="100%" height="100%">
+                      <p>Alternative text - include a link <a href={song.songPreview}>to the PDF!</a></p>
+                    </object>
                   </Row>
                 </Col>}
 
               {/* TODO: And this */}
               {song.songMvmtPreviews.length > 0 &&
-                (song.songMvmtPreviews.map((preview: string, i: number) =>
+                (song.songMvmtPreviews.map((preview: string, i: number): ReactElement =>
                   <>
-                    <p>{song.songMvmtNames[i]} preview: {preview}</p>
+                    <p>{song.songMvmtNames[i]} preview:</p>
+                    <object data={preview} type="application/pdf" width="100%" height="100%">
+                      <p>Alternative text - include a link <a href={preview}>to the PDF!</a></p>
+                    </object>
                   </>
                 ))
               }
@@ -87,7 +92,7 @@ const SongPage = (): ReactElement => {
               </Row>}
 
             {song.songMvmtTracks.length > 0 &&
-              (song.songMvmtTracks.map((track: string, i: number) =>
+              (song.songMvmtTracks.map((track: string, i: number): ReactElement =>
                 <>
                   <p>{song.songMvmtNames[i]} demo track:</p>
                   <AudioEmbed title={song.songMvmtNames[i]} src={track} songId={song._id} />
