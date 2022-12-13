@@ -59,7 +59,7 @@ const SongForm = () => {
       variables: { id: songId }
     });
 
-  const me: User = meData?.me || meData?.currentId || {};
+  const me: User = useMemo(() => { return meData?.me || meData?.currentId || {} }, [meData?.me, meData?.currentId]);
   const songToEdit: Song = useMemo(() => { return thisSongData?.getSong || {} }, [thisSongData?.getSong]);
 
 

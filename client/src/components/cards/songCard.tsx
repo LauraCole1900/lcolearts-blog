@@ -1,4 +1,4 @@
-import { MouseEvent, ReactElement } from "react";
+import { ReactElement } from "react";
 import { Link } from "react-router-dom";
 import { Button, Card } from "react-bootstrap";
 import Auth from "../../utils/auth";

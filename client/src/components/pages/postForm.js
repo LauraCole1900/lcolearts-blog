@@ -53,7 +53,7 @@ const PostForm = () => {
       variables: { id: postId }
     });
 
-  const me = meData?.me || meData?.currentId || {};
+  const me = useMemo(() => { return meData?.me || meData?.currentId || {} }, [meData?.me, meData?.currentId]);
   const postToEdit = useMemo(() => { return noteData?.getEntry || {} }, [noteData?.getEntry]);
 
 
