@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import PropTypes from "prop-types";
 
-const VideoEmbed = ({ src }: {src: string}): ReactElement => {
+const VideoEmbed = ({ src, title }: { src: string; title: string }): ReactElement => {
 
 
   return (
@@ -13,7 +13,7 @@ const VideoEmbed = ({ src }: {src: string}): ReactElement => {
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
-        title="Embedded youtube"
+        title={title}
       />
     </div>
   )

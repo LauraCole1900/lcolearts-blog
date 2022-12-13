@@ -80,7 +80,7 @@ const SongPage = (): ReactElement => {
 
             {song.songVideo &&
               <Row>
-                <VideoEmbed src={song.songVideo} />
+                <VideoEmbed src={song.songVideo} title={song.songTitle} />
               </Row>
             }
 
