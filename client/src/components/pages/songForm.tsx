@@ -112,6 +112,10 @@ const SongForm = (): ReactElement => {
       const trimmedArr: string[] = mvmtArr.map((mvmt: string): string => mvmt.trim());
       setSongData({ ...songData, [name]: trimmedArr });
     }
+
+    if ("songMajorWork" === name) {
+      setSongData({...songData, [name]: !songData.songMajorWork })
+    }
   };
 
   // Handles click on "Submit" button
