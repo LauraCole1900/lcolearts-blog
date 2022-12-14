@@ -63,7 +63,7 @@ const SongPage = (): ReactElement => {
               </Col>
 
               {/* TODO: Embed this */}
-              {song.songPreview &&
+              {song.songPreview.length > 0 &&
                 <Col sm={6}>
                   <Row>
                     <object data={song.songPreview} type="application/pdf" width="100%" height="100%">
@@ -85,7 +85,7 @@ const SongPage = (): ReactElement => {
               }
             </Row>
 
-            {song.songTrack &&
+            {song.songTrack.length > 0 &&
               <Row>
                 <p>Demo track:</p>
                 <AudioEmbed title={song.songTitle} src={song.songTrack} songId={song._id} />
@@ -100,7 +100,7 @@ const SongPage = (): ReactElement => {
               ))
             }
 
-            {song.songVideo &&
+            {song.songVideo.length > 0 &&
               <Row>
                 <VideoEmbed src={song.songVideo} title={song.songTitle} />
               </Row>
