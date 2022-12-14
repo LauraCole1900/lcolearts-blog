@@ -63,8 +63,8 @@ const SongPage = (): ReactElement => {
               </Col>
 
               {/* TODO: Embed this */}
-              {song.songPreview.length > 0 &&
-                <Col sm={6}>
+              {song.songPreview &&
+                <Col sm={{ span: 6, offset: 6 }}>
                   <Row>
                     <object data={song.songPreview} type="application/pdf" width="100%" height="100%">
                       <p>Alternative text - include a link <a href={song.songPreview}>to the PDF!</a></p>
@@ -73,35 +73,35 @@ const SongPage = (): ReactElement => {
                 </Col>}
 
               {/* TODO: And this */}
-              {song.songMvmtPreviews.length > 0 &&
+              {song.songMvmtPreviews[0] !== "" &&
                 (song.songMvmtPreviews.map((preview: string, i: number): ReactElement =>
-                  <>
+                  <div key={song._id}>
                     <p>{song.songMvmtNames[i]} preview:</p>
                     <object data={preview} type="application/pdf" width="100%" height="100%">
                       <p>Alternative text - include a link <a href={preview}>to the PDF!</a></p>
                     </object>
-                  </>
+                  </div>
                 ))
               }
             </Row>
 
-            {song.songTrack.length > 0 &&
+            {song.songTrack &&
               <Row>
                 <p>Demo track:</p>
                 <AudioEmbed title={song.songTitle} src={song.songTrack} songId={song._id} />
               </Row>}
 
-            {song.songMvmtTracks.length > 0 &&
+            {song.songMvmtTracks[0] !== "" &&
               (song.songMvmtTracks.map((track: string, i: number): ReactElement =>
-                <>
+                <div key={song._id}>
                   <p>{song.songMvmtNames[i]} demo track:</p>
                   <AudioEmbed title={song.songMvmtNames[i]} src={track} songId={song._id} />
-                </>
+                </div>
               ))
             }
 
-            {song.songVideo.length > 0 &&
-              <Row>
+            {song.songVideo &&
+              <Row className="centered">
                 <VideoEmbed src={song.songVideo} title={song.songTitle} />
               </Row>
             }
