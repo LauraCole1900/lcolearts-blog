@@ -57,6 +57,26 @@ a {
   cursor: pointer;
 }
 
+.darkBg {
+  background: var(--translucentBgDk);
+  border-radius: 5px;
+}
+
+.darkBgSq {
+  background: var(--translucentBgDk);
+  border-radius: 2px;
+}
+
+.ltBg {
+  background: var(--translucentBgLt);
+  border-radius: 5px;
+}
+
+.ltBgSq {
+  background: var(--translucentBgLt);
+  border-radius: 2px;
+}
+
 .bold {
   font-weight: 700;
 }
@@ -85,6 +105,10 @@ a {
 
 .btn404 {
   margin-right: 0.25rem;
+}
+
+.caption {
+  font-size: 12px;
 }
 
 .card {
@@ -118,8 +142,8 @@ a {
   justify-content: flex-end;
 }
 
-.mypic,
-.choralepic {
+.choralepic,
+.mypic {
   max-width: 300px;
   padding-right: 1.25em;
 }
@@ -135,30 +159,6 @@ a {
 .error {
   color: var(--gcWhite);
   background-color: var(--red);
-}
-
-.formHeader {
-  text-align: center;
-}
-
-.darkBg {
-  background: var(--translucentBgDk);
-  border-radius: 5px;
-}
-
-.darkBgSq {
-  background: var(--translucentBgDk);
-  border-radius: 2px;
-}
-
-.ltBg {
-  background: var(--translucentBgLt);
-  border-radius: 5px;
-}
-
-.ltBgSq {
-  background: var(--translucentBgLt);
-  border-radius: 2px;
 }
 
 .flexStart,
@@ -185,6 +185,10 @@ a {
 .formBtn {
   width: 100%;
   height: 3rem;
+}
+
+.formHeader {
+  text-align: center;
 }
 
 .formInput,
@@ -262,17 +266,14 @@ a {
   color: var(--dkGreen);
 }
 
-.topMargin {
-  margin-top: 2.5em;
-}
-
-.caption {
-  font-size: 12px;
+.mvmtNames {
+  padding-left: 2rem;
+  margin-bottom: .25rem;
 }
 
 .outline {
   text-shadow: -1px 1px 1px var(--ltBlue), 1px 1px 1px var(--ltBlue),
-    1px -1px 1px var(--ltBlue), -1px -1px 1px var(--ltBlue);
+  1px -1px 1px var(--ltBlue), -1px -1px 1px var(--ltBlue);
 }
 
 .pagination {
@@ -287,13 +288,13 @@ a {
 .pagination > ul {
   list-style: none;
   padding: 0;
-  margin-bottom: .25rem;
+  margin-bottom: 0.25rem;
 }
 
 .pagination > ul > li {
   color: var(--ltBlue);
   display: inline;
-  margin: .5rem;
+  margin: 0.5rem;
   text-decoration: underline;
 }
 
@@ -315,11 +316,18 @@ a {
 
 .tag-cloud {
   background-color: rgba(199, 219, 243, 0.5);
-  
 }
 
 .tag-cloud-tag {
   cursor: pointer;
+}
+
+.topMargin {
+  margin-top: 2.5em;
+}
+
+.topMarginSmall {
+  margin-top: 1rem;
 }
 
 .transpBground {

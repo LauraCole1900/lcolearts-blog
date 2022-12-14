@@ -42,7 +42,7 @@ const SongPage = (): ReactElement => {
                 {song.songMajorWork &&
                   <>
                     <p><span className="bold">Movements:</span></p>
-                    {song.songMvmtNames.map((title: string) => <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{title}</p>)}
+                    {song.songMvmtNames.map((title: string, i: number) => <p key={`${song._id}${i}`} className="mvmtNames">{title}</p>)}
                   </>}
 
                 {song.songYear &&
@@ -73,9 +73,9 @@ const SongPage = (): ReactElement => {
                 </Col>}
 
               {/* TODO: And this */}
-              {song.songMvmtPreviews[0] !== "" &&
+              {song.songMvmtPreviews[0] &&
                 (song.songMvmtPreviews.map((preview: string, i: number): ReactElement =>
-                  <div key={song._id}>
+                  <div key={`${i}${song._id}`}>
                     <p>{song.songMvmtNames[i]} preview:</p>
                     <object data={preview} type="application/pdf" width="100%" height="100%">
                       <p>Alternative text - include a link <a href={preview}>to the PDF!</a></p>
@@ -91,7 +91,7 @@ const SongPage = (): ReactElement => {
                 <AudioEmbed title={song.songTitle} src={song.songTrack} songId={song._id} />
               </Row>}
 
-            {song.songMvmtTracks[0] !== "" &&
+            {song.songMvmtTracks[0] &&
               (song.songMvmtTracks.map((track: string, i: number): ReactElement =>
                 <div key={song._id}>
                   <p>{song.songMvmtNames[i]} demo track:</p>
