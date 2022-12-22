@@ -45,7 +45,7 @@ var resolvers: any = {
     },
 
     getSongsByMajorWork: async (_: any, args: any): Promise<any> => {
-      return await Song.find({ songMajorWork: args.songMajorWork === true});
+      return await Song.find({ songMajorWork: args.songMajorWork === true });
     },
 
     getSongsBySacred: async (_: any, args: any): Promise<any> => {

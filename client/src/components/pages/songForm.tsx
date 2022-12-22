@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, ReactElement, useEffect, useMemo, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, ReactElement, useEffect, useMemo, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { ApolloCache, QueryResult, useMutation, useQuery } from "@apollo/client";
@@ -38,7 +38,6 @@ const SongForm = (): ReactElement => {
     songPreview: "",
     songYear: ""
   });
-  const currentSongData = useRef(songData);
 
   // States passed to modals
   const [errThrown, setErrThrown] = useState();
@@ -130,7 +129,6 @@ const SongForm = (): ReactElement => {
         const { data } = await createSong({
           variables: { ...songData }
         });
-        console.log({ data });
         handleShowSuccess();
       } catch (error: any) {
         console.error(JSON.parse(JSON.stringify(error)));
@@ -159,7 +157,6 @@ const SongForm = (): ReactElement => {
 
   // Handles click on "Update" button
   const handleFormUpdate = async (e: FormEvent): Promise<void> => {
-    console.log({ songData }, { songId });
     e.preventDefault();
     // Validates required inputs
     const validationErrors = songValidate(songData);
@@ -167,11 +164,9 @@ const SongForm = (): ReactElement => {
     setErrors(validationErrors);
     if (noErrors) {
       try {
-        console.log("ding");
         const { data } = await editSong({
           variables: { id: songId, ...songData }
         });
-        console.log({ data });
         handleShowSuccess();
       } catch (error: any) {
         console.error(JSON.parse(JSON.stringify(error)));

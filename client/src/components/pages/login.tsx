@@ -23,7 +23,6 @@ const LoginPage = (): ReactElement => {
 
   // Handles form submission
   const handleFormSubmit = async (e: FormEvent): Promise<void> => {
-    console.log({ userData });
     e.preventDefault();
     const form = e.currentTarget as HTMLFormElement;
 
@@ -36,7 +35,6 @@ const LoginPage = (): ReactElement => {
       const { data } = await login({
         variables: { ...userData },
       });
-      console.log({ data });
       Auth.login(data.login.token);
 
       // clear form values

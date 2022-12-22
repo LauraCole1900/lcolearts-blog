@@ -156,6 +156,10 @@ a {
   border-radius: 50%;
 }
 
+.clickable:hover {
+  cursor: pointer;
+}
+
 .error {
   color: var(--gcWhite);
   background-color: var(--red);
@@ -268,12 +272,12 @@ a {
 
 .mvmtNames {
   padding-left: 2rem;
-  margin-bottom: .25rem;
+  margin-bottom: 0.25rem;
 }
 
 .outline {
   text-shadow: -1px 1px 1px var(--ltBlue), 1px 1px 1px var(--ltBlue),
-  1px -1px 1px var(--ltBlue), -1px -1px 1px var(--ltBlue);
+    1px -1px 1px var(--ltBlue), -1px -1px 1px var(--ltBlue);
 }
 
 .pagination {
@@ -306,6 +310,10 @@ a {
   color: var(--medBlue);
 }
 
+.music-pagination {
+  margin-left: 0;
+}
+
 .red {
   color: #f00;
 }
@@ -320,6 +328,10 @@ a {
 
 .tag-cloud-tag {
   cursor: pointer;
+}
+
+.textCenter {
+  text-align: center;
 }
 
 .topMargin {

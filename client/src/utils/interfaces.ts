@@ -7,6 +7,7 @@ export interface Post {
 }
 
 export interface Song {
+  [index: string]: string | boolean | Array<string> | undefined,
   _id?: string,
   songTitle: string,
   songVoicing: string,

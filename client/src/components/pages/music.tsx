@@ -8,6 +8,7 @@ import { Song } from "../../utils/interfaces";
 import { ConfirmModal, ErrorModal, SuccessModal } from "../modals";
 import { Checkmark, CloseIcon, EditIcon } from "../../pix";
 import Auth from "../../utils/auth";
+import { sortAsc, sortDesc } from "../../utils/helpers";
 
 const Music = (): ReactElement => {
 
@@ -27,11 +28,7 @@ const Music = (): ReactElement => {
   const [songsToRender, setSongsToRender] = useState<Array<Song>>([]);
   const [itemOffset, setItemOffset] = useState<number>(0);
   const [pageCount, setPageCount] = useState<number>(0);
-  const color: { luminosity: string, hue: string, format: string } = {
-    luminosity: "dark",
-    hue: "#031105",
-    format: "hex"
-  }
+  const [sortBy, setSortBy] = useState<string>('');
 
   // States passed to modals
   const [btnName, setBtnName] = useState();
@@ -106,9 +103,42 @@ const Music = (): ReactElement => {
     }
   };
 
+  // Handles click on table headers
+  const handleColumnSort = (e: any): void => {
+    const column = e.currentTarget.dataset.col;
+    let newRender: Array<Song> = sortedSongs;
+    switch (sortBy) {
+      case `${column}Asc`:
+        switch (column) {
+          case column:
+            setSortBy(`${column}Desc`);
+            newRender = sortDesc(songsArr, column);
+            setSongsToRender(newRender);
+            break;
+          default:
+            setSortBy(`${column}Asc`);
+            newRender = sortAsc(songsArr, column);
+            setSongsToRender(newRender);
+        };
+        break;
+      default:
+        switch (column) {
+          case column:
+            setSortBy(`${column}Asc`);
+            newRender = sortAsc(songsArr, column);
+            setSongsToRender(newRender);
+            break;
+          default:
+            setSortBy(`${column}Desc`);
+            newRender = sortDesc(songsArr, column);
+            setSongsToRender(newRender);
+        };
+    };
+  }
+
   // Handles click on pagination navigation
   const handlePageClick = (e: any): void => {
-    const newOffset: number = (e.selected * 30);
+    const newOffset: number = (e.selected * 15);
     setItemOffset(newOffset);
   };
 
@@ -148,17 +178,17 @@ const Music = (): ReactElement => {
               <Table striped bordered hover>
                 <thead>
                   <tr className="bottomed">
-                    <td className="centered">MW</td>
-                    <td>Title</td>
-                    <td>Voicing</td>
-                    <td>Accompaniment</td>
-                    <td>Sacred?</td>
-                    <td>Liturgical Season</td>
-                    <td>© Year</td>
+                    <td className="textCenter clickable" data-col="songMajorWork" onClick={handleColumnSort}>MW</td>
+                    <td className="clickable" data-col="songTitle" onClick={handleColumnSort}>Title</td>
+                    <td className="clickable" data-col="songVoicing" onClick={handleColumnSort}>Voicing</td>
+                    <td className="clickable" data-col="songAccompaniment" onClick={handleColumnSort}>Accompaniment</td>
+                    <td className="clickable" data-col="songSacred" onClick={handleColumnSort}>Sacred?</td>
+                    <td className="clickable" data-col="songLiturgy" onClick={handleColumnSort}>Liturgical Season</td>
+                    <td className="clickable" data-col="songYear" onClick={handleColumnSort}>© Year</td>
                   </tr>
                 </thead>
                 <tbody>
-                  {sortedSongs.map(song =>
+                  {songsToRender.map(song =>
                     <tr key={song._id}>
                       {song.songMajorWork === true
                         ? <td><Image fluid src={Checkmark} alt="Major Work" className="iconSmall" /></td>
@@ -189,8 +219,8 @@ const Music = (): ReactElement => {
       </Row>
 
       {pageCount > 1 &&
-        <Row>
-          <Col sm={{ span: 8, offset: 1 }} className="pagination">
+        <Row className="centered">
+          <Col sm={{ span: 8, offset: 1 }} className="pagination music-pagination">
             <ReactPaginate
               breakLabel="..."
               nextLabel="next >"

@@ -118,7 +118,7 @@ const Blog = (): ReactElement => {
 
   // Handles click on pagination navigation
   const handlePageClick = (e: any): void => {
-    const newOffset: number = (e.selected * 15);
+    const newOffset: number = (e.selected * 10);
     setItemOffset(newOffset);
   };
 
@@ -185,16 +185,16 @@ const Blog = (): ReactElement => {
 
   useEffect((): void => {
     if (entriesArr?.length) {
-      const endOffset: number = itemOffset + 15;
+      const endOffset: number = itemOffset + 10;
       fetchTags();
       if (Object.keys(params).length) {
         const filteredEntries: Post[] = sortedEntries.filter((post: Post): boolean => post.postKeywords.includes(params.tag!));
         setEntriesToRender(filteredEntries.slice(itemOffset, endOffset));
-        setPageCount(Math.ceil(filteredEntries.length / 15));
+        setPageCount(Math.ceil(filteredEntries.length / 10));
         setPageReady(true);
       } else {
         setEntriesToRender(sortedEntries.slice(itemOffset, endOffset));
-        setPageCount(Math.ceil(sortedEntries.length / 15));
+        setPageCount(Math.ceil(sortedEntries.length / 10));
         setPageReady(true);
       }
     }
