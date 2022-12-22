@@ -27,6 +27,7 @@ const Music = (): ReactElement => {
   const [songsToRender, setSongsToRender] = useState<Array<Song>>([]);
   const [itemOffset, setItemOffset] = useState<number>(0);
   const [pageCount, setPageCount] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const [sortBy, setSortBy] = useState<string>('');
 
   // States passed to modals
@@ -167,6 +168,7 @@ const Music = (): ReactElement => {
 
       setSongsToRender(sortedSongs.slice(itemOffset, endOffset));
       setPageCount(Math.ceil(sortedSongs.length / 15));
+      setCurrentPage(Math.round(itemOffset / 15));
 
       setPageReady(true);
     }
@@ -202,6 +204,7 @@ const Music = (): ReactElement => {
                       pageRangeDisplayed={5}
                       pageCount={pageCount}
                       previousLabel="< previous"
+                      forcePage={currentPage}
                     />
                   </Col>
                 </Row>}
@@ -259,6 +262,7 @@ const Music = (): ReactElement => {
               pageRangeDisplayed={5}
               pageCount={pageCount}
               previousLabel="< previous"
+              forcePage={currentPage}
             />
           </Col>
         </Row>}
