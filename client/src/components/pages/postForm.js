@@ -96,12 +96,15 @@ const PostForm = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setPostData({ ...postData, [name]: value });
-    if (name === "postKeywords") {
-      let dataArr = value.split(",");
-      let trimmedArr = dataArr.map(item => item.trim())
-      setPostData({ ...postData, [name]: trimmedArr });
-    }
   };
+
+  // Handles trimming whitespace from keywords on loss of focus on input
+  const handleTrim = (e) => {
+    const { name, value } = e.target;
+    const splitArr = value.split(',');
+    const trimmedArr = splitArr.map((keyword) => keyword.trim());
+    setPostData({ ...postData, [name]: trimmedArr });
+  }
 
   // Handles input changes to editor
   const handleEditorChange = (name, value) => {
@@ -242,7 +245,7 @@ const PostForm = () => {
                   <Form.Label>Post keywords:</Form.Label>
                   {errors.postKeywords &&
                     <div className="error"><p>{errors.postKeywords}</p></div>}
-                  <Form.Control type="input" name="postKeywords" placeholder="Keywords" value={postData.postKeywords} className="formInput" onChange={handleInputChange} />
+                  <Form.Control type="input" name="postKeywords" placeholder="Keywords" value={postData.postKeywords} className="formInput" onChange={handleInputChange} onBlur={handleTrim} />
                 </Col>
               </Row>
             </Form.Group>
