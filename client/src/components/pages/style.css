@@ -314,6 +314,10 @@ a {
   margin-left: 0;
 }
 
+.top-pagination {
+  margin-bottom: 1.5rem;
+}
+
 .red {
   color: #f00;
 }

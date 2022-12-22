@@ -1,5 +1,5 @@
-import { ReactElement, useEffect, useState } from "react";
-import { NavigateFunction, Params, useNavigate, useParams } from "react-router-dom";
+import { ReactElement, useEffect, useMemo, useState } from "react";
+import { Params, useParams } from "react-router-dom";
 import { ApolloCache, useMutation, useQuery } from "@apollo/client";
 import { Col, Container, Image, Row, Table } from "react-bootstrap";
 import ReactPaginate from "react-paginate";
@@ -17,7 +17,6 @@ const Music = (): ReactElement => {
   //=================//
 
   const params: Readonly<Params<string>> = useParams();
-  let navigate: NavigateFunction = useNavigate();
 
 
   //=================//
@@ -65,9 +64,9 @@ const Music = (): ReactElement => {
       }
     }
   });
-  const songsArr: Song[] = data?.getAllSongs || [];
+  const songsArr: Song[] = useMemo(() => { return data?.getAllSongs || [] }, [data?.getAllSongs]);
   const arrToSort: Song[] = [...songsArr];
-  const sortedSongs: Song[] = arrToSort.sort((a, b) => (a.songTitle! > b.songTitle!) ? 1 : -1);
+  let sortedSongs: Song[] = arrToSort.sort((a, b) => (a.songTitle! > b.songTitle!) ? 1 : -1);
 
   //=====================//
   //    Modal Methods    //
@@ -103,37 +102,40 @@ const Music = (): ReactElement => {
     }
   };
 
-  // Handles click on table headers
-  const handleColumnSort = (e: any): void => {
-    const column = e.currentTarget.dataset.col;
-    let newRender: Array<Song> = sortedSongs;
+  // Handles column sorting
+  const handleColumnSort = (col: string): Array<Song> | void => {
+    const endOffset: number = itemOffset + 15;
     switch (sortBy) {
-      case `${column}Asc`:
-        switch (column) {
-          case column:
-            setSortBy(`${column}Desc`);
-            newRender = sortDesc(songsArr, column);
-            setSongsToRender(newRender);
+      case `${col}-asc`:
+        switch (col) {
+          case col:
+            sortedSongs = sortDesc(songsArr, col);
+            setSortBy(`${col}-desc`);
             break;
           default:
-            setSortBy(`${column}Asc`);
-            newRender = sortAsc(songsArr, column);
-            setSongsToRender(newRender);
+            sortedSongs = sortAsc(songsArr, col);
+            setSortBy(`${col}-asc`);
         };
         break;
       default:
-        switch (column) {
-          case column:
-            setSortBy(`${column}Asc`);
-            newRender = sortAsc(songsArr, column);
-            setSongsToRender(newRender);
+        switch (col) {
+          case col:
+            sortedSongs = sortAsc(songsArr, col);
+            setSortBy(`${col}-asc`);
             break;
           default:
-            setSortBy(`${column}Desc`);
-            newRender = sortDesc(songsArr, column);
-            setSongsToRender(newRender);
+            sortedSongs = sortDesc(songsArr, col);
+            setSortBy(`${col}-desc`);
         };
     };
+    setSongsToRender(sortedSongs.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(sortedSongs.length / 15));
+  }
+
+  // Handles click on table headers
+  const handleColumnClick = (e: any): void => {
+    const column: string = e.currentTarget.dataset.col;
+    handleColumnSort(column);
   }
 
   // Handles click on pagination navigation
@@ -148,15 +150,29 @@ const Music = (): ReactElement => {
   //=================//
 
   useEffect((): void => {
+    const endOffset: number = itemOffset + 15;
     if (songsArr?.length) {
-      const endOffset: number = itemOffset + 15;
+
+      if (sortBy === '') {
+        handleColumnSort("songTitle");
+      } else {
+        const sortByArr = sortBy.split('-');
+        if (sortByArr[1] === 'asc') {
+          sortedSongs = sortAsc(songsArr, sortByArr[0]);
+        } else {
+          sortedSongs = sortDesc(songsArr, sortByArr[0]);
+
+        }
+      }
+
       setSongsToRender(sortedSongs.slice(itemOffset, endOffset));
       setPageCount(Math.ceil(sortedSongs.length / 15));
+
       setPageReady(true);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [songsArr, itemOffset, params]);
+  }, [songsArr, sortBy, itemOffset, params]);
 
 
   //================//
@@ -175,16 +191,31 @@ const Music = (): ReactElement => {
             ? <h1>No compositions found</h1>
             : <>
               <h1>Compositions</h1>
-              <Table striped bordered hover>
+
+              {pageCount > 1 &&
+                <Row className="centered">
+                  <Col sm={{ span: 8, offset: 1 }} className="pagination music-pagination top-pagination">
+                    <ReactPaginate
+                      breakLabel="..."
+                      nextLabel="next >"
+                      onPageChange={handlePageClick}
+                      pageRangeDisplayed={5}
+                      pageCount={pageCount}
+                      previousLabel="< previous"
+                    />
+                  </Col>
+                </Row>}
+
+              <Table striped bordered hover className="ltBg">
                 <thead>
                   <tr className="bottomed">
-                    <td className="textCenter clickable" data-col="songMajorWork" onClick={handleColumnSort}>MW</td>
-                    <td className="clickable" data-col="songTitle" onClick={handleColumnSort}>Title</td>
-                    <td className="clickable" data-col="songVoicing" onClick={handleColumnSort}>Voicing</td>
-                    <td className="clickable" data-col="songAccompaniment" onClick={handleColumnSort}>Accompaniment</td>
-                    <td className="clickable" data-col="songSacred" onClick={handleColumnSort}>Sacred?</td>
-                    <td className="clickable" data-col="songLiturgy" onClick={handleColumnSort}>Liturgical Season</td>
-                    <td className="clickable" data-col="songYear" onClick={handleColumnSort}>© Year</td>
+                    <td className="textCenter clickable" data-col="songMajorWork" onClick={handleColumnClick}>MW</td>
+                    <td className="clickable" data-col="songTitle" onClick={handleColumnClick}>Title</td>
+                    <td className="clickable" data-col="songVoicing" onClick={handleColumnClick}>Voicing</td>
+                    <td className="clickable" data-col="songAccompaniment" onClick={handleColumnClick}>Accompaniment</td>
+                    <td className="clickable" data-col="songSacred" onClick={handleColumnClick}>Sacred?</td>
+                    <td className="clickable" data-col="songLiturgy" onClick={handleColumnClick}>Liturgical Season</td>
+                    <td className="clickable" data-col="songYear" onClick={handleColumnClick}>© Year</td>
                   </tr>
                 </thead>
                 <tbody>
