@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, ReactElement, useEffect, useMemo, useState } from "react";
+import { ChangeEvent, FocusEvent, FormEvent, ReactElement, useEffect, useMemo, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { ApolloCache, QueryResult, useMutation, useQuery } from "@apollo/client";
@@ -106,16 +106,18 @@ const SongForm = (): ReactElement => {
       setSongData({ ...songData, [name]: JSON.parse(value) });
     }
 
-    if (["songMvmtNames", "songMvmtTracks", "songMvmtPreviews"].includes(name)) {
-      const mvmtArr: string[] = value.split(",")
-      const trimmedArr: string[] = mvmtArr.map((mvmt: string): string => mvmt.trim());
-      setSongData({ ...songData, [name]: trimmedArr });
-    }
-
     if ("songMajorWork" === name) {
-      setSongData({...songData, [name]: !songData.songMajorWork })
+      setSongData({ ...songData, [name]: !songData.songMajorWork })
     }
   };
+
+  // Handles trimming array elements
+  const handleTrim = (e: FocusEvent): void => {
+    const {name, value} = e.target as HTMLInputElement;
+    const splitArr: Array<string> = value.split(',');
+    const trimmedArr: Array<string> = splitArr.map((mvmt: string): string => mvmt.trim());
+    setSongData({ ...songData, [name]: trimmedArr });
+  }
 
   // Handles click on "Submit" button
   const handleFormSubmit = async (e: FormEvent): Promise<void> => {
@@ -305,7 +307,7 @@ const SongForm = (): ReactElement => {
                 <Row>
                   <Col sm={{ span: 8, offset: 2 }}>
                     <Form.Label>Names of movements:</Form.Label>
-                    <Form.Control type="input" name="songMvmtNames" placeholder="Please comma-separate movement names" value={songData.songMvmtNames} className="formInput" onChange={handleInputChange} />
+                    <Form.Control type="input" name="songMvmtNames" placeholder="Please comma-separate movement names" value={songData.songMvmtNames} className="formInput" onChange={handleInputChange} onBlur={handleTrim} />
                   </Col>
                 </Row>
               </Form.Group>
@@ -327,7 +329,7 @@ const SongForm = (): ReactElement => {
                   <Row>
                     <Col sm={{ span: 8, offset: 2 }}>
                       <Form.Label>URLs for demo tracks:</Form.Label>
-                      <Form.Control type="input" name="songMvmtTracks" placeholder="Please comma-separate URLs" value={songData.songMvmtTracks} className="formInput" onChange={handleInputChange} />
+                      <Form.Control type="input" name="songMvmtTracks" placeholder="Please comma-separate URLs" value={songData.songMvmtTracks} className="formInput" onChange={handleInputChange} onBlur={handleTrim} />
                     </Col>
                   </Row>
                 </Form.Group>
@@ -336,7 +338,7 @@ const SongForm = (): ReactElement => {
                   <Row>
                     <Col sm={{ span: 8, offset: 2 }}>
                       <Form.Label>URLs for previews:</Form.Label>
-                      <Form.Control type="input" name="songMvmtPreviews" placeholder="Please comma-separate URLs" value={songData.songMvmtPreviews} className="formInput" onChange={handleInputChange} />
+                      <Form.Control type="input" name="songMvmtPreviews" placeholder="Please comma-separate URLs" value={songData.songMvmtPreviews} className="formInput" onChange={handleInputChange} onBlur={handleTrim} />
                     </Col>
                   </Row>
                 </Form.Group></>
