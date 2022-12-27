@@ -60,45 +60,46 @@ const SongPage = (): ReactElement => {
                   <Row>
                     <p><span className="bold">Liturgical season:</span> {song.songLiturgy}</p>
                   </Row>}
+
+                {song.songTrack &&
+                  <Row className="audioEmbed">
+                    <p>Demo track:</p>
+                    <AudioEmbed title={song.songTitle} src={song.songTrack} songId={song._id} />
+                  </Row>}
+
+                {song.songMvmtTracks[0] &&
+                  (song.songMvmtTracks.map((track: string, i: number): ReactElement =>
+                    <Row key={song._id} className="audioEmbed">
+                      <p>{song.songMvmtNames[i]} demo track:</p>
+                      <AudioEmbed title={song.songMvmtNames[i]} src={track} songId={song._id} />
+                    </Row>))}
               </Col>
 
               {/* TODO: Embed this */}
               {song.songPreview &&
-                <Col sm={{ span: 6, offset: 6 }}  className="previewEmbed">
+                <Col sm={6} className="previewEmbed">
                   <Row>
-                    <object data={song.songPreview} type="application/pdf" width="100%" height="100%">
+                    <object data={song.songPreview} type="application/pdf" className="pdfEmbed">
                       <p>Alternative text - include a link <a href={song.songPreview}>to the PDF!</a></p>
                     </object>
+                    <a href={song.songPreview} target="_blank" rel="noreferrer">Preview {song.songTitle} full size</a>
                   </Row>
                 </Col>}
 
               {/* TODO: And this */}
               {song.songMvmtPreviews[0] &&
-                (song.songMvmtPreviews.map((preview: string, i: number): ReactElement =>
-                  <div key={`${i}${song._id}`} className="previewEmbed">
-                    <p>{song.songMvmtNames[i]} preview:</p>
-                    <object data={preview} type="application/pdf" width="100%" height="100%">
-                      <p>Alternative text - include a link <a href={preview}>to the PDF!</a></p>
-                    </object>
-                  </div>
-                ))
-              }
+                <Col sm={6} className="previewEmbed">
+                  {song.songMvmtPreviews.map((preview: string, i: number): ReactElement =>
+                    <Row key={`${i}${song._id}`} className="previewEmbed">
+                      <p>{song.songMvmtNames[i]} preview:</p>
+                      <object data={preview} type="application/pdf" className="pdfEmbed">
+                        <p>Alternative text - include a link <a href={preview}>to the PDF!</a></p>
+                      </object>
+                      <a href={preview} target="_blank" rel="noreferrer">Preview {song.songMvmtNames[i]} full size</a>
+                    </Row>
+                  )}
+                </Col>}
             </Row>
-
-            {song.songTrack &&
-              <Row className="audioEmbed">
-                <p>Demo track:</p>
-                <AudioEmbed title={song.songTitle} src={song.songTrack} songId={song._id} />
-              </Row>}
-
-            {song.songMvmtTracks[0] &&
-              (song.songMvmtTracks.map((track: string, i: number): ReactElement =>
-                <div key={song._id} className="audioEmbed">
-                  <p>{song.songMvmtNames[i]} demo track:</p>
-                  <AudioEmbed title={song.songMvmtNames[i]} src={track} songId={song._id} />
-                </div>
-              ))
-            }
 
             {song.songVideo &&
               <Row className="centered videoEmbed">

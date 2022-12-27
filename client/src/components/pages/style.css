@@ -324,6 +324,10 @@ a {
   margin-bottom: 1.5rem;
 }
 
+.pdfEmbed {
+  height: 300px;
+}
+
 .red {
   color: #f00;
 }
