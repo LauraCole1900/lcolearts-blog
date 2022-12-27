@@ -1,9 +1,16 @@
-import React, { Component } from "react";
+import { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 
-class CloudinaryUploadWidget extends Component {
-  componentDidMount() {
-    const cloudName = "lauracloud"; // replace with your own cloud name
-    const uploadPreset = "aoh4fpwm"; // replace with your own upload preset
+const CloudinaryUploadWidget = (props) => {
+  const [widget, setWidget] = useState();
+
+  const openWidget = () => {
+    widget.open();
+  }
+
+  useEffect(() => {
+    const cloudName = "lauracloud";
+    const uploadPreset = "ooazqgtg";
 
     // Remove the comments from the code below to add
     // additional functionality.
@@ -12,15 +19,15 @@ class CloudinaryUploadWidget extends Component {
     // can add see:
     //   https://cloudinary.com/documentation/upload_widget_reference
 
-    var myWidget = window.cloudinary.createUploadWidget(
+    const myWidget = window.cloudinary.createUploadWidget(
       {
         cloudName: cloudName,
-        uploadPreset: uploadPreset
+        uploadPreset: uploadPreset,
         // cropping: true, //add a cropping step
         // showAdvancedOptions: true,  //add advanced options (public_id and tag)
-        // sources: [ "local", "url"], // restrict the upload sources to URL and local files
+        sources: ["local", "url"], // restrict the upload sources to URL and local files
         // multiple: false,  //restrict upload to a single file
-        // folder: "user_images", //upload files to the specified folder
+        folder: "my_portfolio", //upload files to the specified folder
         // tags: ["users", "profile"], //add the given tags to the uploaded files
         // context: {alt: "user_uploaded"}, //add the given context data to the uploaded files
         // clientAllowedFormats: ["images"], //restrict uploading to image files only
@@ -30,29 +37,24 @@ class CloudinaryUploadWidget extends Component {
       },
       (error, result) => {
         if (!error && result && result.event === "success") {
-          console.log("Done! Here is the image info: ", result.info);
-          document
-            .getElementById("uploadedimage")
-            .setAttribute("src", result.info.secure_url);
+          console.log("Done! Here is the file info: ", result.info);
+          props.setDataRes(result);
+        } else if (error) {
+          console.error(error)
         }
       }
     );
-    document.getElementById("upload_widget").addEventListener(
-      "click",
-      function () {
-        myWidget.open();
-      },
-      false
-    );
-  }
 
-  render() {
-    return (
-      <button id="upload_widget" className="cloudinary-button">
-        Upload
-      </button>
-    );
-  }
+    setWidget(myWidget);
+
+  }, [])
+
+
+  return (
+    <Button className="cloudinary-button btn" onClick={openWidget}>
+      Upload
+    </Button>
+  );
 }
 
 export default CloudinaryUploadWidget;

@@ -7,22 +7,12 @@ import { songValidate } from "../../utils/validation";
 import { CREATE_SONG, EDIT_SONG, QUERY_ALL_SONGS, QUERY_ME, QUERY_ONE_SONG } from "../../utils/gql";
 import Auth from "../../utils/auth";
 import { ErrorModal, SuccessModal } from "../modals";
+import CloudinaryUploadWidget from "../uploadWidget";
 import { Song, SongErrors, User } from '../../utils/interfaces';
 import "./style.css";
 
 
 const SongForm = (): ReactElement => {
-
-  //=====================//
-  // Cloudinary instance //
-  //=====================//
-
-  const cld = new Cloudinary({
-    cloud: {
-      cloudName: "lauracloud", //Your cloud name
-      upload_preset: "unsigned_upload_preset" //Create an unsigned upload preset and update this
-    }
-  });
 
 
   //=====================//
@@ -36,6 +26,7 @@ const SongForm = (): ReactElement => {
   const [pageReady, setPageReady] = useState(false);
   const [songId, setSongId] = useState(params.songId);
   const [errors, setErrors] = useState<SongErrors | undefined>();
+  const [dataRes, setDataRes] = useState<any>();
   const [songData, setSongData] = useState({
     songTitle: "",
     songVoicing: "",
@@ -111,10 +102,6 @@ const SongForm = (): ReactElement => {
   const handleShowErr = () => setShowErr(true);
   const handleHideErr = () => setShowErr(false);
 
-  const showWidget = (widget): void => {
-    widget.open()
-  }
-
   // Handles input changes to form fields
   const handleInputChange = (e: ChangeEvent<HTMLElement>): void => {
     const { name, value } = e.target as HTMLInputElement;
@@ -130,7 +117,7 @@ const SongForm = (): ReactElement => {
 
   // Handles trimming array elements
   const handleTrim = (e: FocusEvent): void => {
-    const {name, value} = e.target as HTMLInputElement;
+    const { name, value } = e.target as HTMLInputElement;
     const splitArr: Array<string> = value.split(',');
     const trimmedArr: Array<string> = splitArr.map((mvmt: string): string => mvmt.trim());
     setSongData({ ...songData, [name]: trimmedArr });
@@ -212,6 +199,12 @@ const SongForm = (): ReactElement => {
     }
   };
 
+  const setTrackUrl = () => {
+    if (dataRes) {
+      setSongData({ ...songData, songTrack: dataRes.url })
+    }
+  };
+
 
   //=====================//
   //   Run on page load  //
@@ -226,7 +219,7 @@ const SongForm = (): ReactElement => {
     if (!Object.keys(params).length) {
       setPageReady(true);
     }
-  }, [songToEdit, me, params]);
+  }, [dataRes, me, params, songToEdit]);
 
 
   //=====================//
@@ -245,7 +238,7 @@ const SongForm = (): ReactElement => {
   return (
     <>
       {pageReady === true &&
-        <Container>
+        <Container className="ltBg">
           <Row>
             <Col sm={12} className="formHeader">
               {Object.keys(params).length > 0
@@ -364,7 +357,7 @@ const SongForm = (): ReactElement => {
                   <Row>
                     <Col sm={{ span: 8, offset: 2 }}>
                       <Form.Label>URL for demo track:</Form.Label>
-                      <Form.Control type="input" name="songTrack" placeholder="Demo track" value={songData.songTrack} className="formInput" onChange={handleInputChange} />
+                      <Form.Control type="input" name="songTrack" placeholder="Demo track" value={songData.songTrack} className="formInput" onChange={handleInputChange} onFocus={setTrackUrl} />
                     </Col>
                   </Row>
                 </Form.Group>
@@ -388,11 +381,18 @@ const SongForm = (): ReactElement => {
                 </Form.Group>
               </>}
 
+            <Row>
+              <Col sm={{ span: 3, offset: 2 }}>
+                <CloudinaryUploadWidget dataRes={dataRes} setDataRes={setDataRes} />
+              </Col>
+            </Row>
+
+            {dataRes &&
               <Row>
-                <Col sm={{ span: 3, offset: 2 }}>
-                  <Button data-toggle="popover" title="Upload" className="button formBtn" onClick={showWidget} type="button">Upload media</Button>
+                <Col sm={{ span: 8, offset: 2 }}>
+                  <p className="bold">Here is the URL of the uploaded file: {dataRes.info.secure_url}</p>
                 </Col>
-              </Row>
+              </Row>}
 
             <Row>
               <Col sm={{ span: 3, offset: 2 }}>

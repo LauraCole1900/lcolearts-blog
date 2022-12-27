@@ -18,6 +18,28 @@
   --translucentBgGreen: rgba(3, 17, 5, 0.55);
 }
 
+.btn {
+  background-color: var(--ltBlue);
+  color: var(--dkGreen);
+  border: 3px solid var(--dkGreen);
+  border-radius: 10px;
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 3px;
+}
+
+.btn:hover {
+  color: var(--ltBlue);
+  background-color: var(--dkGreen);
+  border: 3px solid var(--ltBlue);
+}
+
+.btn:visited {
+  background-color: var(--ltBlue);
+  color: var(--dkGreen);
+  border: 3px solid var(--dkGreen);
+}
+
 .mycontainer {
   background-color: var(--ltGray);
 }

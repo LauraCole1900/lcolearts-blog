@@ -57,6 +57,12 @@ a {
   cursor: pointer;
 }
 
+.audioEmbed,
+.previewEmbed,
+.videoEmbed {
+  margin-bottom: 2rem;
+}
+
 .darkBg {
   background: var(--translucentBgDk);
   border-radius: 5px;

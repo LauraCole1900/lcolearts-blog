@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
-import { Params, useParams } from "react-router-dom";
+import { Link, Params, useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { QUERY_ONE_SONG } from "../../utils/gql";
 import { Song } from "../../utils/interfaces";
 import { AudioEmbed, VideoEmbed } from "../embed";
@@ -64,7 +64,7 @@ const SongPage = (): ReactElement => {
 
               {/* TODO: Embed this */}
               {song.songPreview &&
-                <Col sm={{ span: 6, offset: 6 }}>
+                <Col sm={{ span: 6, offset: 6 }}  className="previewEmbed">
                   <Row>
                     <object data={song.songPreview} type="application/pdf" width="100%" height="100%">
                       <p>Alternative text - include a link <a href={song.songPreview}>to the PDF!</a></p>
@@ -75,7 +75,7 @@ const SongPage = (): ReactElement => {
               {/* TODO: And this */}
               {song.songMvmtPreviews[0] &&
                 (song.songMvmtPreviews.map((preview: string, i: number): ReactElement =>
-                  <div key={`${i}${song._id}`}>
+                  <div key={`${i}${song._id}`} className="previewEmbed">
                     <p>{song.songMvmtNames[i]} preview:</p>
                     <object data={preview} type="application/pdf" width="100%" height="100%">
                       <p>Alternative text - include a link <a href={preview}>to the PDF!</a></p>
@@ -86,14 +86,14 @@ const SongPage = (): ReactElement => {
             </Row>
 
             {song.songTrack &&
-              <Row>
+              <Row className="audioEmbed">
                 <p>Demo track:</p>
                 <AudioEmbed title={song.songTitle} src={song.songTrack} songId={song._id} />
               </Row>}
 
             {song.songMvmtTracks[0] &&
               (song.songMvmtTracks.map((track: string, i: number): ReactElement =>
-                <div key={song._id}>
+                <div key={song._id} className="audioEmbed">
                   <p>{song.songMvmtNames[i]} demo track:</p>
                   <AudioEmbed title={song.songMvmtNames[i]} src={track} songId={song._id} />
                 </div>
@@ -101,11 +101,12 @@ const SongPage = (): ReactElement => {
             }
 
             {song.songVideo &&
-              <Row className="centered">
+              <Row className="centered videoEmbed">
                 <VideoEmbed src={song.songVideo} title={song.songTitle} />
               </Row>
             }
 
+            <Link to="/music"><Button className="btn">Return to list</Button></Link>
           </Col>
         </Row>
       </Container>
