@@ -2,6 +2,7 @@ import { ChangeEvent, FocusEvent, FormEvent, ReactElement, useEffect, useMemo, u
 import { Navigate, useParams } from "react-router-dom";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { ApolloCache, QueryResult, useMutation, useQuery } from "@apollo/client";
+import { Cloudinary } from "@cloudinary/url-gen";
 import { songValidate } from "../../utils/validation";
 import { CREATE_SONG, EDIT_SONG, QUERY_ALL_SONGS, QUERY_ME, QUERY_ONE_SONG } from "../../utils/gql";
 import Auth from "../../utils/auth";
@@ -11,6 +12,18 @@ import "./style.css";
 
 
 const SongForm = (): ReactElement => {
+
+  //=====================//
+  // Cloudinary instance //
+  //=====================//
+
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName: "lauracloud", //Your cloud name
+      upload_preset: "unsigned_upload_preset" //Create an unsigned upload preset and update this
+    }
+  });
+
 
   //=====================//
   //   Global Variables  //
@@ -97,6 +110,10 @@ const SongForm = (): ReactElement => {
   const handleHideSuccess = () => setShowSuccess(false);
   const handleShowErr = () => setShowErr(true);
   const handleHideErr = () => setShowErr(false);
+
+  const showWidget = (widget): void => {
+    widget.open()
+  }
 
   // Handles input changes to form fields
   const handleInputChange = (e: ChangeEvent<HTMLElement>): void => {
@@ -370,6 +387,12 @@ const SongForm = (): ReactElement => {
                   </Row>
                 </Form.Group>
               </>}
+
+              <Row>
+                <Col sm={{ span: 3, offset: 2 }}>
+                  <Button data-toggle="popover" title="Upload" className="button formBtn" onClick={showWidget} type="button">Upload media</Button>
+                </Col>
+              </Row>
 
             <Row>
               <Col sm={{ span: 3, offset: 2 }}>
