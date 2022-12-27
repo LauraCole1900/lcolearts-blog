@@ -201,7 +201,7 @@ const SongForm = (): ReactElement => {
 
   const setTrackUrl = () => {
     if (dataRes) {
-      setSongData({ ...songData, songTrack: dataRes.url })
+      setSongData({ ...songData, songTrack: dataRes.secure_url })
     }
   };
 
