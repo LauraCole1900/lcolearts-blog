@@ -2,7 +2,6 @@ import { ChangeEvent, FocusEvent, FormEvent, ReactElement, useEffect, useMemo, u
 import { Navigate, useParams } from "react-router-dom";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { ApolloCache, QueryResult, useMutation, useQuery } from "@apollo/client";
-import { Cloudinary } from "@cloudinary/url-gen";
 import { songValidate } from "../../utils/validation";
 import { CREATE_SONG, EDIT_SONG, QUERY_ALL_SONGS, QUERY_ME, QUERY_ONE_SONG } from "../../utils/gql";
 import Auth from "../../utils/auth";
