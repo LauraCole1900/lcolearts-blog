@@ -31,24 +31,6 @@ const SongPage = (): ReactElement => {
 
             <Row>
               <Col sm={6}>
-                <Row>
-                  <p><span className="bold">Voicing:</span> {song.songVoicing}</p>
-                </Row>
-
-                <Row>
-                  <p><span className="bold">Instrumentation:</span> {song.songAccompaniment}</p>
-                </Row>
-
-                {song.songMajorWork &&
-                  <>
-                    <p><span className="bold">Movements:</span></p>
-                    {song.songMvmtNames.map((title: string, i: number) => <p key={`${song._id}${i}`} className="mvmtNames">{title}</p>)}
-                  </>}
-
-                {song.songYear &&
-                  <Row>
-                    <p><span className="bold">Year composed:</span> {song.songYear}</p>
-                  </Row>}
 
                 <Row>
                   {song.songSacred === true
@@ -61,18 +43,36 @@ const SongPage = (): ReactElement => {
                     <p><span className="bold">Liturgical season:</span> {song.songLiturgy}</p>
                   </Row>}
 
+                <Row>
+                  <p><span className="bold">Voicing:</span> {song.songVoicing}</p>
+                </Row>
+
+                <Row>
+                  <p><span className="bold">Instrumentation:</span> {song.songAccompaniment}</p>
+                </Row>
+
+                {song.songMajorWork &&
+                  <>
+                    <p><span className="bold">Movements:</span></p>
+                    {song.songMvmtNames.map((title: string, i: number) => <p key={`${song._id}${i}`} className="mvmtNames">{title}</p>)}
+                    {song.songMvmtTracks[0] &&
+                      (song.songMvmtTracks.map((track: string, i: number): ReactElement =>
+                        <Row>
+                          <AudioEmbed title={song.songMvmtNames[i]} src={track} songId={song._id} />
+                        </Row>))}
+                  </>}
+
+                {song.songYear &&
+                  <Row>
+                    <p><span className="bold">Year composed:</span> {song.songYear}</p>
+                  </Row>}
+
                 {song.songTrack &&
                   <Row className="audioEmbed">
                     <p>Demo track:</p>
                     <AudioEmbed title={song.songTitle} src={song.songTrack} songId={song._id} />
                   </Row>}
 
-                {song.songMvmtTracks[0] &&
-                  (song.songMvmtTracks.map((track: string, i: number): ReactElement =>
-                    <Row key={song._id} className="audioEmbed">
-                      <p>{song.songMvmtNames[i]} demo track:</p>
-                      <AudioEmbed title={song.songMvmtNames[i]} src={track} songId={song._id} />
-                    </Row>))}
               </Col>
 
               {/* TODO: Embed this */}
