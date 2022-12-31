@@ -113,6 +113,10 @@ a {
   margin-right: 0.25rem;
 }
 
+.songBtn {
+  margin-top: 1rem;
+}
+
 .caption {
   font-size: 12px;
 }
@@ -274,6 +278,10 @@ a {
 
 .loginLabel {
   color: var(--dkGreen);
+}
+
+.mvmtMargins {
+  margin-top: 1rem;
 }
 
 .mvmtNames {

@@ -51,21 +51,20 @@ const SongPage = (): ReactElement => {
                   <p><span className="bold">Instrumentation:</span> {song.songAccompaniment}</p>
                 </Row>
 
-                {song.songMajorWork &&
-                  <>
-                    <p><span className="bold">Movements:</span></p>
-                    {song.songMvmtNames.map((title: string, i: number) => <p key={`${song._id}${i}`} className="mvmtNames">{title}</p>)}
-                    {song.songMvmtTracks[0] &&
-                      (song.songMvmtTracks.map((track: string, i: number): ReactElement =>
-                        <Row>
-                          <AudioEmbed title={song.songMvmtNames[i]} src={track} songId={song._id} />
-                        </Row>))}
-                  </>}
-
                 {song.songYear &&
                   <Row>
                     <p><span className="bold">Year composed:</span> {song.songYear}</p>
                   </Row>}
+
+                {song.songMajorWork &&
+                  <>
+                    <p><span className="bold">Movements:</span></p>
+                    {song.songMvmtNames.map((title: string, i: number) =>
+                      <>
+                        <p key={`${song._id}${i}`} className="mvmtNames mvmtMargins">{title}</p>
+                        <AudioEmbed title={title} src={song.songMvmtTracks[i]} songId={song._id} />
+                      </>)}
+                  </>}
 
                 {song.songTrack &&
                   <Row className="audioEmbed">
@@ -107,7 +106,7 @@ const SongPage = (): ReactElement => {
               </Row>
             }
 
-            <Link to="/music"><Button className="btn">Return to list</Button></Link>
+            <Link to="/music"><Button className="btn songBtn">Return to list</Button></Link>
           </Col>
         </Row>
       </Container>
