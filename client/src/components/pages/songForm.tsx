@@ -25,7 +25,7 @@ const SongForm = (): ReactElement => {
   const [pageReady, setPageReady] = useState(false);
   const [songId, setSongId] = useState(params.songId);
   const [errors, setErrors] = useState<SongErrors | undefined>();
-  const [dataRes, setDataRes] = useState<any>();
+  const [dataRes, setDataRes] = useState<any>({});
   const [songData, setSongData] = useState({
     songTitle: "",
     songVoicing: "",
@@ -386,7 +386,7 @@ const SongForm = (): ReactElement => {
               </Col>
             </Row>
 
-            {dataRes &&
+            {Object.keys(dataRes).length > 0 &&
               <Row>
                 <Col sm={{ span: 8, offset: 2 }}>
                   <p className="bold">Here is the URL of the uploaded file: {dataRes.info.secure_url}</p>
