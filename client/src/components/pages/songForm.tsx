@@ -198,12 +198,6 @@ const SongForm = (): ReactElement => {
     }
   };
 
-  const setTrackUrl = () => {
-    if (dataRes) {
-      setSongData({ ...songData, songTrack: dataRes.secure_url })
-    }
-  };
-
 
   //=====================//
   //   Run on page load  //
@@ -356,7 +350,7 @@ const SongForm = (): ReactElement => {
                   <Row>
                     <Col sm={{ span: 8, offset: 2 }}>
                       <Form.Label>URL for demo track:</Form.Label>
-                      <Form.Control type="input" name="songTrack" placeholder="Demo track" value={songData.songTrack} className="formInput" onChange={handleInputChange} onFocus={setTrackUrl} />
+                      <Form.Control type="input" name="songTrack" placeholder="Demo track" value={songData.songTrack} className="formInput" onChange={handleInputChange} />
                     </Col>
                   </Row>
                 </Form.Group>
