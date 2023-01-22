@@ -28,6 +28,13 @@
   margin-bottom: 3px;
 }
 
+.btn:active,
+.btn:focus {
+  box-shadow: 0 0 10px var(--dkGreen);
+}
+
+.btn:active,
+.btn:focus,
 .btn:hover {
   color: var(--ltBlue);
   background-color: var(--dkGreen);
