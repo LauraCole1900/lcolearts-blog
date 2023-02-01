@@ -378,6 +378,13 @@ const SongForm = (): ReactElement => {
               <Col sm={{ span: 3, offset: 2 }}>
                 <CloudinaryUploadWidget dataRes={dataRes} setDataRes={setDataRes} />
               </Col>
+
+              <Col sm={{span: 3, offset: 2}}>
+                {!Object.keys(params).length
+                  ? <Button data-toggle="popover" title="Submit" disabled={!(songData.songTitle && songData.songVoicing && songData.songAccompaniment)} className="button formBtn" onClick={handleFormSubmit} type="submit">Submit</Button>
+                  : <Button data-toggle="popover" title="Update" disabled={!(songData.songTitle && songData.songVoicing && songData.songAccompaniment)} className="button formBtn" onClick={handleFormUpdate} type="submit">Update</Button>
+                }
+              </Col>
             </Row>
 
             {Object.keys(dataRes).length > 0 &&
@@ -388,12 +395,7 @@ const SongForm = (): ReactElement => {
               </Row>}
 
             <Row>
-              <Col sm={{ span: 3, offset: 2 }}>
-                {!Object.keys(params).length
-                  ? <Button data-toggle="popover" title="Submit" disabled={!(songData.songTitle && songData.songVoicing && songData.songAccompaniment)} className="button formBtn" onClick={handleFormSubmit} type="submit">Submit</Button>
-                  : <Button data-toggle="popover" title="Update" disabled={!(songData.songTitle && songData.songVoicing && songData.songAccompaniment)} className="button formBtn" onClick={handleFormUpdate} type="submit">Update</Button>
-                }
-              </Col>
+
             </Row>
 
           </Form>
