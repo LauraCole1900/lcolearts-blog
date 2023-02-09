@@ -324,6 +324,11 @@ a {
   color: var(--medBlue);
 }
 
+.purchaseThis {
+  color: var(--medColumbine);
+  font-weight: 700;
+}
+
 .music-pagination {
   margin-left: 0;
 }

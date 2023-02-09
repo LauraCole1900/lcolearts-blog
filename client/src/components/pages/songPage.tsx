@@ -27,7 +27,13 @@ const SongPage = (): ReactElement => {
       <Container>
         <Row>
           <Col sm={{ span: 10, offset: 1 }} className="transpBground">
-            <h1>{song.songTitle}</h1>
+            <Row>
+              <h1>{song.songTitle}</h1>
+            </Row>
+
+            <Row>
+              <p className="purchaseThis">*** If you are interested in purchasing copies of this composition, please <a href="mailto:lauracole1900@comcast.net">email me</a> ***</p>
+            </Row>
 
             <Row>
               <Col sm={6}>
