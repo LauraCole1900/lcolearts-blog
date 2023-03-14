@@ -12,9 +12,12 @@ const db = require("./config/connection");
 
 const PORT: any | 3001 = process.env.PORT || 3001;
 
-async function startApolloServer(resolvers: any, typeDefs: any) {
+const { Express } = express;
+const { Server } = http;
+
+async function startApolloServer(resolvers: Object, typeDefs: string) {
   const app = express();
-  const httpServer = http.createServer(app);
+  const httpServer: typeof Server = http.createServer(app);
   const server = new ApolloServer({
     typeDefs,
     resolvers,
@@ -36,16 +39,14 @@ async function startApolloServer(resolvers: any, typeDefs: any) {
     app.use(express.static(path.join(__dirname, "../client/build")));
   }
 
-  app.get("*", (req: any, res: any): void => {
+  app.get("*", (req: typeof Express.Request, res: typeof Express.Response): void => {
     res.sendFile(path.join(__dirname, "../client/build/index.html"));
   });
 
   db.once("open", (): void => {
     httpServer.listen(PORT, () => {
       console.log(`API server running on port ${PORT}!`);
-      console.log(
-        `Use GraphQL at http://localhost:${PORT}/graphql`
-      );
+      console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
     });
   });
 }
