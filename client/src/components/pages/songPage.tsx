@@ -1,10 +1,11 @@
-import { ReactElement } from "react";
+import { ReactElement, useEffect } from "react";
 import { Link, Params, useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { QUERY_ONE_SONG } from "../../utils/gql";
 import { Song } from "../../utils/interfaces";
 import { AudioEmbed, VideoEmbed } from "../embed";
+import NotFound from './notFound';
 
 
 const SongPage = (): ReactElement => {
@@ -17,8 +18,20 @@ const SongPage = (): ReactElement => {
     });
   const song: Song = songData?.getSong || {};
 
+  // Set tab text on initial render/when data comes back from the database
+  useEffect((): void => {
+    if (!songError) {
+      song.songTitle ? document.title = `${song.songTitle}` : document.title = `My Music`
+    }
+  }, [song]);
+
+
   if (songLoading) {
     return <h1>Loading....</h1>
+  };
+
+  if (songError) {
+    return <NotFound />
   };
 
 

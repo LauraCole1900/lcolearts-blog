@@ -202,6 +202,10 @@ const Blog = (): ReactElement => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [entriesArr, itemOffset, params]);
 
+  useEffect((): void => {
+    document.title = `My Blog`
+  });
+
 
   //================//
   //  Conditionals  //

@@ -177,6 +177,12 @@ const Music = (): ReactElement => {
   }, [songsArr, sortBy, itemOffset, params]);
 
 
+  // Set tab text on initial render
+  useEffect((): void => {
+    document.title = `Music Catalog`
+  }, []);
+
+
   //================//
   //  Conditionals  //
   //================//

@@ -1,10 +1,13 @@
-import { ReactElement } from "react";
+import { ReactElement, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button, Col, Container, Row } from "react-bootstrap";
 
 
 const NotFound = (): ReactElement => {
 
+  useEffect((): void => {
+    document.title = `404 Not Found`
+  });
 
   return (
     <>
