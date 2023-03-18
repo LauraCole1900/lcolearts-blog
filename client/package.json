@@ -4,7 +4,7 @@
   "private": true,
   "proxy": "http://localhost:3001/",
   "dependencies": {
-    "@apollo/client": "^3.5.7",
+    "@apollo/client": "^3.7.10",
     "@cloudinary/react": "^1.7.0",
     "@cloudinary/url-gen": "^1.8.7",
     "@testing-library/jest-dom": "^5.15.1",
