@@ -24,6 +24,7 @@ const Blog = (): ReactElement => {
 
   const params: Readonly<Params<string>> = useParams();
   let navigate: NavigateFunction = useNavigate();
+  console.log(params)
 
 
   //=================//
@@ -120,6 +121,11 @@ const Blog = (): ReactElement => {
   const handlePageClick = (e: any): void => {
     const newOffset: number = (e.selected * 10);
     setItemOffset(newOffset);
+    if (params.tag) {
+      navigate(`/tags/${params.tag}/${newOffset / 10 + 1}`);
+    } else {
+      navigate(`/blog/page/${newOffset / 10 + 1}`);
+    }
   };
 
 
@@ -185,14 +191,26 @@ const Blog = (): ReactElement => {
 
   useEffect((): void => {
     if (entriesArr?.length) {
-      const endOffset: number = itemOffset + 10;
       fetchTags();
       if (Object.keys(params).length) {
-        const filteredEntries: Post[] = sortedEntries.filter((post: Post): boolean => post.postKeywords.includes(params.tag!));
-        setEntriesToRender(filteredEntries.slice(itemOffset, endOffset));
-        setPageCount(Math.ceil(filteredEntries.length / 10));
+        if (params.pageNum) {
+          setItemOffset((parseInt(params.pageNum!) - 1) * 10)
+        } else {
+          setItemOffset(0);
+        }
+        const endOffset: number = itemOffset + 10;
+        console.log(endOffset)
+        if (params.tag) {
+          const filteredEntries: Post[] = sortedEntries.filter((post: Post): boolean => post.postKeywords.includes(params.tag!));
+          setEntriesToRender(filteredEntries.slice(itemOffset, endOffset));
+          setPageCount(Math.ceil(filteredEntries.length / 10));
+        } else {
+          setEntriesToRender(sortedEntries.slice(itemOffset, endOffset));
+          setPageCount(Math.ceil(sortedEntries.length / 10));
+        }
         setPageReady(true);
       } else {
+        const endOffset: number = itemOffset + 10;
         setEntriesToRender(sortedEntries.slice(itemOffset, endOffset));
         setPageCount(Math.ceil(sortedEntries.length / 10));
         setPageReady(true);

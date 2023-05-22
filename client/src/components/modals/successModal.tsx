@@ -14,7 +14,6 @@ interface SuccessProps {
 const SuccessModal = (props: SuccessProps): ReactElement => {
 
   const urlArray: string[] = window.location.href.split("/");
-  const urlWhere: string | undefined = urlArray.at(-1);
 
 
   return (
@@ -31,15 +30,15 @@ const SuccessModal = (props: SuccessProps): ReactElement => {
           <Modal.Footer className="modalFooter">
 
             {/* Link to Blog */}
-            {urlWhere !== "blog"
-              ? <Link to="/blog">
+            {!urlArray.includes("blog")
+              ? <Link to="/blog/page/1">
                 <Button data-toggle="popover" title="Blog" type="button" className="button">Blog</Button>
               </Link>
               : <Button data-toggle="popover" title="Blog" type="button" className="button" onClick={props.hide}>Blog</Button>}
 
             {/* Link to Compositions */}
-            {urlWhere !== "music"
-              ? <Link to="/music">
+            {!urlArray.includes("music")
+              ? <Link to="/music/page/1">
                 <Button data-toggle="popover" title="Compositions" type="button" className="button">Compositions</Button>
               </Link>
               : <Button data-toggle="popover" title="Compositions" type="button" className="button" onClick={props.hide}>Compositions</Button>}

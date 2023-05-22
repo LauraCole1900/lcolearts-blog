@@ -36,13 +36,13 @@ const NotFound = (): ReactElement => {
             <a href="https://lcolearts.com/#/musician">
               <Button data-toggle="popover" title="Musician" className="button btn btn404">Music CV</Button>
             </a>
-            <Link to="/music">
+            <Link to="/music/page/1">
               <Button data-toggle="popover" title="Compositions" className="button btn btn404">Compositions</Button>
             </Link>
             <a href="https://lcolearts.com/#/martial_artist">
               <Button data-toggle="popover" title="Martial Artist" className="button btn btn404">Martial Artist</Button>
             </a>
-            <Link to="/blog">
+            <Link to="/blog/page/1">
               <Button data-toggle="popover" title="Blog" className="button btn btn404">Blog</Button>
             </Link>
           </Col>

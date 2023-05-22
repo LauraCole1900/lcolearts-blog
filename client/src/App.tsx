@@ -60,15 +60,16 @@ const App = (): ReactElement => {
           <Container fluid className="mycontainer">
             <Routes>
               <Route path="/" element={<LandingPage />} />
-              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/page/:pageNum" element={<Blog />} />
               <Route path="/tags/:tag" element={<Blog />} />
+              <Route path="/tags/:tag/:pageNum" element={<Blog />} />
               <Route path="/blog/:blogId" element={<BlogEntry />} />
               <Route path="/log_me_in" element={<LoginPage />} />
               <Route path="/new_post" element={<PostForm />} />
               <Route path="/edit_post/:postId" element={<PostForm />} />
               <Route path="/new_song" element={<SongForm />} />
               <Route path="/edit_song/:songId" element={<SongForm />} />
-              <Route path="/music" element={<Music />} />
+              <Route path="/music/page/:pageNum" element={<Music />} />
               <Route path="/music/:songId" element={<SongPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>

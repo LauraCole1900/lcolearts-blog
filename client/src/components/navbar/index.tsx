@@ -29,12 +29,12 @@ const Navigation = (): ReactElement => {
           </a>
           <NavDropdown title="Musician">
             <NavDropdown.Item href="https://lcolearts.com/#/musician" className="navlink">C.V.</NavDropdown.Item>
-            <NavDropdown.Item href="/music" className="navlink" rel="noreferred noopener">Compositions</NavDropdown.Item>
+            <NavDropdown.Item href="/music/page/1" className="navlink" rel="noreferred noopener">Compositions</NavDropdown.Item>
           </NavDropdown>
           <a href="https://lcolearts.com/#/martial_artist" className="navlink">
             Martial Artist
           </a>
-          <Link to="/blog" className="navlink">
+          <Link to="/blog/page/1" className="navlink">
             Blog
           </Link>
           <a href="https://lcolearts.com/#/fun_and_games" className="navlink">

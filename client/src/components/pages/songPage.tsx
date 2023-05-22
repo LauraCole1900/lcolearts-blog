@@ -1,5 +1,5 @@
 import { ReactElement, useEffect } from "react";
-import { Link, Params, useParams } from "react-router-dom";
+import { Link, NavigateFunction, Params, useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { QUERY_ONE_SONG } from "../../utils/gql";
@@ -11,12 +11,18 @@ import NotFound from './notFound';
 const SongPage = (): ReactElement => {
 
   const params: Readonly<Params<string>> = useParams<string>();
+  const navigate: NavigateFunction = useNavigate();
 
   const { loading: songLoading, data: songData, error: songError } = useQuery(QUERY_ONE_SONG,
     {
       variables: { id: params.songId }
     });
   const song: Song = songData?.getSong || {};
+
+
+  const goBack = (): void => {
+    navigate(-1);
+  }
 
   // Set tab text on initial render/when data comes back from the database
   useEffect((): void => {
@@ -125,7 +131,7 @@ const SongPage = (): ReactElement => {
               </Row>
             }
 
-            <Link to="/music"><Button className="btn songBtn">Return to list</Button></Link>
+            <Button className="btn songBtn" onClick={goBack}>Return to list</Button>
           </Col>
         </Row>
       </Container>

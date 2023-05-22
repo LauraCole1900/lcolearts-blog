@@ -224,7 +224,7 @@ const SongForm = (): ReactElement => {
   };
 
   if (!Auth.loggedIn()) {
-    return <Navigate to="/blog" />
+    return <Navigate to="/music/page/1" />
   };
 
 

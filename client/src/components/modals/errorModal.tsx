@@ -32,10 +32,10 @@ const ErrorModal = (props: ErrorProps): ReactElement => {
             <Button data-toggle="popover" title="Close" type="button" className="button" onClick={props.hide}>Close</Button>
 
             {/* Link to Blog page */}
-            <Link to={"/blog"}>
+            <Link to={"/blog/page/1"}>
               <Button data-toggle="popover" title="Blog" type="button" className="button">Return to Blog</Button>
             </Link>
-            <Link to={"/music"}>
+            <Link to={"/music/page/1"}>
               <Button data-toggle="popover" title="Compositions" type="button" className="button">Return to Compositions</Button>
             </Link>
 

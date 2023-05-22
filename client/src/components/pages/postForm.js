@@ -199,7 +199,7 @@ const PostForm = () => {
   };
 
   if (!Auth.loggedIn()) {
-    return <Navigate to="/blog" />
+    return <Navigate to="/blog/page/1" />
   };
 
 
