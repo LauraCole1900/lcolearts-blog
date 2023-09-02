@@ -24,6 +24,9 @@ var typeDefs: any = gql`
     songVideo: String
     songPreview: String
     songYear: String
+    songOtherVerName: [String]
+    songOtherVerUrl: [String]
+    songNotes: String
   }
 
   type User {
@@ -58,9 +61,9 @@ var typeDefs: any = gql`
     createEntry(postTitle: String!, postBody: String!, postKeywords: [String!]): Post
     deleteEntry(_id: ID!): Post
     editEntry(_id: ID!, postTitle: String!, postBody: String!, postKeywords: [String!]): Post
-    createSong(songTitle: String!, songVoicing: String!, songAccompaniment: String!, songMajorWork: Boolean, songMvmtNames: [String!], songMvmtTracks: [String!], songMvmtPreviews: [String!], songSacred: Boolean!, songLiturgy: String, songTrack: String, songVideo: String, songPreview: String, songYear: String): Song
+    createSong(songTitle: String!, songVoicing: String!, songAccompaniment: String!, songMajorWork: Boolean, songMvmtNames: [String!], songMvmtTracks: [String!], songMvmtPreviews: [String!], songSacred: Boolean!, songLiturgy: String, songTrack: String, songVideo: String, songPreview: String, songYear: String, songOtherVerName: [String], songOtherVerUrl: [String], songNotes: String): Song
     deleteSong(_id: ID!): Song
-    editSong(_id: ID!, songTitle: String!, songVoicing: String!, songAccompaniment: String!, songMajorWork: Boolean, songMvmtNames: [String!], songMvmtTracks: [String!], songMvmtPreviews: [String!], songSacred: Boolean!, songLiturgy: String, songTrack: String, songVideo: String, songPreview: String, songYear: String): Song
+    editSong(_id: ID!, songTitle: String!, songVoicing: String!, songAccompaniment: String!, songMajorWork: Boolean, songMvmtNames: [String!], songMvmtTracks: [String!], songMvmtPreviews: [String!], songSacred: Boolean!, songLiturgy: String, songTrack: String, songVideo: String, songPreview: String, songYear: String, songOtherVerName: [String], songOtherVerUrl: [String] songNotes: String): Song
   }
 `;
 

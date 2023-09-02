@@ -44,6 +44,15 @@ const songSchema = new Schema({
   },
   songYear: {
     type: String
+  },
+  songOtherVerName: {
+    type: [String]
+  },
+  songOtherVerUrl: {
+    type: [String]
+  },
+  songNotes: {
+    type: String
   }
 });
 

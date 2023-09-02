@@ -21,7 +21,10 @@ export interface Song {
   songTrack: string,
   songVideo: string,
   songPreview: string,
-  songYear: string
+  songYear: string,
+  songOtherVerName: Array<string>,
+  songOtherVerUrl: Array<string>,
+  songNotes: string
 }
 
 export interface SongErrors {

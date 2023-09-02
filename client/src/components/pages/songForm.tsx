@@ -39,7 +39,10 @@ const SongForm = (): ReactElement => {
     songTrack: "",
     songVideo: "",
     songPreview: "",
-    songYear: ""
+    songYear: "",
+    songOtherVerName: [""],
+    songOtherVerUrl: [""],
+    songNotes: ""
   });
 
   // States passed to modals
@@ -153,7 +156,10 @@ const SongForm = (): ReactElement => {
         songTrack: "",
         songVideo: "",
         songPreview: "",
-        songYear: ""
+        songYear: "",
+        songOtherVerName: [""],
+        songOtherVerUrl: [""],
+        songNotes: ""
       });
     } else {
       console.error({ validationErrors });
@@ -191,7 +197,10 @@ const SongForm = (): ReactElement => {
         songTrack: "",
         songVideo: "",
         songPreview: "",
-        songYear: ""
+        songYear: "",
+        songOtherVerName: [""],
+        songOtherVerUrl: [""],
+        songNotes: ""
       });
     } else {
       console.error({ validationErrors });
@@ -280,6 +289,17 @@ const SongForm = (): ReactElement => {
                 <Col sm={{ span: 8, offset: 2 }}>
                   <Form.Label>Year composed:</Form.Label>
                   <Form.Control type="input" name="songYear" placeholder="Year" value={songData.songYear} className="formInput" onChange={handleInputChange} />
+                </Col>
+              </Row>
+            </Form.Group>
+
+            <Form.Group controlId="formSongVersions">
+              <Row>
+                <Col sm={{ span: 8, offset: 2 }}>
+                  <Form.Label>Voicing of other versions:</Form.Label>
+                  <Form.Control type="input" name="songOtherVerName" placeholder="Other versions, voicing" value={songData.songOtherVerName} className="formInput" onChange={handleInputChange} onBlur={handleTrim} />
+                  <Form.Label>URLs of other versions:</Form.Label>
+                  <Form.Control type="input" name="songOtherVerName" placeholder="Other versions, URLs" value={songData.songOtherVerUrl} className="formInput" onChange={handleInputChange} onBlur={handleTrim} />
                 </Col>
               </Row>
             </Form.Group>
