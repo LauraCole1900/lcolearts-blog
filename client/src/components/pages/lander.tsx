@@ -12,10 +12,10 @@ const LandingPage = (): ReactElement => {
       </Row>
       <Row>
         <Col sm={{ span: 2, offset: 4 }}>
-          <Link to="/blog"><Button data-toggle="popover" title="Blog" className="button btn btn404">My Blog</Button></Link>
+          <Link to="/blog/page/1"><Button data-toggle="popover" title="Blog" className="button btn btn404">My Blog</Button></Link>
         </Col>
         <Col sm={2}>
-          <Link to="/music"><Button data-toggle="popover" title="Compositions" className="button btn btn404">My Compositions</Button></Link>
+          <Link to="/music/page/1"><Button data-toggle="popover" title="Compositions" className="button btn btn404">My Compositions</Button></Link>
         </Col>
       </Row>
     </Container>

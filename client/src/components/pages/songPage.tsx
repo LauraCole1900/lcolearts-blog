@@ -1,15 +1,17 @@
-import { ReactElement } from "react";
-import { Link, Params, useParams } from "react-router-dom";
+import { ReactElement, useEffect } from "react";
+import { Link, NavigateFunction, Params, useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { QUERY_ONE_SONG } from "../../utils/gql";
 import { Song } from "../../utils/interfaces";
 import { AudioEmbed, VideoEmbed } from "../embed";
+import NotFound from './notFound';
 
 
 const SongPage = (): ReactElement => {
 
   const params: Readonly<Params<string>> = useParams<string>();
+  const navigate: NavigateFunction = useNavigate();
 
   const { loading: songLoading, data: songData, error: songError } = useQuery(QUERY_ONE_SONG,
     {
@@ -17,8 +19,25 @@ const SongPage = (): ReactElement => {
     });
   const song: Song = songData?.getSong || {};
 
+
+  const goBack = (): void => {
+    navigate(-1);
+  }
+
+  // Set tab text on initial render/when data comes back from the database
+  useEffect((): void => {
+    if (!songError) {
+      song.songTitle ? document.title = `${song.songTitle}` : document.title = `My Music`
+    }
+  }, [song]);
+
+
   if (songLoading) {
     return <h1>Loading....</h1>
+  };
+
+  if (songError) {
+    return <NotFound />
   };
 
 
@@ -27,7 +46,13 @@ const SongPage = (): ReactElement => {
       <Container>
         <Row>
           <Col sm={{ span: 10, offset: 1 }} className="transpBground">
-            <h1>{song.songTitle}</h1>
+            <Row>
+              <h1>{song.songTitle}</h1>
+            </Row>
+
+            <Row>
+              <p className="purchaseThis">*** If you are interested in purchasing copies of this composition, please <a href="mailto:lauracole1900@comcast.net">email me</a> ***</p>
+            </Row>
 
             <Row>
               <Col sm={6}>
@@ -106,7 +131,7 @@ const SongPage = (): ReactElement => {
               </Row>
             }
 
-            <Link to="/music"><Button className="btn songBtn">Return to list</Button></Link>
+            <Button className="btn songBtn" onClick={goBack}>Return to list</Button>
           </Col>
         </Row>
       </Container>

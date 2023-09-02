@@ -60,13 +60,13 @@ const SongForm = (): ReactElement => {
 
   const { loading: meLoading, data: meData, error: meError }: QueryResult = useQuery(QUERY_ME);
 
-  const { loading: thisSongLoading, data: thisSongData, error: thisSongError }: QueryResult = useQuery(QUERY_ONE_SONG,
+  const { loading: currSongLoading, data: currSongData, error: currSongError } = useQuery(QUERY_ONE_SONG,
     {
       variables: { id: songId }
     });
 
   const me: User = useMemo(() => { return meData?.me || meData?.currentId || {} }, [meData?.me, meData?.currentId]);
-  const songToEdit: Song = useMemo(() => { return thisSongData?.getSong || {} }, [thisSongData?.getSong]);
+  const songToEdit: Song = useMemo(() => { return currSongData?.getSong || {} }, [currSongData?.getSong]);
 
 
   //=====================//
@@ -228,12 +228,12 @@ const SongForm = (): ReactElement => {
   //    Conditionals     //
   //=====================//
 
-  if (meLoading || thisSongLoading) {
+  if (meLoading || currSongLoading) {
     return <h1>Loading....</h1>
   };
 
   if (!Auth.loggedIn()) {
-    return <Navigate to="/blog" />
+    return <Navigate to="/music/page/1" />
   };
 
 

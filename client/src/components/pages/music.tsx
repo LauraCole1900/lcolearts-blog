@@ -1,5 +1,5 @@
 import { ReactElement, useEffect, useMemo, useState } from "react";
-import { Params, useParams } from "react-router-dom";
+import { NavigateFunction, Params, useNavigate, useParams } from "react-router-dom";
 import { ApolloCache, useMutation, useQuery } from "@apollo/client";
 import { Col, Container, Image, Row, Table } from "react-bootstrap";
 import ReactPaginate from "react-paginate";
@@ -17,7 +17,7 @@ const Music = (): ReactElement => {
   //=================//
 
   const params: Readonly<Params<string>> = useParams();
-
+  const navigate: NavigateFunction = useNavigate();
 
   //=================//
   //      State      //
@@ -143,6 +143,7 @@ const Music = (): ReactElement => {
   const handlePageClick = (e: any): void => {
     const newOffset: number = (e.selected * 15);
     setItemOffset(newOffset);
+    navigate(`/music/page/${newOffset / 15 + 1}`);
   };
 
 
@@ -151,6 +152,9 @@ const Music = (): ReactElement => {
   //=================//
 
   useEffect((): void => {
+    if (Object.keys(params).length) {
+      setItemOffset((parseInt(params.pageNum!) - 1) * 15)
+    }
     const endOffset: number = itemOffset + 15;
     if (songsArr?.length) {
 
@@ -175,6 +179,12 @@ const Music = (): ReactElement => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [songsArr, sortBy, itemOffset, params]);
+
+
+  // Set tab text on initial render
+  useEffect((): void => {
+    document.title = `Music Catalog`
+  }, []);
 
 
   //================//

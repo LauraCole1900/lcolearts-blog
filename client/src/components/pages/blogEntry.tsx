@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ReactElement } from "react";
+import { ReactElement, useEffect } from "react";
 import { NavigateFunction, Params, useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { Col, Container, Row } from "react-bootstrap";
 import dayjs from "dayjs";
 import { QUERY_ONE_ENTRY } from "../../utils/gql";
+import { Post } from "../../utils/interfaces";
+import NotFound from './notFound';
 
 
 const BlogEntry = (): ReactElement => {
@@ -16,15 +18,25 @@ const BlogEntry = (): ReactElement => {
     {
       variables: { id: params.blogId }
     });
-  const entry = postData?.getEntry || {};
+  const entry: Post = postData?.getEntry || {};
 
   const handleKeyword = (word: string): void => {
     navigate(`/tags/${word}`)
   };
 
+  useEffect((): void => {
+    if (!postError) {
+      entry.postTitle ? document.title = `${entry.postTitle}` : document.title = `My Blog`
+    }
+  }, [entry]);
+
 
   if (postLoading) {
     return <h1>Loading....</h1>
+  };
+
+  if (postError) {
+    return <NotFound />
   };
 
 
