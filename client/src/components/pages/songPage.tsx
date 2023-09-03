@@ -81,6 +81,11 @@ const SongPage = (): ReactElement => {
                     <p><span className="bold">Year composed:</span> {song.songYear}</p>
                   </Row>}
 
+                {song.songOtherVerName[0] &&
+                  <Row>
+                    <p><span className="bold">Other versions:</span> {song.songOtherVerName.map((name: string, i: number) => [i > 0 && ", ", <Link to={`/music/${song.songOtherVerId[i]}`} key={i}>{name}</Link>])}</p>
+                  </Row>}
+
                 {song.songMajorWork &&
                   <>
                     <p><span className="bold">Movements:</span></p>
@@ -93,7 +98,7 @@ const SongPage = (): ReactElement => {
 
                 {song.songTrack &&
                   <Row className="audioEmbed">
-                    <p>Demo track:</p>
+                    <p className="bold">Demo track:</p>
                     <AudioEmbed title={song.songTitle} src={song.songTrack} songId={song._id} />
                   </Row>}
 
@@ -130,6 +135,14 @@ const SongPage = (): ReactElement => {
                 <VideoEmbed src={song.songVideo} title={song.songTitle} />
               </Row>
             }
+
+            {song.songNotes &&
+            <Row>
+              <Col>
+                <p className="bold">Notes from the composer:</p>
+                <p>{song.songNotes}</p>
+              </Col>
+              </Row>}
 
             <Button className="btn songBtn" onClick={goBack}>Return to list</Button>
           </Col>

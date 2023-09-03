@@ -41,7 +41,7 @@ const SongForm = (): ReactElement => {
     songPreview: "",
     songYear: "",
     songOtherVerName: [""],
-    songOtherVerUrl: [""],
+    songOtherVerId: [""],
     songNotes: ""
   });
 
@@ -158,7 +158,7 @@ const SongForm = (): ReactElement => {
         songPreview: "",
         songYear: "",
         songOtherVerName: [""],
-        songOtherVerUrl: [""],
+        songOtherVerId: [""],
         songNotes: ""
       });
     } else {
@@ -169,6 +169,7 @@ const SongForm = (): ReactElement => {
   // Handles click on "Update" button
   const handleFormUpdate = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
+    console.log(songData);
     // Validates required inputs
     const validationErrors = songValidate(songData);
     const noErrors = Object.keys(validationErrors).some(val => validationErrors[val] === "");
@@ -199,7 +200,7 @@ const SongForm = (): ReactElement => {
         songPreview: "",
         songYear: "",
         songOtherVerName: [""],
-        songOtherVerUrl: [""],
+        songOtherVerId: [""],
         songNotes: ""
       });
     } else {
@@ -299,7 +300,7 @@ const SongForm = (): ReactElement => {
                   <Form.Label>Voicing of other versions:</Form.Label>
                   <Form.Control type="input" name="songOtherVerName" placeholder="Other versions, voicing" value={songData.songOtherVerName} className="formInput" onChange={handleInputChange} onBlur={handleTrim} />
                   <Form.Label>URLs of other versions:</Form.Label>
-                  <Form.Control type="input" name="songOtherVerName" placeholder="Other versions, URLs" value={songData.songOtherVerUrl} className="formInput" onChange={handleInputChange} onBlur={handleTrim} />
+                  <Form.Control type="input" name="songOtherVerId" placeholder="Other versions, IDs" value={songData.songOtherVerId} className="formInput" onChange={handleInputChange} onBlur={handleTrim} />
                 </Col>
               </Row>
             </Form.Group>
@@ -345,6 +346,15 @@ const SongForm = (): ReactElement => {
                   </Col>
                 </Row>
               </Form.Group>}
+
+            <Form.Group controlId="formSongNotes">
+              <Row>
+                <Col sm={{ span: 8, offset: 2 }}>
+                  <Form.Label>Notes:</Form.Label>
+                  <Form.Control as="textarea" name="songNotes" placeholder="Notes" value={songData.songNotes} className="formInput" onChange={handleInputChange} />
+                </Col>
+              </Row>
+            </Form.Group>
 
             {songData.songMajorWork
               ? <>
@@ -399,7 +409,7 @@ const SongForm = (): ReactElement => {
                 <CloudinaryUploadWidget dataRes={dataRes} setDataRes={setDataRes} />
               </Col>
 
-              <Col sm={{span: 3, offset: 2}}>
+              <Col sm={{ span: 3, offset: 2 }}>
                 {!Object.keys(params).length
                   ? <Button data-toggle="popover" title="Submit" disabled={!(songData.songTitle && songData.songVoicing && songData.songAccompaniment)} className="button formBtn" onClick={handleFormSubmit} type="submit">Submit</Button>
                   : <Button data-toggle="popover" title="Update" disabled={!(songData.songTitle && songData.songVoicing && songData.songAccompaniment)} className="button formBtn" onClick={handleFormUpdate} type="submit">Update</Button>

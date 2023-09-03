@@ -50,6 +50,9 @@ export const QUERY_ALL_SONGS = gql`
       songVideo
       songPreview
       songYear
+      songOtherVerName
+      songOtherVerId
+      songNotes
     }
   }
 `;
@@ -71,6 +74,9 @@ export const QUERY_ONE_SONG = gql`
       songVideo
       songPreview
       songYear
+      songOtherVerName
+      songOtherVerId
+      songNotes
     }
   }
 `;
@@ -92,6 +98,9 @@ export const QUERY_SONGS_BY_ACC = gql`
       songVideo
       songPreview
       songYear
+      songOtherVerName
+      songOtherVerId
+      songNotes
     }
   }
 `;
@@ -113,6 +122,9 @@ export const QUERY_SONGS_BY_LIT = gql`
       songVideo
       songPreview
       songYear
+      songOtherVerName
+      songOtherVerId
+      songNotes
     }
   }
 `;
@@ -134,6 +146,9 @@ export const QUERY_SONGS_BY_MW = gql`
       songVideo
       songPreview
       songYear
+      songOtherVerName
+      songOtherVerId
+      songNotes
     }
   }
 `;
@@ -155,6 +170,9 @@ export const QUERY_SONGS_BY_SACRED = gql`
       songVideo
       songPreview
       songYear
+      songOtherVerName
+      songOtherVerId
+      songNotes
     }
   }
 `;
@@ -176,6 +194,9 @@ export const QUERY_SONGS_BY_TITLE = gql`
       songVideo
       songPreview
       songYear
+      songOtherVerName
+      songOtherVerId
+      songNotes
     }
   }
 `;
@@ -197,6 +218,9 @@ export const QUERY_SONGS_BY_VOICING = gql`
       songVideo
       songPreview
       songYear
+      songOtherVerName
+      songOtherVerId
+      songNotes
     }
   }
 `;

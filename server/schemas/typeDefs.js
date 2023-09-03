@@ -25,7 +25,7 @@ var typeDefs = gql `
     songPreview: String
     songYear: String
     songOtherVerName: [String]
-    songOtherVerUrl: [String]
+    songOtherVerId: [ID]
     songNotes: String
   }
 
@@ -61,9 +61,9 @@ var typeDefs = gql `
     createEntry(postTitle: String!, postBody: String!, postKeywords: [String!]): Post
     deleteEntry(_id: ID!): Post
     editEntry(_id: ID!, postTitle: String!, postBody: String!, postKeywords: [String!]): Post
-    createSong(songTitle: String!, songVoicing: String!, songAccompaniment: String!, songMajorWork: Boolean, songMvmtNames: [String!], songMvmtTracks: [String!], songMvmtPreviews: [String!], songSacred: Boolean!, songLiturgy: String, songTrack: String, songVideo: String, songPreview: String, songYear: String, songOtherVerName: [String], songOtherVerUrl: [String], songNotes: String): Song
+    createSong(songTitle: String!, songVoicing: String!, songAccompaniment: String!, songMajorWork: Boolean, songMvmtNames: [String!], songMvmtTracks: [String!], songMvmtPreviews: [String!], songSacred: Boolean!, songLiturgy: String, songTrack: String, songVideo: String, songPreview: String, songYear: String, songOtherVerName: [String], songOtherVerId: [ID], songNotes: String): Song
     deleteSong(_id: ID!): Song
-    editSong(_id: ID!, songTitle: String!, songVoicing: String!, songAccompaniment: String!, songMajorWork: Boolean, songMvmtNames: [String!], songMvmtTracks: [String!], songMvmtPreviews: [String!], songSacred: Boolean!, songLiturgy: String, songTrack: String, songVideo: String, songPreview: String, songYear: String, songOtherVerName: [String], songOtherVerUrl: [String] songNotes: String): Song
+    editSong(_id: ID!, songTitle: String!, songVoicing: String!, songAccompaniment: String!, songMajorWork: Boolean, songMvmtNames: [String!], songMvmtTracks: [String!], songMvmtPreviews: [String!], songSacred: Boolean!, songLiturgy: String, songTrack: String, songVideo: String, songPreview: String, songYear: String, songOtherVerName: [String], songOtherVerId: [ID] songNotes: String): Song
   }
 `;
 module.exports = typeDefs;

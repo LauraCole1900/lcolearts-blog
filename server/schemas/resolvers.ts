@@ -112,6 +112,7 @@ var resolvers: any = {
     },
 
     createSong: async (_: any, args: any): Promise<any> => {
+      console.log(args);
       const song = await Song.create(args);
       return song;
     },
@@ -122,6 +123,7 @@ var resolvers: any = {
     },
 
     editSong: async (_: any, args: any): Promise<any> => {
+      console.log(args);
       const song = await Song.findByIdAndUpdate(
         { _id: args._id },
         { $set: { ...args } },

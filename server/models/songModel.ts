@@ -48,7 +48,7 @@ const songSchema = new Schema({
   songOtherVerName: {
     type: [String]
   },
-  songOtherVerUrl: {
+  songOtherVerId: {
     type: [String]
   },
   songNotes: {

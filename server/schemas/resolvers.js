@@ -92,6 +92,7 @@ var resolvers = {
             return post;
         }),
         createSong: (_, args) => __awaiter(void 0, void 0, void 0, function* () {
+            console.log(args);
             const song = yield Song.create(args);
             return song;
         }),
@@ -100,6 +101,7 @@ var resolvers = {
             return song;
         }),
         editSong: (_, args) => __awaiter(void 0, void 0, void 0, function* () {
+            console.log(args);
             const song = yield Song.findByIdAndUpdate({ _id: args._id }, { $set: Object.assign({}, args) }, { new: true });
             return song;
         }),

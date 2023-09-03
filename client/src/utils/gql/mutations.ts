@@ -66,6 +66,9 @@ export const CREATE_SONG = gql`
     $songVideo: String
     $songPreview: String
     $songYear: String
+    $songOtherVerName: [String]
+    $songOtherVerId: [ID]
+    $songNotes: String
   ) {
     createSong(
       songTitle: $songTitle
@@ -81,6 +84,9 @@ export const CREATE_SONG = gql`
       songVideo: $songVideo
       songPreview: $songPreview
       songYear: $songYear
+      songOtherVerName: $songOtherVerName
+      songOtherVerId: $songOtherVerId
+      songNotes: $songNotes
     ) {
       _id
       songTitle
@@ -96,6 +102,9 @@ export const CREATE_SONG = gql`
       songVideo
       songPreview
       songYear
+      songOtherVerName
+      songOtherVerId
+      songNotes
     }
   }
 `;
@@ -117,6 +126,9 @@ export const DELETE_SONG = gql`
       songVideo
       songPreview
       songYear
+      songOtherVerName
+      songOtherVerId
+      songNotes
     }
   }
 `;
@@ -137,6 +149,9 @@ export const EDIT_SONG = gql`
     $songVideo: String
     $songPreview: String
     $songYear: String
+    $songOtherVerName: [String]
+    $songOtherVerId: [ID]
+    $songNotes: String
   ) {
     editSong(
       _id: $id
@@ -153,6 +168,9 @@ export const EDIT_SONG = gql`
       songVideo: $songVideo
       songPreview: $songPreview
       songYear: $songYear
+      songOtherVerName: $songOtherVerName
+      songOtherVerId: $songOtherVerId
+      songNotes: $songNotes
     ) {
       _id
       songTitle
@@ -168,6 +186,9 @@ export const EDIT_SONG = gql`
       songVideo
       songPreview
       songYear
+      songOtherVerName
+      songOtherVerId
+      songNotes
     }
   }
 `;

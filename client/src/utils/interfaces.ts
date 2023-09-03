@@ -23,7 +23,7 @@ export interface Song {
   songPreview: string,
   songYear: string,
   songOtherVerName: Array<string>,
-  songOtherVerUrl: Array<string>,
+  songOtherVerId: Array<string>,
   songNotes: string
 }
 
