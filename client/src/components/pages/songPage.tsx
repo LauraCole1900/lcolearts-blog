@@ -21,7 +21,12 @@ const SongPage = (): ReactElement => {
 
 
   const goBack = (): void => {
-    navigate(-1);
+    console.log(window.history.length)
+    if (window.history.length > 1) {
+      navigate(-1);
+    } else {
+      navigate("/music/page/1")
+    }
   }
 
   // Set tab text on initial render/when data comes back from the database
@@ -137,11 +142,11 @@ const SongPage = (): ReactElement => {
             }
 
             {song.songNotes &&
-            <Row>
-              <Col>
-                <p className="bold">Notes from the composer:</p>
-                <p>{song.songNotes}</p>
-              </Col>
+              <Row>
+                <Col>
+                  <p className="bold">Notes from the composer:</p>
+                  <p>{song.songNotes}</p>
+                </Col>
               </Row>}
 
             <Button className="btn songBtn" onClick={goBack}>Return to list</Button>
