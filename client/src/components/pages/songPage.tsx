@@ -21,7 +21,6 @@ const SongPage = (): ReactElement => {
 
 
   const goBack = (): void => {
-    console.log(window.history.length)
     if (window.history.length > 1) {
       navigate(-1);
     } else {
