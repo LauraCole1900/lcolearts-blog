@@ -1,8 +1,8 @@
-const { AuthenticationError } = require("@apollo/server/express4");
-var { Post, Song, User } = require("../models");
-const { signToken } = require("../utils/auth");
+import { GraphQLError } from "graphql";
+import { Post, Song, User } from "../models";
+import auth from "../utils/auth";
 
-var resolvers: any = {
+const resolvers = {
   Query: {
     me: async (_: any, __: any, context: any): Promise<any> => {
       if (context.user) {
@@ -13,7 +13,9 @@ var resolvers: any = {
         return userData;
       }
 
-      throw new AuthenticationError("Not logged in");
+      throw new GraphQLError("Not logged in", {
+        extensions: { code: "FORBIDDEN" },
+      });
     },
 
     getAllEntries: async (): Promise<any> => {
@@ -70,7 +72,7 @@ var resolvers: any = {
   Mutation: {
     addUser: async (_: any, args: any) => {
       const user: typeof User = await User.create(args);
-      const token: string = signToken(user);
+      const token: string = auth.signToken(user);
 
       return { token, user };
     },
@@ -79,16 +81,20 @@ var resolvers: any = {
       const user: typeof User = await User.findOne({ userName: args.userName });
 
       if (!user) {
-        throw new AuthenticationError("Incorrect credentials");
+        throw new GraphQLError("Incorrect credentials", {
+          extensions: { code: "FORBIDDEN" },
+        });
       }
 
       const correctPw: boolean = await user.isCorrectPassword(args.password);
 
       if (!correctPw) {
-        throw new AuthenticationError("Incorrect credentials");
+        throw new GraphQLError("Incorrect credentials", {
+          extensions: { code: "FORBIDDEN" },
+        });
       }
 
-      const token: string = signToken(user);
+      const token: string = auth.signToken(user);
       return { token, user };
     },
 
@@ -112,7 +118,6 @@ var resolvers: any = {
     },
 
     createSong: async (_: any, args: any): Promise<any> => {
-      console.log(args);
       const song = await Song.create(args);
       return song;
     },
@@ -123,7 +128,6 @@ var resolvers: any = {
     },
 
     editSong: async (_: any, args: any): Promise<any> => {
-      console.log(args);
       const song = await Song.findByIdAndUpdate(
         { _id: args._id },
         { $set: { ...args } },
@@ -134,4 +138,4 @@ var resolvers: any = {
   },
 };
 
-module.exports = resolvers;
+export default resolvers;

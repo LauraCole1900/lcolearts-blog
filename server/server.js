@@ -1,4 +1,3 @@
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -8,19 +7,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const express = require("express");
-const { ApolloServer } = require("@apollo/server");
-const { expressMiddleware } = require("@apollo/server/express4");
-const path = require("path");
-const http = require("http");
-const cors = require("cors");
-const { json } = require("body-parser");
-var { typeDefs, resolvers } = require("./schemas");
-const { authMiddleware } = require("./utils/auth");
-const db = require("./config/connection");
+import express from "express";
+import { ApolloServer } from "@apollo/server";
+import { expressMiddleware } from "@apollo/server/express4";
+import path from "path";
+import http from "http";
+import cors from "cors";
+import pkg from "body-parser";
+const { json } = pkg;
+import { typeDefs, resolvers } from "./schemas";
+import auth from "./utils/auth";
+import db from "./config/connection";
 const PORT = process.env.PORT || 3001;
-const { Express } = express;
-const { Server } = http;
 function startApolloServer(resolvers, typeDefs) {
     return __awaiter(this, void 0, void 0, function* () {
         const app = express();
@@ -30,7 +28,7 @@ function startApolloServer(resolvers, typeDefs) {
             resolvers,
         });
         yield server.start();
-        app.use("/graphql", cors(), json(), expressMiddleware(server, { context: authMiddleware }));
+        app.use("/graphql", cors(), json(), expressMiddleware(server, { context: auth.authMiddleware }));
         app.use(express.urlencoded({ extended: false }));
         app.use(express.json());
         // Serve up static assets

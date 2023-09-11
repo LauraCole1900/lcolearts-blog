@@ -58,4 +58,4 @@ const songSchema = new Schema({
 
 var Song: any = model("Song", songSchema);
 
-module.exports = Song;
+export default Song;

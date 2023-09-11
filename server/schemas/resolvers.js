@@ -1,4 +1,3 @@
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -8,17 +7,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const { AuthenticationError } = require("@apollo/server/express4");
-var { Post, Song, User } = require("../models");
+import { GraphQLError } from "graphql";
+import { Post, Song, User } from "../models";
 const { signToken } = require("../utils/auth");
-var resolvers = {
+const resolvers = {
     Query: {
         me: (_, __, context) => __awaiter(void 0, void 0, void 0, function* () {
             if (context.user) {
                 const userData = yield User.findOne({ _id: context.user._id }).select("-__v -password");
                 return userData;
             }
-            throw new AuthenticationError("Not logged in");
+            throw new GraphQLError("Not logged in", {
+                extensions: { code: "FORBIDDEN" },
+            });
         }),
         getAllEntries: () => __awaiter(void 0, void 0, void 0, function* () {
             return yield Post.find({});
@@ -70,11 +71,15 @@ var resolvers = {
         login: (_, args) => __awaiter(void 0, void 0, void 0, function* () {
             const user = yield User.findOne({ userName: args.userName });
             if (!user) {
-                throw new AuthenticationError("Incorrect credentials");
+                throw new GraphQLError("Incorrect credentials", {
+                    extensions: { code: "FORBIDDEN" },
+                });
             }
             const correctPw = yield user.isCorrectPassword(args.password);
             if (!correctPw) {
-                throw new AuthenticationError("Incorrect credentials");
+                throw new GraphQLError("Incorrect credentials", {
+                    extensions: { code: "FORBIDDEN" },
+                });
             }
             const token = signToken(user);
             return { token, user };
@@ -92,7 +97,6 @@ var resolvers = {
             return post;
         }),
         createSong: (_, args) => __awaiter(void 0, void 0, void 0, function* () {
-            console.log(args);
             const song = yield Song.create(args);
             return song;
         }),
@@ -101,10 +105,9 @@ var resolvers = {
             return song;
         }),
         editSong: (_, args) => __awaiter(void 0, void 0, void 0, function* () {
-            console.log(args);
             const song = yield Song.findByIdAndUpdate({ _id: args._id }, { $set: Object.assign({}, args) }, { new: true });
             return song;
         }),
     },
 };
-module.exports = resolvers;
+export default resolvers;

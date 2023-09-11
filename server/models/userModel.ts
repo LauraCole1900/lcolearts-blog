@@ -40,4 +40,4 @@ userSchema.methods.isCorrectPassword = async function (
 
 var User: any = model("User", userSchema);
 
-module.exports = User;
+export default User;

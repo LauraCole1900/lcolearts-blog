@@ -4,7 +4,7 @@ const jwt: any = require("jsonwebtoken");
 const secret: string | undefined = process.env.JWT_SECRET;
 const expiration: "2h" = "2h";
 
-module.exports = {
+export default {
   authMiddleware: function ({ req }: { req: any }): any {
     // allows token to be sent via req.body, req.query, or headers
     let token: any =

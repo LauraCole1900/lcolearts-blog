@@ -1,6 +1,4 @@
-const gql = require('graphql-tag');
-
-var typeDefs: any = gql`
+var typeDefs: any = `#graphql
   type Post {
     _id: ID!
     postTitle: String!
@@ -67,4 +65,4 @@ var typeDefs: any = gql`
   }
 `;
 
-module.exports = typeDefs;
+export default typeDefs;

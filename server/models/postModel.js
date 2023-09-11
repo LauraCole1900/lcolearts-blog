@@ -1,4 +1,3 @@
-"use strict";
 var { Schema, model } = require("mongoose");
 const postSchema = new Schema({
     postTitle: {
@@ -18,4 +17,4 @@ const postSchema = new Schema({
     },
 });
 var Post = model("Post", postSchema);
-module.exports = Post;
+export default Post;

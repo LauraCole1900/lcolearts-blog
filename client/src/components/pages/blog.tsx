@@ -24,7 +24,6 @@ const Blog = (): ReactElement => {
 
   const params: Readonly<Params<string>> = useParams();
   let navigate: NavigateFunction = useNavigate();
-  console.log(params)
 
 
   //=================//
@@ -199,7 +198,6 @@ const Blog = (): ReactElement => {
           setItemOffset(0);
         }
         const endOffset: number = itemOffset + 10;
-        console.log(endOffset)
         if (params.tag) {
           const filteredEntries: Post[] = sortedEntries.filter((post: Post): boolean => post.postKeywords.includes(params.tag!));
           setEntriesToRender(filteredEntries.slice(itemOffset, endOffset));

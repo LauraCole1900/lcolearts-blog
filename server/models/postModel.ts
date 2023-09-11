@@ -20,4 +20,4 @@ const postSchema = new Schema({
 
 var Post: any = model("Post", postSchema);
 
-module.exports = Post;
+export default Post;

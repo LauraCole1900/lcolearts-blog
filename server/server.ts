@@ -1,24 +1,26 @@
-const express = require("express");
-const { ApolloServer } = require("@apollo/server");
-const { expressMiddleware } = require("@apollo/server/express4");
-const path = require("path");
-const http = require("http");
-const cors = require("cors");
-const { json } = require("body-parser");
+import express from "express";
+import { ApolloServer } from "@apollo/server";
+import { expressMiddleware } from "@apollo/server/express4";
+import path from "path";
+import http from "http";
+import cors from "cors";
+import pkg from "body-parser";
+const { json } = pkg;
 
-var { typeDefs, resolvers } = require("./schemas");
-const { authMiddleware } = require("./utils/auth");
-const db = require("./config/connection");
+import { typeDefs, resolvers } from "./schemas";
+import auth from "./utils/auth";
+import db from "./config/connection";
+
+interface MyContext {
+  token?: String;
+}
 
 const PORT: any | 3001 = process.env.PORT || 3001;
 
-const { Express } = express;
-const { Server } = http;
-
 async function startApolloServer(resolvers: Object, typeDefs: string) {
   const app = express();
-  const httpServer: typeof Server = http.createServer(app);
-  const server = new ApolloServer({
+  const httpServer = http.createServer(app);
+  const server = new ApolloServer<MyContext>({
     typeDefs,
     resolvers,
   });
@@ -26,9 +28,9 @@ async function startApolloServer(resolvers: Object, typeDefs: string) {
   await server.start();
   app.use(
     "/graphql",
-    cors(),
+    cors<cors.CorsRequest>(),
     json(),
-    expressMiddleware(server, { context: authMiddleware })
+    expressMiddleware(server, { context: auth.authMiddleware })
   );
 
   app.use(express.urlencoded({ extended: false }));
@@ -39,9 +41,12 @@ async function startApolloServer(resolvers: Object, typeDefs: string) {
     app.use(express.static(path.join(__dirname, "../client/build")));
   }
 
-  app.get("*", (req: typeof Express.Request, res: typeof Express.Response): void => {
-    res.sendFile(path.join(__dirname, "../client/build/index.html"));
-  });
+  app.get(
+    "*",
+    (req, res): void => {
+      res.sendFile(path.join(__dirname, "../client/build/index.html"));
+    }
+  );
 
   db.once("open", (): void => {
     httpServer.listen(PORT, () => {

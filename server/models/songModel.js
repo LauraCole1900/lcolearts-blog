@@ -1,4 +1,3 @@
-"use strict";
 var { Schema, model } = require("mongoose");
 const songSchema = new Schema({
     songTitle: {
@@ -56,4 +55,4 @@ const songSchema = new Schema({
     }
 });
 var Song = model("Song", songSchema);
-module.exports = Song;
+export default Song;
