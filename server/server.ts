@@ -18,7 +18,7 @@ interface MyContext {
 
 const PORT: string | 3001 = process.env.PORT || 3001;
 
-async function startApolloServer(resolvers: Resolvers, typeDefs: string) {
+async function startApolloServer(resolvers: Resolvers, typeDefs: string): Promise<void> {
   const app = express();
   const httpServer = http.createServer(app);
   const server = new ApolloServer<MyContext>({
@@ -50,7 +50,8 @@ async function startApolloServer(resolvers: Resolvers, typeDefs: string) {
   );
 
   db.once("open", (): void => {
-    httpServer.listen(PORT, () => {
+    console.log("firing")
+    httpServer.listen(PORT, (): void => {
       console.log(`API server running on port ${PORT}!`);
       console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
     });
