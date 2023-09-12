@@ -1,23 +1,24 @@
-import express from "express";
-import { ApolloServer } from "@apollo/server";
-import { expressMiddleware } from "@apollo/server/express4";
-import path from "path";
-import http from "http";
-import cors from "cors";
-import pkg from "body-parser";
+import express from 'express';
+import { ApolloServer } from '@apollo/server';
+import { expressMiddleware } from '@apollo/server/express4';
+import path from 'path';
+import http from 'http';
+import cors from 'cors';
+import pkg from 'body-parser';
 const { json } = pkg;
 
-import { typeDefs, resolvers } from "./schemas";
-import auth from "./utils/auth";
-import db from "./config/connection";
+import { typeDefs, resolvers } from './schemas/index.js';
+import { Resolvers } from './tsdefs'
+import auth from './utils/auth.js';
+import db from './config/connection.js';
 
 interface MyContext {
   token?: String;
 }
 
-const PORT: any | 3001 = process.env.PORT || 3001;
+const PORT: string | 3001 = process.env.PORT || 3001;
 
-async function startApolloServer(resolvers: Object, typeDefs: string) {
+async function startApolloServer(resolvers: Resolvers, typeDefs: string) {
   const app = express();
   const httpServer = http.createServer(app);
   const server = new ApolloServer<MyContext>({

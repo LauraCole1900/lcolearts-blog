@@ -7,17 +7,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import express from "express";
-import { ApolloServer } from "@apollo/server";
-import { expressMiddleware } from "@apollo/server/express4";
-import path from "path";
-import http from "http";
-import cors from "cors";
-import pkg from "body-parser";
+import express from 'express';
+import { ApolloServer } from '@apollo/server';
+import { expressMiddleware } from '@apollo/server/express4';
+import path from 'path';
+import http from 'http';
+import cors from 'cors';
+import pkg from 'body-parser';
 const { json } = pkg;
-import { typeDefs, resolvers } from "./schemas";
-import auth from "./utils/auth";
-import db from "./config/connection";
+import { typeDefs, resolvers } from './schemas/index.js';
+import auth from './utils/auth.js';
+import db from './config/connection.js';
 const PORT = process.env.PORT || 3001;
 function startApolloServer(resolvers, typeDefs) {
     return __awaiter(this, void 0, void 0, function* () {

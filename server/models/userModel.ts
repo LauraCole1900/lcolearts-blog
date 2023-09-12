@@ -1,5 +1,6 @@
-var { Schema, model } = require("mongoose");
-const bcrypt: any = require("bcrypt");
+import mongoose from 'mongoose';
+const { Schema, model } = mongoose;
+import bcrypt from 'bcrypt';
 
 const userSchema = new Schema({
   userName: {
@@ -20,7 +21,7 @@ const userSchema = new Schema({
 
 // hash user password
 userSchema.pre(
-  "save",
+  'save',
   async function (this: typeof User, next: any): Promise<void> {
     if (this.isNew || this.isModified("password")) {
       const saltRounds = 10;
@@ -38,6 +39,6 @@ userSchema.methods.isCorrectPassword = async function (
   return bcrypt.compare(password, this.password);
 };
 
-var User: any = model("User", userSchema);
+var User: any = model('User', userSchema);
 
 export default User;

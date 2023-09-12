@@ -7,14 +7,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { GraphQLError } from "graphql";
-import { Post, Song, User } from "../models";
-const { signToken } = require("../utils/auth");
+import { GraphQLError } from 'graphql';
+import { Post, Song, User } from '../models/index.js';
+import auth from '../utils/auth.js';
 const resolvers = {
     Query: {
         me: (_, __, context) => __awaiter(void 0, void 0, void 0, function* () {
             if (context.user) {
-                const userData = yield User.findOne({ _id: context.user._id }).select("-__v -password");
+                const userData = yield User.findOne({ _id: context.user._id }).select('-__v -password');
                 return userData;
             }
             throw new GraphQLError("Not logged in", {
@@ -65,7 +65,7 @@ const resolvers = {
     Mutation: {
         addUser: (_, args) => __awaiter(void 0, void 0, void 0, function* () {
             const user = yield User.create(args);
-            const token = signToken(user);
+            const token = auth.signToken(user);
             return { token, user };
         }),
         login: (_, args) => __awaiter(void 0, void 0, void 0, function* () {
@@ -81,7 +81,7 @@ const resolvers = {
                     extensions: { code: "FORBIDDEN" },
                 });
             }
-            const token = signToken(user);
+            const token = auth.signToken(user);
             return { token, user };
         }),
         createEntry: (_, args) => __awaiter(void 0, void 0, void 0, function* () {

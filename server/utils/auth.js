@@ -1,9 +1,7 @@
-require("dotenv").config();
-const jwt = require("jsonwebtoken");
-
+require('dotenv').config();
+const jwt = require('jsonwebtoken');
 const secret = process.env.JWT_SECRET;
-const expiration = "2h";
-
+const expiration = '2h';
 export default {
     authMiddleware: function ({ req }) {
         // allows token to be sent via req.body, req.query, or headers
@@ -20,7 +18,7 @@ export default {
             req.user = data;
         }
         catch (_a) {
-            console.log("Invalid token");
+            console.log('Invalid token');
         }
         return req;
     },

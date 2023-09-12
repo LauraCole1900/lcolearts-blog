@@ -1,4 +1,5 @@
-var typeDefs = `#graphql
+const typeDefs = `#graphql
+  
   type Post {
     _id: ID!
     postTitle: String!
@@ -63,5 +64,5 @@ var typeDefs = `#graphql
     deleteSong(_id: ID!): Song
     editSong(_id: ID!, songTitle: String!, songVoicing: String!, songAccompaniment: String!, songMajorWork: Boolean, songMvmtNames: [String!], songMvmtTracks: [String!], songMvmtPreviews: [String!], songSacred: Boolean!, songLiturgy: String, songTrack: String, songVideo: String, songPreview: String, songYear: String, songOtherVerName: [String], songOtherVerId: [ID] songNotes: String): Song
   }
-`;
+  `;
 export default typeDefs;

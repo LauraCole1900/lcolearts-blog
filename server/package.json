@@ -4,9 +4,11 @@
   "description": "",
   "author": "Laura E. Cole",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "start": "node server.js",
-    "watch": "nodemon server.js"
+    "watch": "nodemon server.js",
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "keywords": [],
   "license": "MIT",
@@ -20,6 +22,12 @@
     "mongoose": "^6.0.13"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "5.0.0",
+    "@graphql-codegen/client-preset": "4.1.0",
+    "@graphql-codegen/introspection": "4.0.0",
+    "@graphql-codegen/typescript": "^4.0.1",
+    "@graphql-codegen/typescript-resolvers": "^4.0.1",
+    "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.14",
     "@types/express": "^4.17.17",
     "@types/jest": "^29.5.4",

@@ -1,13 +1,14 @@
-import { GraphQLError } from "graphql";
-import { Post, Song, User } from "../models";
-import auth from "../utils/auth";
+import { GraphQLError } from 'graphql';
+import { Resolvers } from '../tsdefs';
+import { Post, Song, User } from '../models/index.js';
+import auth from '../utils/auth.js';
 
-const resolvers = {
+const resolvers: Resolvers = {
   Query: {
     me: async (_: any, __: any, context: any): Promise<any> => {
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id }).select(
-          "-__v -password"
+          '-__v -password'
         );
 
         return userData;

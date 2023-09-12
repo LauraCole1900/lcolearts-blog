@@ -1,4 +1,5 @@
-var { Schema, model } = require("mongoose");
+import mongoose from 'mongoose';
+const { Schema, model } = mongoose;
 const songSchema = new Schema({
     songTitle: {
         type: String,
@@ -54,5 +55,5 @@ const songSchema = new Schema({
         type: String
     }
 });
-var Song = model("Song", songSchema);
+var Song = model('Song', songSchema);
 export default Song;
