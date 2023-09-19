@@ -8,7 +8,7 @@ const AudioEmbed = ({ title, src, songId }: { title: string; src: string; songId
     <>
       <Row className="audio-responsive" >
         <audio controls>
-          <source src={process.env.PUBLIC_URL + src}
+          <source src={src}
             title={title}
             type="audio/mp3"
             id={songId} />
