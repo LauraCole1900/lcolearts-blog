@@ -45,9 +45,9 @@ const Music = (): ReactElement => {
   //     GraphQL     //
   //=================//
 
-  const { loading, data, refetch } = useQuery(QUERY_ALL_SONGS, {});
+  const { loading, data } = useQuery(QUERY_ALL_SONGS, {});
 
-  const [deleteSong, { error: deleteSongError, data: deleteSongData }] = useMutation(DELETE_SONG, {
+  const [deleteSong] = useMutation(DELETE_SONG, {
     update(cache: ApolloCache<Song>, { data: { deleteSong } }) {
       try {
         // Retrieve existing song data that is stored in the cache
