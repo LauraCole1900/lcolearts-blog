@@ -58,9 +58,9 @@ const SongForm = (): ReactElement => {
   //       Queries       //
   //=====================//
 
-  const { loading: meLoading, data: meData, error: meError }: QueryResult = useQuery(QUERY_ME);
+  const { loading: meLoading, data: meData }: QueryResult = useQuery(QUERY_ME);
 
-  const { loading: currSongLoading, data: currSongData, error: currSongError } = useQuery(QUERY_ONE_SONG,
+  const { loading: currSongLoading, data: currSongData } = useQuery(QUERY_ONE_SONG,
     {
       variables: { id: songId }
     });
@@ -73,7 +73,7 @@ const SongForm = (): ReactElement => {
   //      Mutations      //
   //=====================//
 
-  const [createSong, { error: createSongError, data: createSongData }] = useMutation(CREATE_SONG, {
+  const [createSong] = useMutation(CREATE_SONG, {
     update(cache: ApolloCache<Array<Song>>, { data: { createSong } }) {
       try {
         // Retrieve existing post data that is stored in the cache
@@ -91,7 +91,7 @@ const SongForm = (): ReactElement => {
     }
   });
 
-  const [editSong, { error: editSongError, data: editSongData }] = useMutation(EDIT_SONG);
+  const [editSong] = useMutation(EDIT_SONG);
 
 
   //=====================//
