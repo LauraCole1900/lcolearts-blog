@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+dotenv.config();
 mongoose
-    .connect(process.env.MONGODB_URI || "mongodb://127.0.0.1/lcoleartsblog_db")
-    .then(() => console.log("Connected!"));
-export default mongoose.connection;
+    .connect(process.env.MONGODB_URI);
+const connection = mongoose.connection;
+export default connection;

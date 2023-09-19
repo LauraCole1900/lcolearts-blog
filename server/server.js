@@ -7,22 +7,32 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import express from 'express';
-import { ApolloServer } from '@apollo/server';
-import { expressMiddleware } from '@apollo/server/express4';
-import path from 'path';
-import http from 'http';
-import cors from 'cors';
-import pkg from 'body-parser';
+import express from "express";
+import { ApolloServer } from "@apollo/server";
+import { expressMiddleware } from "@apollo/server/express4";
+import path from "path";
+import { fileURLToPath } from "url";
+import http from "http";
+import cors from "cors";
+import pkg from "body-parser";
 const { json } = pkg;
-import { typeDefs, resolvers } from './schemas/index.js';
-import auth from './utils/auth.js';
-import db from './config/connection.js';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+import { typeDefs, resolvers } from "./schemas/index.js";
+import auth from "./utils/auth.js";
+import db from "./config/connection.js";
 const PORT = process.env.PORT || 3001;
+const app = express();
+const httpServer = http.createServer(app);
+db.once("open", () => {
+    console.log("firing");
+    httpServer.listen(PORT, () => {
+        console.log(`API server running on port ${PORT}!`);
+        console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
+    });
+});
 function startApolloServer(resolvers, typeDefs) {
     return __awaiter(this, void 0, void 0, function* () {
-        const app = express();
-        const httpServer = http.createServer(app);
         const server = new ApolloServer({
             typeDefs,
             resolvers,
@@ -37,13 +47,6 @@ function startApolloServer(resolvers, typeDefs) {
         }
         app.get("*", (req, res) => {
             res.sendFile(path.join(__dirname, "../client/build/index.html"));
-        });
-        db.once("open", () => {
-            console.log("firing");
-            httpServer.listen(PORT, () => {
-                console.log(`API server running on port ${PORT}!`);
-                console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
-            });
         });
     });
 }

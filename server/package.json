@@ -1,6 +1,6 @@
 {
   "name": "blog-server",
-  "version": "1.0.0",
+  "version": "2.1.0",
   "description": "",
   "author": "Laura E. Cole",
   "main": "server.js",
@@ -19,7 +19,7 @@
     "express": "^4.18.2",
     "graphql": "^16.8.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^6.0.13"
+    "mongoose": "^7.5.2"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "5.0.0",

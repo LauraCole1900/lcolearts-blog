@@ -1,16 +1,19 @@
-import express from 'express';
-import { ApolloServer } from '@apollo/server';
-import { expressMiddleware } from '@apollo/server/express4';
-import path from 'path';
-import http from 'http';
-import cors from 'cors';
-import pkg from 'body-parser';
+import express from "express";
+import { ApolloServer } from "@apollo/server";
+import { expressMiddleware } from "@apollo/server/express4";
+import path from "path";
+import { fileURLToPath } from "url";
+import http from "http";
+import cors from "cors";
+import pkg from "body-parser";
 const { json } = pkg;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-import { typeDefs, resolvers } from './schemas/index.js';
-import { Resolvers } from './tsdefs'
-import auth from './utils/auth.js';
-import db from './config/connection.js';
+import { typeDefs, resolvers } from "./schemas/index.js";
+import { Resolvers } from "./tsdefs";
+import auth from "./utils/auth.js";
+import db from "./config/connection.js";
 
 interface MyContext {
   token?: String;
@@ -18,9 +21,21 @@ interface MyContext {
 
 const PORT: string | 3001 = process.env.PORT || 3001;
 
-async function startApolloServer(resolvers: Resolvers, typeDefs: string): Promise<void> {
-  const app = express();
-  const httpServer = http.createServer(app);
+const app = express();
+const httpServer = http.createServer(app);
+
+db.once("open", (): void => {
+  console.log("firing");
+  httpServer.listen(PORT, (): void => {
+    console.log(`API server running on port ${PORT}!`);
+    console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
+  });
+});
+
+async function startApolloServer(
+  resolvers: Resolvers,
+  typeDefs: string
+): Promise<void> {
   const server = new ApolloServer<MyContext>({
     typeDefs,
     resolvers,
@@ -42,19 +57,8 @@ async function startApolloServer(resolvers: Resolvers, typeDefs: string): Promis
     app.use(express.static(path.join(__dirname, "../client/build")));
   }
 
-  app.get(
-    "*",
-    (req, res): void => {
-      res.sendFile(path.join(__dirname, "../client/build/index.html"));
-    }
-  );
-
-  db.once("open", (): void => {
-    console.log("firing")
-    httpServer.listen(PORT, (): void => {
-      console.log(`API server running on port ${PORT}!`);
-      console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
-    });
+  app.get("*", (req, res): void => {
+    res.sendFile(path.join(__dirname, "../client/build/index.html"));
   });
 }
 
