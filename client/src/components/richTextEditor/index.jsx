@@ -33,7 +33,7 @@ class EditorContainer extends Component {
     });
     this.onChange(this.name, editorState)
   };
-  
+
 
   // Defines options to render
   render() {
@@ -60,7 +60,11 @@ class EditorContainer extends Component {
             options: ["unordered", "ordered"]
           },
           textAlign: { inDropdown: false },
-          link: { inDropdown: false },
+          link: {
+            inDropdown: false,
+            defaultTargetOption: "_blank",
+            options: ['link', 'unlink']
+          },
           history: { inDropdown: false },
           colorPicker: { component: ColorPicker }
         }}

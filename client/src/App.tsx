@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from "react-bootstrap/Container";
 import Footer from "./components/footer";
 import Navigation from "./components/navbar";
-import { Blog, BlogEntry, LandingPage, LoginPage, Music, NotFound, SongForm, SongPage } from "./components/pages";
+import { Blog, BlogEntry, LandingPage, LoginPage, Music, NotFound, PostForm, SongForm, SongPage } from "./components/pages";
 import './App.css';
 
 
@@ -63,13 +63,13 @@ const App = (): ReactElement => {
               <Route path="/blog/page/:pageNum" element={<Blog />} />
               <Route path="/blog/:blogId" element={<BlogEntry />} />
               <Route path="/blog" element={<Navigate to="/blog/page/1" replace={true} />} />
-              {/* <Route path="/edit_post/:postId" element={<PostForm />} /> */}
+              <Route path="/edit_post/:postId" element={<PostForm />} />
               <Route path="/edit_song/:songId" element={<SongForm />} />
               <Route path="/log_me_in" element={<LoginPage />} />
               <Route path="/music/page/:pageNum" element={<Music />} />
               <Route path="/music/:songId" element={<SongPage />} />
               <Route path="/music" element={<Navigate to="/music/page/1" replace={true} />} />
-              {/* <Route path="/new_post" element={<PostForm />} /> */}
+              <Route path="/new_post" element={<PostForm />} />
               <Route path="/new_song" element={<SongForm />} />
               <Route path="/tags/:tag" element={<Blog />} />
               <Route path="/tags/:tag/:pageNum" element={<Blog />} />
