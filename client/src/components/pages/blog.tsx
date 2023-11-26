@@ -56,9 +56,9 @@ const Blog = (): ReactElement => {
   //     GraphQL     //
   //=================//
 
-  const { loading, data, refetch } = useQuery(QUERY_ALL_ENTRIES, {});
+  const { loading, data } = useQuery(QUERY_ALL_ENTRIES, {});
 
-  const [deleteEntry, { error: deleteEntryError, data: deleteEntryData }] = useMutation(DELETE_ENTRY, {
+  const [deleteEntry] = useMutation(DELETE_ENTRY, {
     update(cache: ApolloCache<any>, { data: { deleteEntry } }) {
       try {
         // Retrieve existing post data that is stored in the cache
