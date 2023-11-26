@@ -23,7 +23,6 @@ const Music = (): ReactElement => {
   //      State      //
   //=================//
 
-  const [pageReady, setPageReady] = useState<boolean>(false);
   const [songsToRender, setSongsToRender] = useState<Array<Song>>([]);
   const [itemOffset, setItemOffset] = useState<number>(0);
   const [pageCount, setPageCount] = useState<number>(0);
@@ -31,7 +30,7 @@ const Music = (): ReactElement => {
   const [sortBy, setSortBy] = useState<string>('');
 
   // States passed to modals
-  const [btnName, setBtnName] = useState();
+  const [btnName] = useState();
   const [errThrown, setErrThrown] = useState<string | undefined>();
   const [songId, setSongId] = useState<string>();
 
@@ -92,7 +91,7 @@ const Music = (): ReactElement => {
   const handleDeleteSong = async (id: string): Promise<void> => {
     handleHideConfirm();
     try {
-      const { data } = await deleteSong({
+      await deleteSong({
         variables: { id: id },
       });
       handleShowSuccess();
@@ -173,8 +172,6 @@ const Music = (): ReactElement => {
       setSongsToRender(sortedSongs.slice(itemOffset, endOffset));
       setPageCount(Math.ceil(sortedSongs.length / 15));
       setCurrentPage(Math.round(itemOffset / 15));
-
-      setPageReady(true);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

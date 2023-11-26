@@ -23,7 +23,7 @@ const SongForm = (): ReactElement => {
 
   // State variables
   const [pageReady, setPageReady] = useState(false);
-  const [songId, setSongId] = useState(params.songId);
+  const [songId] = useState(params.songId);
   const [errors, setErrors] = useState<SongErrors | undefined>();
   const [dataRes, setDataRes] = useState<any>({});
   const [songData, setSongData] = useState({
@@ -47,7 +47,7 @@ const SongForm = (): ReactElement => {
 
   // States passed to modals
   const [errThrown, setErrThrown] = useState();
-  const [btnName, setBtnName] = useState();
+  const [btnName] = useState();
 
   // Modal states
   const [showErr, setShowErr] = useState(false);
@@ -134,7 +134,7 @@ const SongForm = (): ReactElement => {
     setErrors(validationErrors);
     if (noErrors) {
       try {
-        const { data } = await createSong({
+        await createSong({
           variables: { ...songData }
         });
         handleShowSuccess();
@@ -176,7 +176,7 @@ const SongForm = (): ReactElement => {
     setErrors(validationErrors);
     if (noErrors) {
       try {
-        const { data } = await editSong({
+        await editSong({
           variables: { id: songId, ...songData }
         });
         handleShowSuccess();

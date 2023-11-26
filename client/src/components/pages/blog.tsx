@@ -42,7 +42,7 @@ const Blog = (): ReactElement => {
   }
 
   // States passed to modals
-  const [btnName, setBtnName] = useState();
+  const [btnName] = useState();
   const [errThrown, setErrThrown] = useState<string | undefined>();
   const [entryId, setEntryId] = useState<string>();
 
@@ -101,7 +101,7 @@ const Blog = (): ReactElement => {
   const handleDeleteEntry = async (id: string): Promise<void> => {
     handleHideConfirm();
     try {
-      const { data } = await deleteEntry({
+      await deleteEntry({
         variables: { id: id },
       });
       handleShowSuccess();

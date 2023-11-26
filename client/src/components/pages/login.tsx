@@ -14,7 +14,7 @@ const LoginPage = (): ReactElement => {
   const [userData, setUserData] = useState<User>({ userName: "", password: "" });
   const navigate = useNavigate();
 
-  const [login, { error }] = useMutation(LOG_ME_IN);
+  const [login] = useMutation(LOG_ME_IN);
 
   const handleInputChange = (e: ChangeEvent): Object | void => {
     const { name, value } = e.target as HTMLInputElement;
