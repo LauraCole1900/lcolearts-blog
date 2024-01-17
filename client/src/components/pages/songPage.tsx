@@ -55,7 +55,7 @@ const SongPage = (): ReactElement => {
             </Row>
 
             <Row>
-              <p className="purchaseThis">*** If you are interested in purchasing copies of this composition, please <a href="mailto:lauracole1900@comcast.net">email me</a> ***</p>
+              <p className="instruct">*** If you are interested in purchasing copies of this composition, please <a href="mailto:lauracole1900@comcast.net">email me</a> ***</p>
             </Row>
 
             <Row>

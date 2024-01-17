@@ -216,6 +216,8 @@ const Music = (): ReactElement => {
                   </Col>
                 </Row>}
 
+              <p className="instruct">*** Click or tap table headers to sort by that column ***</p>
+
               <Table striped bordered hover className="ltBg">
                 <thead>
                   <tr className="bottomed">
