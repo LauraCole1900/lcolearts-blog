@@ -5,54 +5,37 @@ import colorWheel from "../../pix/color-wheel.png";
 
 
 class ColorPicker extends Component {
-  static propTypes = {
-    expanded: PropTypes.bool,
-    onExpandEvent: PropTypes.func,
-    onChange: PropTypes.func,
-    currentState: PropTypes.object,
-  };
-
-  stopPropagation = (event) => {
-    event.stopPropagation();
-  };
-
-  onChange = (color) => {
-    const { onChange } = this.props;
-    onChange('color', color.hex);
+  state = {
+    pickerVisible: false,
   }
 
-  renderModal = () => {
-    const { color } = this.props.currentState;
-    return (
-      <div
-        onClick={this.stopPropagation}
-      >
-        <CompactPicker color={color} onChangeComplete={this.onChange} />
-      </div>
-    );
-  };
+  static propTypes = {
+    onChange: PropTypes.func
+  }
+
+  onChange = ({ hex }) => {
+    const { onChange } = this.props;
+    onChange('color', hex);
+  }
 
   render() {
-    const { expanded, onExpandEvent } = this.props;
+    const onTogglePicker = () => this.setState({ pickerVisible: !this.state.pickerVisible })
+
     return (
-      <div
-        aria-haspopup="true"
-        aria-expanded={expanded}
-        aria-label="rdw-color-picker"
-      >
-        <div
-          onClick={onExpandEvent}
-        >
-          <img
-            src={colorWheel}
-            alt="Color picker icon"
-            className="editorIcon"
-          />
-        </div>
-        {expanded ? this.renderModal() : undefined}
+      <div>
+        <img src={colorWheel} className='editorIcon colorIcon' alt='toggle color picker' onClick={onTogglePicker} />
+
+        {this.state.pickerVisible && (
+          <div style={{ position: 'absolute' }}>
+            <CompactPicker
+              color="#333"
+              onChangeComplete={this.onChange}
+            />
+          </div>
+        )}
       </div>
-    );
+    )
   }
-};
+}
 
 export default ColorPicker;

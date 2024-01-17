@@ -31,7 +31,11 @@ pre {
 
 .editorIcon {
   height: 18px;
-  padding: 0 5px 0 5px;
+  padding: 0 5px;
+}
+
+.colorIcon {
+  vertical-align: top;
 }
 
 .blogToolbar {
