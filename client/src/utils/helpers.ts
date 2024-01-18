@@ -37,8 +37,8 @@ export const sortAsc = (data: Array<Song>, col: string): Array<Song> => {
   const sortedData: Array<Song> = arrToSort.sort((a: Song, b: Song): 1 | -1 => {
     let aTitle: string | void = removeArticles(a.songTitle);
     let bTitle: string | void = removeArticles(b.songTitle);
-    let aVoicing: string | void = a.songVoicing;
-    let bVoicing: string | void = b.songVoicing;
+    // let aVoicing: string | void = a.songVoicing;
+    // let bVoicing: string | void = b.songVoicing;
     if (col === "songTitle") {
       return aTitle > bTitle ? 1 : -1;
     } else if (col === "songAccompaniment") {
