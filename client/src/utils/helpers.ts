@@ -23,7 +23,7 @@ const compare = (
     } else {
       return a! > b! ? 1 : -1;
     }
-  } else if (dir === "dsc") {
+  } else {
     if (a === b) {
       return aTitle > bTitle ? 1 : -1;
     } else {
