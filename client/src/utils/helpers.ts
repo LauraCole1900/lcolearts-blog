@@ -9,14 +9,7 @@ const removeArticles = (str: string): string | void => {
   return str;
 };
 
-const compare = (
-  a: string | boolean | Array<string> | undefined,
-  b: string | boolean | Array<string> | undefined,
-  aTitle: string,
-  bTitle: string,
-  dir: string
-): 1 | -1 => {
-  console.log(a, b);
+const compare = (a: string | boolean | Array<string> | undefined, b: string | boolean | Array<string> | undefined, aTitle: string, bTitle: string, dir: string): 1 | -1 => {
   if (dir === "asc") {
     if (a === b) {
       return aTitle > bTitle ? 1 : -1;
