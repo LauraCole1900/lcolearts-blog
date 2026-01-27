@@ -1,7 +1,26 @@
 import mongoose from 'mongoose';
 const { Schema, model } = mongoose;
 
-const songSchema = new Schema({
+interface ISong {
+  songTitle: string;
+  songVoicing: string;
+  songAccompaniment: string;
+  songMajorWork: Boolean;
+  songMvmtNames?: string[];
+  songMvmtTracks?: string[];
+  songMvmtPreviews?: string[];
+  songSacred: boolean;
+  songLiturgy?: string;
+  songTrack?: string;
+  songVideo?: string;
+  songPreview?: string;
+  songYear?: string;
+  songOtherVerName?: string[];
+  songOtherVerId?: string[];
+  songNotes?: string;
+};
+
+const songSchema = new Schema<ISong>({
   songTitle: {
     type: String,
     required: true
@@ -57,6 +76,6 @@ const songSchema = new Schema({
   }
 });
 
-var Song: any = model('Song', songSchema);
+var Song = model<ISong>('Song', songSchema);
 
 export default Song;

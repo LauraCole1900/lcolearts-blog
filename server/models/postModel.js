@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-const { Schema, model } = mongoose;
+import { Schema, model } from "mongoose";
+;
 const postSchema = new Schema({
     postTitle: {
         type: String,
@@ -17,5 +17,5 @@ const postSchema = new Schema({
         default: Date.now,
     },
 });
-var Post = model("Post", postSchema);
+const Post = model("Post", postSchema);
 export default Post;

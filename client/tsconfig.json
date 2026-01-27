@@ -4,10 +4,10 @@
     "useDefineForClassFields": true,
     "lib": ["dom", "dom.iterable", "ES2020"],
     "types": ["vite/client"],
-    "module": "esnext",
+    "module": "node16",
     "skipLibCheck": true,
 
-    "moduleResolution": "node",
+    "moduleResolution": "node16",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,

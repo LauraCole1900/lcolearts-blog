@@ -12,14 +12,14 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "concurrently": "^6.4.0"
+    "concurrently": "^9.2.1"
   },
   "dependencies": {
-    "dotenv": "^16.0.0",
-    "typescript": "^5.2.2"
+    "dotenv": "^17.2.3",
+    "typescript": "^5.9.3"
   },
   "engines": {
-    "node": "18.16.0",
-    "npm": "9.5.1"
+    "node": "24.23.0",
+    "npm": "11.6.2"
   }
 }

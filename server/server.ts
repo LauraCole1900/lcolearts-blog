@@ -1,6 +1,6 @@
 import express from "express";
 import { ApolloServer } from "@apollo/server";
-import { expressMiddleware } from "@apollo/server/express4";
+import { expressMiddleware } from "@as-integrations/express5";
 import path from "path";
 import { fileURLToPath } from "url";
 import http from "http";
@@ -11,7 +11,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 import { typeDefs, resolvers } from "./schemas/index.js";
-import { Resolvers } from "./tsdefs";
+import { Resolvers } from "./tsdefs.js";
 import auth from "./utils/auth.js";
 import db from "./config/connection.js";
 

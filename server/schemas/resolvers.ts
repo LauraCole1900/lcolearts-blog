@@ -1,5 +1,5 @@
 import { GraphQLError } from 'graphql';
-import { Resolvers } from '../tsdefs';
+import { Resolvers } from '../tsdefs.js';
 import { Post, Song, User } from '../models/index.js';
 import auth from '../utils/auth.js';
 

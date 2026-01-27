@@ -7,9 +7,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import mongoose from 'mongoose';
-const { Schema, model } = mongoose;
+import { Schema, model } from 'mongoose';
 import bcrypt from 'bcrypt';
+;
+;
 const userSchema = new Schema({
     userName: {
         type: String,
@@ -27,13 +28,12 @@ const userSchema = new Schema({
     },
 });
 // hash user password
-userSchema.pre('save', function (next) {
+userSchema.pre('save', function () {
     return __awaiter(this, void 0, void 0, function* () {
         if (this.isNew || this.isModified("password")) {
             const saltRounds = 10;
             this.password = yield bcrypt.hash(this.password, saltRounds);
         }
-        next();
     });
 });
 // custom method to compare and validate password for logging in

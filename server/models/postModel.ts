@@ -1,7 +1,13 @@
-import mongoose from "mongoose";
-const { Schema, model } = mongoose;
+import { Schema, model } from "mongoose";
 
-const postSchema = new Schema({
+interface IPost {
+  postTitle: string;
+  postBody: string;
+  postKeywords?: string[];
+  postDate: Date;
+};
+
+const postSchema = new Schema<IPost>({
   postTitle: {
     type: String,
     required: true,
@@ -19,6 +25,6 @@ const postSchema = new Schema({
   },
 });
 
-var Post: any = model("Post", postSchema);
+const Post = model<IPost>("Post", postSchema);
 
 export default Post;
