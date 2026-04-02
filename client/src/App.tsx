@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import { ApolloClient, ApolloLink, ApolloProvider, createHttpLink, GraphQLRequest, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
 import { setContext } from "@apollo/client/link/context";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Container from "react-bootstrap/Container";
-import Footer from "./components/footer";
-import Navigation from "./components/navbar";
-import { Blog, BlogEntry, LandingPage, LoginPage, Music, NotFound, PostForm, SongForm, SongPage } from "./components/pages";
+import { Container } from "react-bootstrap";
+import Footer from "./components/footer/index.jsx";
+import Navigation from "./components/navbar/index.jsx";
+import { Blog, BlogEntry, LandingPage, LoginPage, Music, NotFound, PostForm, SongForm, SongPage } from "./components/pages/index.js";
 import './App.css';
 
 

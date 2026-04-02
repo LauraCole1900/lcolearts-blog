@@ -1,2 +1,2 @@
-export { default as postValidate } from "./postFormValidation";
-export { songValidate } from "./songFormValidation";
+export { default as postValidate } from "./postFormValidation.js";
+export { songValidate } from "./songFormValidation.js";

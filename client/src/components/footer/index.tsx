@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import { Col, Image, Row } from "react-bootstrap";
-import { Bluesky, Email, GitHubLight, LinkedIn, Phone, Resume, YouTube } from "../../pix";
+import { Bluesky, Email, GitHubLight, LinkedIn, Phone, Resume, YouTube } from "../../pix/index.js";
 import "./style.css";
 
 
