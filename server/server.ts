@@ -57,7 +57,7 @@ async function startApolloServer(
     app.use(express.static(path.join(__dirname, "../client/build")));
   }
 
-  app.get("*", (req, res): void => {
+  app.get("/files/{*path}", (req, res): void => {
     res.sendFile(path.join(__dirname, "../client/build/index.html"));
   });
 }
