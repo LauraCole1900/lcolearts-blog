@@ -1,2 +1,2 @@
-export { default as SongCard } from "./songCard.jsx";
-export { default as PostCard} from "./postCard.jsx";
+export { default as SongCard } from "./songCard.tsx";
+export { default as PostCard} from "./postCard.tsx";

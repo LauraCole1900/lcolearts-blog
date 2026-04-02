@@ -1,9 +1,9 @@
-export { default as Blog } from "./blog.jsx";
-export { default as BlogEntry } from "./blogEntry.jsx";
-export { default as LandingPage } from "./lander.jsx";
-export { default as LoginPage } from "./login.jsx";
-export { default as Music } from "./music.jsx";
-export { default as NotFound } from "./notFound.jsx";
+export { default as Blog } from "./blog.tsx";
+export { default as BlogEntry } from "./blogEntry.tsx";
+export { default as LandingPage } from "./lander.tsx";
+export { default as LoginPage } from "./login.tsx";
+export { default as Music } from "./music.tsx";
+export { default as NotFound } from "./notFound.tsx";
 export { default as PostForm } from "./postForm.jsx";
-export { default as SongForm } from "./songForm.jsx";
-export { default as SongPage } from "./songPage.jsx";
+export { default as SongForm } from "./songForm.tsx";
+export { default as SongPage } from "./songPage.tsx";
