@@ -27,19 +27,19 @@ const NotFound = (): ReactElement => {
             <a href="https://lcolearts.com/">
               <Button data-toggle="popover" title="Home" className="button btn btn404">Home</Button>
             </a>
-            <a href="https://lcolearts.com/#/about">
+            <a href="https://lcolearts.com/about">
               <Button data-toggle="popover" title="About" className="button btn btn404">About</Button>
             </a>
-            <a href="https://lcolearts.com/#/webdev">
+            <a href="https://lcolearts.com/webdev">
               <Button data-toggle="popover" title="Webdev Portfolio" className="button btn btn404">Webdev Portfolio</Button>
             </a>
-            <a href="https://lcolearts.com/#/musician">
+            <a href="https://lcolearts.com/musician">
               <Button data-toggle="popover" title="Musician" className="button btn btn404">Music CV</Button>
             </a>
             <Link to="/music/page/1">
               <Button data-toggle="popover" title="Compositions" className="button btn btn404">Compositions</Button>
             </Link>
-            <a href="https://lcolearts.com/#/martial_artist">
+            <a href="https://lcolearts.com/martial_artist">
               <Button data-toggle="popover" title="Martial Artist" className="button btn btn404">Martial Artist</Button>
             </a>
             <Link to="/blog/page/1">
