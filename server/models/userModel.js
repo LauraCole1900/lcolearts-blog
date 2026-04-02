@@ -9,8 +9,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { Schema, model } from 'mongoose';
 import bcrypt from 'bcrypt';
-;
-;
+// interface IUser extends Document {
+//   userName: string;
+//   email: string;
+//   password: string;
+// };
+// interface UserModelType extends Model<IUser> {
+//   isCorrectPassword(password: string): Promise<boolean>;
+// };
+// interface IUserDoc extends IUser, Document {};
 const userSchema = new Schema({
     userName: {
         type: String,
@@ -26,6 +33,14 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
+}, {
+    methods: {
+        isCorrectPassword: function (password) {
+            return __awaiter(this, void 0, void 0, function* () {
+                return bcrypt.compare(password, this.password);
+            });
+        }
+    }
 });
 // hash user password
 userSchema.pre('save', function () {
@@ -37,10 +52,11 @@ userSchema.pre('save', function () {
     });
 });
 // custom method to compare and validate password for logging in
-userSchema.methods.isCorrectPassword = function (password) {
-    return __awaiter(this, void 0, void 0, function* () {
-        return bcrypt.compare(password, this.password);
-    });
-};
+// userSchema.methods.isCorrectPassword = async function (
+//   password: string,
+//   next?: NextFunction
+// ): Promise<boolean> {
+//   return bcrypt.compare(password, this.password);
+// };
 var User = model('User', userSchema);
 export default User;

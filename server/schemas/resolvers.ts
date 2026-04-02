@@ -1,4 +1,5 @@
 import { GraphQLError } from 'graphql';
+import { HydratedDocument } from 'mongoose';
 import { Resolvers } from '../tsdefs.js';
 import { Post, Song, User } from '../models/index.js';
 import auth from '../utils/auth.js';
@@ -72,14 +73,17 @@ const resolvers: Resolvers = {
 
   Mutation: {
     addUser: async (_: any, args: any) => {
-      const user: typeof User = await User.create(args);
-      const token: string = auth.signToken(user);
+      const user = await User.create(args);
+      const token: string = auth.signToken({
+        ...user.toObject(),
+        _id: user._id.toString()
+      });
 
-      return { token, user };
+      return { token, user: { ...user.toObject(), _id: user._id.toString() } };
     },
 
     login: async (_: any, args: any) => {
-      const user: typeof User = await User.findOne({ userName: args.userName });
+      const user = await User.findOne({ userName: args.userName });
 
       if (!user) {
         throw new GraphQLError("Incorrect credentials", {
@@ -95,8 +99,11 @@ const resolvers: Resolvers = {
         });
       }
 
-      const token: string = auth.signToken(user);
-      return { token, user };
+      const token: string = auth.signToken({
+        ...user.toObject(),
+        _id: user._id.toString(),
+      });
+      return { token, user: { ...user.toObject(), _id: user._id.toString() } };
     },
 
     createEntry: async (_: any, args: any): Promise<any> => {

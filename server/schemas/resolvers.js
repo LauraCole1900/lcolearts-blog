@@ -65,8 +65,8 @@ const resolvers = {
     Mutation: {
         addUser: (_, args) => __awaiter(void 0, void 0, void 0, function* () {
             const user = yield User.create(args);
-            const token = auth.signToken(user);
-            return { token, user };
+            const token = auth.signToken(Object.assign(Object.assign({}, user.toObject()), { _id: user._id.toString() }));
+            return { token, user: Object.assign(Object.assign({}, user.toObject()), { _id: user._id.toString() }) };
         }),
         login: (_, args) => __awaiter(void 0, void 0, void 0, function* () {
             const user = yield User.findOne({ userName: args.userName });
@@ -81,8 +81,8 @@ const resolvers = {
                     extensions: { code: "FORBIDDEN" },
                 });
             }
-            const token = auth.signToken(user);
-            return { token, user };
+            const token = auth.signToken(Object.assign(Object.assign({}, user.toObject()), { _id: user._id.toString() }));
+            return { token, user: Object.assign(Object.assign({}, user.toObject()), { _id: user._id.toString() }) };
         }),
         createEntry: (_, args) => __awaiter(void 0, void 0, void 0, function* () {
             const post = yield Post.create(args);
